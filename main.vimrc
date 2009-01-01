@@ -330,15 +330,11 @@ endfunction
 
 command! -nargs=* Command call PutCommand(<f-args>)
 
+" Some useful mappings
 
 Command copy-all gg"+yG``
-Command TOHtmlForOutlook \print
-Command open-browser \openwd
-Command open-command \opencd
-Command only \only
-Command remove-bom \nobom
-Command hitest \hitest
 
+" Temporary Files
 
 if os == win
   let $TMPDIR = 'F:/temp'
@@ -347,6 +343,7 @@ else
 endif
 
 map <leader>W :cd $TMPDIR<cr>:w! _<cr>
+
 map \temp1 :w! $TMPDIR/_1<cr>
 map \temp2 :w! $TMPDIR/_2<cr>
 map \temp3 :w! $TMPDIR/_3<cr>
@@ -389,6 +386,7 @@ Command open-temp-file-7 \otemp7
 Command open-temp-file-8 \otemp8
 Command open-temp-file-9 \otemp9
 
+
 """"""""""""""""""""""""""""""""""""""""""""""""""
 " Misc
 """"""""""""""""""""""""""""""""""""""""""""""""""
@@ -410,23 +408,31 @@ function! OnlyInput()
 endfunction
 
 map \only :call OnlyInput()<cr>
+Command only \only
 
-" TOhtml
-"let html_font="Courier New"
-"let html_number_lines = 0
-map \print :TOhtml<cr>:silent %s/font face="\([^*]*\)"/font style="font-size:10pt;" face="Courier New, \1"/<cr>:silent %s/^\(.*\)<br>$/<p style="margin:0px">\1<\/p>/<cr>:wq<cr>:silent !%.html<cr>
+if os == win
+  " TOhtml
+  "let html_font="Courier New"
+  "let html_number_lines = 0
+  map \print :TOhtml<cr>:silent %s/font face="\([^*]*\)"/font style="font-size:10pt;" face="Courier New, \1"/<cr>:silent %s/^\(.*\)<br>$/<p style="margin:0px">\1<\/p>/<cr>:wq<cr>:silent !%.html<cr>
+  Command TOHtmlForOutlook \print
 
-" Open directory in a new explorer window
-map \openwd :call system("explorer ".expand("%:p:h"))<cr>
+  " Open directory in a new explorer window
+  map \openwd :call system("explorer ".expand("%:p:h"))<cr>
+  Command open-browser \openwd
 
-" Open directory in a new cmd window
-map \opencd :silent !start=cmd /K cd /d %:p:h<cr>
+  " Open directory in a new cmd window
+  map \opencd :silent !start=cmd /K cd /d %:p:h<cr>
+  Command open-command \opencd
+endif
 
 " Remove BOM in current file
 map \nobom :set nobomb<cr> :w<cr>
+Command remove-bom \nobom
 
 " hitest
 map \hitest :so $VIMRUNTIME/syntax/hitest.vim<cr>
+Command hitest \hitest
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""
@@ -540,13 +546,13 @@ map \75 :set filetype=diff<cr>
   autocmd FileType c,cpp map <buffer> <leader>= :up<cr>:%!astyle --style=ansi -p < %<cr>
 
   """""""""""""""""""""""""""""""
-  " Java section
+  " Java
   """""""""""""""""""""""""""""""
   autocmd FileType java map <buffer> <leader>= :up<cr>:%!astyle --style=java -p < %<cr>
 
 
   """""""""""""""""""""""""""""""
-  " Perl section 
+  " Perl
   """""""""""""""""""""""""""""""
   autocmd FileType perl map <buffer> <leader><space> :up<cr>:!perl %<cr>
   autocmd FileType perl map <buffer> <leader>cc :up<cr>:!perl -c %<cr>
@@ -556,47 +562,43 @@ map \75 :set filetype=diff<cr>
 
 
   """""""""""""""""""""""""""""""
-  " Python section
+  " Python
   """""""""""""""""""""""""""""""
   autocmd FileType python map <buffer> <leader><space> :up<cr>:!python %<cr>
 
 
   """""""""""""""""""""""""""""""
-  " Tcl section
+  " Tcl
   """""""""""""""""""""""""""""""
   autocmd FileType tcl map <buffer> <leader><space> :up<cr>:!tclsh %<cr>
 
 
   """""""""""""""""""""""""""""""
-  " Lua section
+  " Lua
   """""""""""""""""""""""""""""""
   autocmd FileType lua map <buffer> <leader><space> :up<cr>:!lua %<cr>
   autocmd FileType lua map <buffer> <leader>cc :up<cr>:!luac -p %<cr>
 
 
   """""""""""""""""""""""""""""""
-  " Lisp section
+  " Lisp
   """""""""""""""""""""""""""""""
   autocmd FileType lisp map <buffer> <leader><space> :up<cr>:!clisp %<cr>
 
 
   """""""""""""""""""""""""""""""
-  " XML section
+  " XML & Ant
   """""""""""""""""""""""""""""""
-  if os == linux
-    autocmd FileType xml map <buffer> <leader>= :up<cr>:%!xmllint --format %<cr>
-    autocmd FileType xml map <buffer> <leader><space> <leader>=
-  else
-    autocmd FileType xml,ant map <buffer> <leader><space> :up<cr>:%!xmllint --format %<cr>
-    autocmd FileType xml,ant map <buffer> <leader>= :up<cr>:%!xmllint --format %<cr>
+  autocmd FileType xml,ant map <buffer> <leader>= :up<cr>:%!xmllint --format %<cr>
+  if os == win
     autocmd FileType xml,ant map <buffer> <leader>cc :up<cr>:!rxp %<cr>
     autocmd FileType xml map <buffer> <leader>cC :up<cr>:!rxp -V -N -s -x<cr>
-
-    autocmd FileType ant compiler ant
-    autocmd FileType ant map <buffer> <leader><space> :up<cr>:make<cr>
-
-    autocmd FileType ant map <buffer> \ant :up<cr>:make<space>
   endif
+  autocmd FileType xml map <buffer> <leader><space> <leader>=
+
+  autocmd FileType ant compiler ant
+  autocmd FileType ant map <buffer> <leader><space> :up<cr>:make<cr>
+  autocmd FileType ant map <buffer> \ant :up<cr>:make<space>
 
   """""""""""""""""""""""""""""""
   " JavaScript
