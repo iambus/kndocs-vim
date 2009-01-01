@@ -481,48 +481,6 @@ map \74 :set filetype=tex<cr>
 map \75 :set filetype=diff<cr>
 
 
-if os == 'win'
-
-autocmd FileType perl,python,tcl,dosbatch map <buffer> <leader>! :up<cr>:!%<cr>
-
-autocmd FileType c map <buffer> <leader>cc :up<cr>:!gcc -W -Wall % -o %:r<cr>
-autocmd FileType c map <buffer> <leader>cr :up<cr>:!%:r<cr>
-autocmd FileType c map <buffer> <leader><space> <leader>cc
-autocmd FileType cpp map <buffer> <leader>cc :up<cr>:!g++ -W -Wall % -o %:r<cr>
-autocmd FileType cpp map <buffer> <leader>cr :up<cr>:!%:r<cr>
-autocmd FileType cpp map <buffer> <leader><space> <leader>cc
-
-autocmd FileType perl map <buffer> <leader><space> :up<cr>:!perl %<cr>
-autocmd FileType perl map <buffer> <leader>cc :up<cr>:!perl -c %<cr>
-autocmd FileType python map <buffer> <leader><space> :up<cr>:!python %<cr>
-autocmd FileType tcl map <buffer> <leader><space> :up<cr>:!tclsh %<cr>
-autocmd FileType lua map <buffer> <leader><space> :up<cr>:!lua %<cr>
-autocmd FileType lua map <buffer> <leader>cc :up<cr>:!luac -p %<cr>
-autocmd FileType javascript map <buffer> <leader><space> :up<cr>:!js %<cr>
-autocmd FileType dosbatch map <buffer> <leader><space> :up<cr>:!call %<cr>
-
-autocmd FileType lisp map <buffer> <leader><space> :up<cr>:!clisp %<cr>
-
-autocmd FileType xml,ant map <buffer> <leader><space> :up<cr>:%!xmllint --format %<cr>
-autocmd FileType xml,ant map <buffer> <leader>cc :up<cr>:!rxp %<cr>
-autocmd FileType xml map <buffer> <leader>cC :up<cr>:!rxp -V -N -s -x<cr>
-
-autocmd FileType ant compiler ant
-autocmd FileType ant map <buffer> <leader><space> :up<cr>:make<cr>
-
-autocmd FileType ant map <buffer> \ant :up<cr>:make<space>
-
-autocmd FileType vim map <buffer> <leader><space> :up<cr>:source %<cr>
-
-autocmd FileType c,cpp map <buffer> <leader>= :up<cr>:%!astyle --style=ansi -p < %<cr>
-autocmd FileType java map <buffer> <leader>= :up<cr>:%!astyle --style=java -p < %<cr>
-autocmd FileType perl map <buffer> <leader>= :up<cr>:%!perltidy < %<cr>
-autocmd FileType xml,ant map <buffer> <leader>= :up<cr>:%!xmllint --format %<cr>
-autocmd FileType html map <buffer> <leader>= :up<cr>:%!tidy -f nul %<cr>
-
-
-else
-
   """"""""""""""""""""""""""""""
   " Util
   """"""""""""""""""""""""""""""
@@ -535,22 +493,38 @@ else
   " VIM
   """"""""""""""""""""""""""""""
   autocmd FileType vim map <buffer> <leader><space> :up<cr>:source %<cr>
-  "autocmd FileType vim set nofen
+
+  autocmd FileType vim set shiftwidth=2
+  autocmd FileType vim set tabstop=2
+  autocmd FileType vim set noexpandtab
 
   """"""""""""""""""""""""""""""
   " C mappings
   """""""""""""""""""""""""""""""
 "  autocmd FileType c map <buffer> <leader>cc :up<cr>:!gcc -W -Wall %<cr>
-  autocmd FileType c map <buffer> <leader>cc :up<cr>:exe "!gcc -W -Wall % -o ".FileDir().'/a.out'<cr>
-  autocmd FileType c map <buffer> <leader>cr :up<cr>:exe '!'.FileDir().'/a.out'<cr>
+
+  if os == 'linux'
+    autocmd FileType c map <buffer> <leader>cc :up<cr>:exe "!gcc -W -Wall % -o ".FileDir().'/a.out'<cr>
+    autocmd FileType c map <buffer> <leader>cr :up<cr>:exe '!'.FileDir().'/a.out'<cr>
+  else
+    autocmd FileType c map <buffer> <leader>cc :up<cr>:!gcc -W -Wall % -o %:r<cr>
+    autocmd FileType c map <buffer> <leader>cr :up<cr>:!%:r<cr>
+  endif
+
   autocmd FileType c map <buffer> <leader><space> <leader>cc
 
   """"""""""""""""""""""""""""""
   " C++ mappings
   """""""""""""""""""""""""""""""
 "  autocmd FileType cpp map <buffer> <leader>cc :up<cr>:!g++ -W -Wall %<cr>
-  autocmd FileType cpp map <buffer> <leader>cc :up<cr>:exe "!g++ -W -Wall % -o ".FileDir().'/a.out'<cr>
-  autocmd FileType cpp map <buffer> <leader>cr :up<cr>:exe '!'.FileDir().'/a.out'<cr>
+  if os == 'linux'
+    autocmd FileType cpp map <buffer> <leader>cc :up<cr>:exe "!g++ -W -Wall % -o ".FileDir().'/a.out'<cr>
+    autocmd FileType cpp map <buffer> <leader>cr :up<cr>:exe '!'.FileDir().'/a.out'<cr>
+  else
+    autocmd FileType cpp map <buffer> <leader>cc :up<cr>:!g++ -W -Wall % -o %:r<cr>
+    autocmd FileType cpp map <buffer> <leader>cr :up<cr>:!%:r<cr>
+  endif
+
   autocmd FileType cpp map <buffer> <leader><space> <leader>cc
 
   """"""""""""""""""""""""""""""
@@ -561,6 +535,7 @@ else
   """""""""""""""""""""""""""""""
   " Java section
   """""""""""""""""""""""""""""""
+  autocmd FileType java map <buffer> <leader>= :up<cr>:%!astyle --style=java -p < %<cr>
 
 
   """""""""""""""""""""""""""""""
@@ -568,6 +543,9 @@ else
   """""""""""""""""""""""""""""""
   autocmd FileType perl map <buffer> <leader><space> :up<cr>:!perl %<cr>
   autocmd FileType perl map <buffer> <leader>cc :up<cr>:!perl -c %<cr>
+  if os == 'win'
+    autocmd FileType perl map <buffer> <leader>= :up<cr>:%!perltidy < %<cr>
+  endif
 
 
   """""""""""""""""""""""""""""""
@@ -586,6 +564,7 @@ else
   " Lua section
   """""""""""""""""""""""""""""""
   autocmd FileType lua map <buffer> <leader><space> :up<cr>:!lua %<cr>
+  autocmd FileType lua map <buffer> <leader>cc :up<cr>:!luac -p %<cr>
 
 
   """""""""""""""""""""""""""""""
@@ -597,9 +576,20 @@ else
   """""""""""""""""""""""""""""""
   " XML section
   """""""""""""""""""""""""""""""
-  autocmd FileType xml map <buffer> <leader>= :up<cr>:%!xmllint --format %<cr>
-  autocmd FileType xml map <buffer> <leader><space> <leader>=
+  if os == 'linux'
+    autocmd FileType xml map <buffer> <leader>= :up<cr>:%!xmllint --format %<cr>
+    autocmd FileType xml map <buffer> <leader><space> <leader>=
+  else
+    autocmd FileType xml,ant map <buffer> <leader><space> :up<cr>:%!xmllint --format %<cr>
+    autocmd FileType xml,ant map <buffer> <leader>= :up<cr>:%!xmllint --format %<cr>
+    autocmd FileType xml,ant map <buffer> <leader>cc :up<cr>:!rxp %<cr>
+    autocmd FileType xml map <buffer> <leader>cC :up<cr>:!rxp -V -N -s -x<cr>
 
+    autocmd FileType ant compiler ant
+    autocmd FileType ant map <buffer> <leader><space> :up<cr>:make<cr>
+
+    autocmd FileType ant map <buffer> \ant :up<cr>:make<space>
+  endif
 
   """""""""""""""""""""""""""""""
   " JavaScript
@@ -609,22 +599,32 @@ else
   """""""""""""""""""""""""""""""
   " HTML
   """""""""""""""""""""""""""""""
-  autocmd FileType html map <buffer> <leader>= :up<cr>:%!tidy -f /dev/null %<cr>
+  if os == 'win'
+    autocmd FileType html map <buffer> <leader>= :up<cr>:%!tidy -f nul %<cr>
+  else
+    autocmd FileType html map <buffer> <leader>= :up<cr>:%!tidy -f /dev/null %<cr>
+  end
 
-endif
+  """""""""""""""""""""""""""""""
+  " Shell
+  """""""""""""""""""""""""""""""
+  autocmd FileType sh set ff=unix " XXX: does it have any potential problem?
+
+  """""""""""""""""""""""""""""""
+  " DOS Batch
+  """""""""""""""""""""""""""""""
+  autocmd FileType dosbatch map <buffer> <leader><space> :up<cr>:!call %<cr>
+
+  """""""""""""""""""""""""""""""
+  " SVN
+  """""""""""""""""""""""""""""""
+  autocmd FileType svn set spell " XXX: how to avoid Chinese spell check?
 
 
-
-autocmd FileType sh set ff=unix " XXX: does it have any potential problem?
-
-autocmd FileType vim set shiftwidth=2
-autocmd FileType vim set tabstop=2
-autocmd FileType vim set noexpandtab
-
-autocmd FileType svn set spell " XXX: how to avoid Chinese spell check?
-
-
-
+  """""""""""""""""""""""""""""""
+  " Others
+  """""""""""""""""""""""""""""""
+  autocmd FileType perl,python,tcl,dosbatch map <buffer> <leader>! :up<cr>:!%<cr>
 
 
 
