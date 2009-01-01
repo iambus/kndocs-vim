@@ -97,7 +97,7 @@ map <leader>h :help<space>
 map <leader>K :exe "help" expand("<cword>")<cr>
 
 if Platform() == 'win'
-  map \rc :e $VIM/_vimrc<cr>
+  map \rc :e $VIM/main.vimrc<cr>
   map \lrc :e $VIM/local_vimrc<cr>
   map \sorc :source $VIM/_vimrc<cr>
   map \slrc :source $VIM/local_vimrc<cr>
