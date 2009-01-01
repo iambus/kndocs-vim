@@ -183,9 +183,9 @@ endif
 """"""""""""""""""""""""""""""""""""""""""""""""""
 syntax enable
 
-if os == "win"
+if os == win
   set guifont=Monaco:h10:cDEFAULT
-elseif os == "linux"
+elseif os == linux
   set guifont=Monospace\ 11
 endif
 
