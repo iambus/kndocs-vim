@@ -5,7 +5,7 @@ function! Platform()
     return "win"
   elseif has('win64')
     return "win"
-  elseif has('linux')
+  elseif has('unix')
     return 'linux'
   else
     throw 'Unknown platform'
@@ -28,7 +28,6 @@ set vb t_vb=
 " Mappings
 let mapleader = ","
 
-map <leader>W :cd F:/temp<cr>:w! _<cr>
 "map <leader>S :source $VIM/_vimrc<cr>
 map <leader>cd :cd %:p:h<cr>
 map \rc :e $VIM/_vimrc<cr>
@@ -224,47 +223,93 @@ Command only \only
 Command remove-bom \nobom
 Command hitest \hitest
 
-map \temp1 :w! F:/temp/_1<cr>
-map \temp2 :w! F:/temp/_2<cr>
-map \temp3 :w! F:/temp/_3<cr>
-map \temp4 :w! F:/temp/_4<cr>
-map \temp5 :w! F:/temp/_5<cr>
-map \temp6 :w! F:/temp/_6<cr>
-map \temp7 :w! F:/temp/_7<cr>
-map \temp8 :w! F:/temp/_8<cr>
-map \temp9 :w! F:/temp/_9<cr>
+if Platform() == 'win'
+  map <leader>W :cd F:/temp<cr>:w! _<cr>
+  map \temp1 :w! F:/temp/_1<cr>
+  map \temp2 :w! F:/temp/_2<cr>
+  map \temp3 :w! F:/temp/_3<cr>
+  map \temp4 :w! F:/temp/_4<cr>
+  map \temp5 :w! F:/temp/_5<cr>
+  map \temp6 :w! F:/temp/_6<cr>
+  map \temp7 :w! F:/temp/_7<cr>
+  map \temp8 :w! F:/temp/_8<cr>
+  map \temp9 :w! F:/temp/_9<cr>
 
-map \otemp :e F:/temp/_<cr>
-map \otemp1 :e F:/temp/_1<cr>
-map \otemp2 :e F:/temp/_2<cr>
-map \otemp3 :e F:/temp/_3<cr>
-map \otemp4 :e F:/temp/_4<cr>
-map \otemp5 :e F:/temp/_5<cr>
-map \otemp6 :e F:/temp/_6<cr>
-map \otemp7 :e F:/temp/_7<cr>
-map \otemp8 :e F:/temp/_8<cr>
-map \otemp9 :e F:/temp/_9<cr>
+  map \otemp :e F:/temp/_<cr>
+  map \otemp1 :e F:/temp/_1<cr>
+  map \otemp2 :e F:/temp/_2<cr>
+  map \otemp3 :e F:/temp/_3<cr>
+  map \otemp4 :e F:/temp/_4<cr>
+  map \otemp5 :e F:/temp/_5<cr>
+  map \otemp6 :e F:/temp/_6<cr>
+  map \otemp7 :e F:/temp/_7<cr>
+  map \otemp8 :e F:/temp/_8<cr>
+  map \otemp9 :e F:/temp/_9<cr>
 
-Command temp-file-1 \temp1
-Command temp-file-2 \temp2
-Command temp-file-3 \temp3
-Command temp-file-4 \temp4
-Command temp-file-5 \temp5
-Command temp-file-6 \temp6
-Command temp-file-7 \temp7
-Command temp-file-8 \temp8
-Command temp-file-9 \temp9
+  Command temp-file-1 \temp1
+  Command temp-file-2 \temp2
+  Command temp-file-3 \temp3
+  Command temp-file-4 \temp4
+  Command temp-file-5 \temp5
+  Command temp-file-6 \temp6
+  Command temp-file-7 \temp7
+  Command temp-file-8 \temp8
+  Command temp-file-9 \temp9
 
-Command open-temp-file \otemp
-Command open-temp-file-1 \otemp1
-Command open-temp-file-2 \otemp2
-Command open-temp-file-3 \otemp3
-Command open-temp-file-4 \otemp4
-Command open-temp-file-5 \otemp5
-Command open-temp-file-6 \otemp6
-Command open-temp-file-7 \otemp7
-Command open-temp-file-8 \otemp8
-Command open-temp-file-9 \otemp9
+  Command open-temp-file \otemp
+  Command open-temp-file-1 \otemp1
+  Command open-temp-file-2 \otemp2
+  Command open-temp-file-3 \otemp3
+  Command open-temp-file-4 \otemp4
+  Command open-temp-file-5 \otemp5
+  Command open-temp-file-6 \otemp6
+  Command open-temp-file-7 \otemp7
+  Command open-temp-file-8 \otemp8
+  Command open-temp-file-9 \otemp9
+else
+  map <leader>W :cd ~/tmp<cr>:w! _<cr>
+  map \temp1 :w! ~/tmp/_1<cr>
+  map \temp2 :w! ~/tmp/_2<cr>
+  map \temp3 :w! ~/tmp/_3<cr>
+  map \temp4 :w! ~/tmp/_4<cr>
+  map \temp5 :w! ~/tmp/_5<cr>
+  map \temp6 :w! ~/tmp/_6<cr>
+  map \temp7 :w! ~/tmp/_7<cr>
+  map \temp8 :w! ~/tmp/_8<cr>
+  map \temp9 :w! ~/tmp/_9<cr>
+
+  map \otemp :e ~/tmp/_<cr>
+  map \otemp1 :e ~/tmp/_1<cr>
+  map \otemp2 :e ~/tmp/_2<cr>
+  map \otemp3 :e ~/tmp/_3<cr>
+  map \otemp4 :e ~/tmp/_4<cr>
+  map \otemp5 :e ~/tmp/_5<cr>
+  map \otemp6 :e ~/tmp/_6<cr>
+  map \otemp7 :e ~/tmp/_7<cr>
+  map \otemp8 :e ~/tmp/_8<cr>
+  map \otemp9 :e ~/tmp/_9<cr>
+
+  Command temp-file-1 \temp1
+  Command temp-file-2 \temp2
+  Command temp-file-3 \temp3
+  Command temp-file-4 \temp4
+  Command temp-file-5 \temp5
+  Command temp-file-6 \temp6
+  Command temp-file-7 \temp7
+  Command temp-file-8 \temp8
+  Command temp-file-9 \temp9
+
+  Command open-temp-file \otemp
+  Command open-temp-file-1 \otemp1
+  Command open-temp-file-2 \otemp2
+  Command open-temp-file-3 \otemp3
+  Command open-temp-file-4 \otemp4
+  Command open-temp-file-5 \otemp5
+  Command open-temp-file-6 \otemp6
+  Command open-temp-file-7 \otemp7
+  Command open-temp-file-8 \otemp8
+  Command open-temp-file-9 \otemp9
+endif
 
 """"""""""""""""""""""""""""""""""""""""""""""""""
 " Misc
