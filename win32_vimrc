@@ -1,4 +1,23 @@
 
+
+function! Platform()
+  if has('win32')
+    return "win"
+  elseif has('win64')
+    return "win"
+  elseif has('linux')
+    return 'linux'
+  else
+    throw 'Unknown platform'
+    return 'unkown'
+  endif
+endfunction
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""
+" Basic
+""""""""""""""""""""""""""""""""""""""""""""""""""
+
 " Generl
 set nobackup
 set number
