@@ -135,7 +135,6 @@ nmap <leader>fD :set ffs=dos<cr>:e<cr>
 "nmap <leader>fD :e ++ff=dos<cr>
 nmap <leader>fu :set ff=unix<cr>
 nmap <leader>fm :set ff=mac<cr>
-autocmd FileType sh set ff=unix " XXX: does it have any potential problem?
 
 " File encoding
 if Platform() == 'win'
@@ -426,7 +425,7 @@ map \hitest :so $VIMRUNTIME/syntax/hitest.vim<cr>
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""
-" Programming
+" File Types
 """"""""""""""""""""""""""""""""""""""""""""""""""
 
 map <leader>ft :set filetype=
@@ -618,6 +617,10 @@ endif
 
 
 
+autocmd FileType sh set ff=unix " XXX: does it have any potential problem?
+autocmd FileType vim set ff=unix " XXX: does it have any potential problem?
+
+autocmd FileType svn set spell " XXX: how to avoid Chinese spell check?
 
 
 
