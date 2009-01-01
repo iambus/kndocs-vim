@@ -65,6 +65,7 @@ set incsearch
 set hlsearch
 "set whichwrap+=<,>,h,l
 set backspace=indent,eol,start "?
+set wrap
 
 set ruler "?
 set magic "?
@@ -100,16 +101,16 @@ endif
 " Indent
 set tabstop=4
 set shiftwidth=4
+set autoindent
+
 if os == linux
   set expandtab
   set smarttab
   set linebreak
   set textwidth=500
-  set autoindent
   set smartindent
   "C-style indeting
   "set cindent
-  set wrap
 endif
 
 map <leader>t2 :set expandtab<cr>:set shiftwidth=2<cr>
