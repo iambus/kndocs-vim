@@ -16,10 +16,6 @@ function! Platform()
   endif
 endfunction
 
-if Platform() == 'win'
-else
-endif
-
 let os = Platform()
 
 """"""""""""""""""""""""""""""""""""""""""""""""""
@@ -635,14 +631,10 @@ autocmd FileType svn set spell " XXX: how to avoid Chinese spell check?
 " Load more
 """"""""""""""""""""""""""""""""""""""""""""""""""
 
-if os == 'win'
-  if filereadable(expand('$VIM\local_vimrc'))
-    source $VIM\local_vimrc
-  endif
-else
-  if filereadable(expand('~/.vimrc_local'))
-    source ~/.vimrc_local
-  endif
+let local_vimrc = os == 'win' ? '$VIM\local_vimrc' : '~/.vimrc_local'
+
+if filereadable(expand(local_vimrc))
+  exe 'source' local_vimrc
 endif
 
 
