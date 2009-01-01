@@ -32,7 +32,10 @@ set ignorecase
 set incsearch
 set hlsearch
 "set whichwrap+=<,>,h,l
-set backspace=indent,eol,start
+set backspace=indent,eol,start "?
+
+set ruler "?
+set magic "?
 
 if Platform() == 'win'
   set vb t_vb=
@@ -43,13 +46,21 @@ else
 endif
 
 if Platform() == 'linux'
-  set nowb
+  set nowritebackup
   set noswapfile
 
   set scrolloff=5
 
   set showmatch
-  set mat=2
+  set matchtime=2
+
+  set wildmenu "?
+
+  "Do not redraw, when running macros.. lazyredraw
+  set lazyredraw "?
+
+  "Change buffer - without saving
+  set hidden "?
 endif
 
 "set history=400
@@ -62,13 +73,10 @@ if Platform() == 'linux'
   set smarttab
   set linebreak
   set textwidth=500
-  "Auto indent
   set autoindent
-  "Smart indet
   set smartindent
   "C-style indeting
   "set cindent
-  "Wrap lines
   set wrap
 endif
 
@@ -77,33 +85,6 @@ map <leader>t3 :set expandtab<cr>:set shiftwidth=3<cr>
 map <leader>t4 :set expandtab<cr>:set shiftwidth=4<cr>
 map <leader>tt :set noexpandtab<cr>:set shiftwidth=4<cr>
 
-if Platform() == 'linux'
-  """"""""""""""""""""""""""""""""""""""""""""""""""
-  " VIM userinterface
-  """"""""""""""""""""""""""""""""""""""""""""""""""
-  set wildmenu
-
-  "Always show current position
-  set ruler
-
-  "Do not redraw, when running macros.. lazyredraw
-  set lazyredraw
-
-  "Change buffer - without saving
-  set hidden
-
-  "Set magic on
-  set magic
-
-  """"""""""""""""""""""""""""""""""""""""""""""""""
-  " Buffer realted
-  """"""""""""""""""""""""""""""""""""""""""""""""""
-
-  "Restore cursor to file position in previous editing session
-  set viminfo='10,\"100,:20,%,n~/.viminfo
-  au BufReadPost * if line("'\"") > 0|if line("'\"") <= line("$")|exe("norm '\"")|else|exe "norm $"|endif|endif
-
-endif
 
 """"""""""""""""""""""""""""""""""""""""""""""""""
 " Mappings
@@ -202,6 +183,18 @@ if Platform() == 'linux'
   "Format the statusline
   set statusline=\ %F%m%r%h\ %w\ \ CWD:\ %r%{CurDir()}%h\ \ \ Line:\ %l/%L:%c
 endif
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""
+" Buffers
+""""""""""""""""""""""""""""""""""""""""""""""""""
+
+if Platform() == 'linux'
+  "Restore cursor to file position in previous editing session
+  set viminfo='10,\"100,:20,%,n~/.viminfo
+  au BufReadPost * if line("'\"") > 0|if line("'\"") <= line("$")|exe("norm '\"")|else|exe "norm $"|endif|endif
+endif
+
 
 """"""""""""""""""""""""""""""""""""""""""""""""""
 " Folding
