@@ -20,6 +20,8 @@ if Platform() == 'win'
 else
 endif
 
+let os = Platform()
+
 """"""""""""""""""""""""""""""""""""""""""""""""""
 " Basic
 """"""""""""""""""""""""""""""""""""""""""""""""""
@@ -37,7 +39,7 @@ set backspace=indent,eol,start "?
 set ruler "?
 set magic "?
 
-if Platform() == 'win'
+if os == 'win'
   set vb t_vb=
 else
   set noerrorbells
@@ -45,7 +47,7 @@ else
   set t_vb=
 endif
 
-if Platform() == 'linux'
+if os == 'linux'
   set nowritebackup
   set noswapfile
 
@@ -68,7 +70,7 @@ endif
 " Indent
 set tabstop=4
 set shiftwidth=4
-if Platform() == 'linux'
+if os == 'linux'
   set expandtab
   set smarttab
   set linebreak
@@ -96,7 +98,7 @@ map <leader>cd :cd %:p:h<cr>
 map <leader>h :help<space>
 map <leader>K :exe "help" expand("<cword>")<cr>
 
-if Platform() == 'win'
+if os == 'win'
   map \rc :e $VIM/main.vimrc<cr>
   map \lrc :e $VIM/local_vimrc<cr>
   map \sorc :source $VIM/_vimrc<cr>
@@ -124,7 +126,7 @@ noremap <M-x> <C-x>
 " File Format and File Encodings
 """"""""""""""""""""""""""""""""""""""""""""""""""
 " File format
-if Platform() == 'win'
+if os == 'win'
   set ffs=dos,unix,mac
 else
   set ffs=unix,dos,mac
@@ -137,7 +139,7 @@ nmap <leader>fu :set ff=unix<cr>
 nmap <leader>fm :set ff=mac<cr>
 
 " File encoding
-if Platform() == 'win'
+if os == 'win'
   set fileencodings=ucs-bom,utf-8
 else
   set fileencodings=utf-8,gbk,ucs-bom,default,latin1
@@ -151,9 +153,9 @@ endif
 """"""""""""""""""""""""""""""""""""""""""""""""""
 syntax enable
 
-if Platform() == "win"
+if os == "win"
   set guifont=Monaco:h10:cDEFAULT
-elseif Platform() == "linux"
+elseif os == "linux"
   set guifont=Monospace\ 11
 endif
 
@@ -173,7 +175,7 @@ set showcmd
 set laststatus=2
 set statusline=\ %<%F%m%r%h\ %w\ \ [%{&ff}][%{&fenc!=''?&fenc:&enc}%{&bomb?',BOM':''}][%Y]\ %=%4l,%-10.(%c%V%)\ %P\ 
 
-if Platform() == 'linux'
+if os == 'linux'
   function! CurDir()
     let curdir = substitute(getcwd(), '/home/pleiades/', "~/", "g")
     return curdir
@@ -188,7 +190,7 @@ endif
 " Buffers
 """"""""""""""""""""""""""""""""""""""""""""""""""
 
-if Platform() == 'linux'
+if os == 'linux'
   "Restore cursor to file position in previous editing session
   set viminfo='10,\"100,:20,%,n~/.viminfo
   au BufReadPost * if line("'\"") > 0|if line("'\"") <= line("$")|exe("norm '\"")|else|exe "norm $"|endif|endif
@@ -335,7 +337,7 @@ Command remove-bom \nobom
 Command hitest \hitest
 
 
-if Platform() == 'win'
+if os == 'win'
   let $TMPDIR = 'F:/temp'
 else
   let $TMPDIR = '~/tmp'
@@ -468,7 +470,7 @@ map \52 :set filetype=javascript<cr>
 map \53 :set filetype=actionscript<cr>
 map \54 :set filetype=mxml<cr>
 
-if Platform() == 'win'
+if os == 'win'
   map \61 :set filetype=dosbatch<cr>
   map \62 :set filetype=sh<cr>
 else
@@ -483,7 +485,7 @@ map \74 :set filetype=tex<cr>
 map \75 :set filetype=diff<cr>
 
 
-if Platform() == 'win'
+if os == 'win'
 
 autocmd FileType perl,python,tcl,dosbatch map <buffer> <leader>! :up<cr>:!%<cr>
 
@@ -633,7 +635,7 @@ autocmd FileType svn set spell " XXX: how to avoid Chinese spell check?
 " Load more
 """"""""""""""""""""""""""""""""""""""""""""""""""
 
-if Platform() == 'win'
+if os == 'win'
   if filereadable(expand('$VIM\local_vimrc'))
     source $VIM\local_vimrc
   endif
