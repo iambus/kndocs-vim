@@ -33,5 +33,5 @@ endfunction
 " By Kneo
 """"""""""""""""""""""""""""""""""""""""""""""""""
 
-source $VIM/win32_vimrc
+source $VIM/main.vimrc
 
