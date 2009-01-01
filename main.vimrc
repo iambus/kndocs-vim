@@ -1,4 +1,7 @@
 
+""""""""""""""""""""""""""""""""""""""""""""""""""
+" Platform
+""""""""""""""""""""""""""""""""""""""""""""""""""
 
 function! Platform()
   if has('win32')
@@ -13,28 +16,134 @@ function! Platform()
   endif
 endfunction
 
+if Platform() == 'win'
+else
+endif
 
 """"""""""""""""""""""""""""""""""""""""""""""""""
 " Basic
 """"""""""""""""""""""""""""""""""""""""""""""""""
 
 " Generl
+set nocompatible
 set nobackup
 set number
 set ignorecase
 set incsearch
 set vb t_vb=
 
+if Platform() == 'linux'
+  set nowb
+  set noswapfile
+endif
+
+"set history=400
+
+" Indent
+set tabstop=4
+set shiftwidth=4
+if Platform() == 'linux'
+  set expandtab
+  set smarttab
+  set lbr
+  set tw=500
+  "Auto indent
+  set ai
+  "Smart indet
+  set si
+  "C-style indeting
+  "set cindent
+  "Wrap lines
+  set wrap
+endif
+
+map <leader>t2 :set expandtab<cr>:set shiftwidth=2<cr>
+map <leader>t3 :set expandtab<cr>:set shiftwidth=3<cr>
+map <leader>t4 :set expandtab<cr>:set shiftwidth=4<cr>
+map <leader>tt :set noexpandtab<cr>:set shiftwidth=4<cr>
+
+if Platform() == 'linux'
+  """"""""""""""""""""""""""""""""""""""""""""""""""
+  " VIM userinterface
+  """"""""""""""""""""""""""""""""""""""""""""""""""
+  "Set 7 lines to the curors - when moving vertical..
+  set so=7
+
+  "Turn on WiLd menu
+  set wildmenu
+
+  "Always show current position
+  set ruler
+
+  "Do not redraw, when running macros.. lazyredraw
+  set lz
+
+  "Change buffer - without saving
+  set hid
+
+  "Set backspace
+  set backspace=eol,start,indent
+
+  "Bbackspace and cursor keys wrap to
+  set whichwrap+=<,>,h,l
+
+  "Ignore case when searching
+  set ignorecase
+  set incsearch
+
+  "Set magic on
+  set magic
+
+  "No sound on errors.
+  set noerrorbells
+  set novisualbell
+  set t_vb=
+
+  "show matching bracets
+  set showmatch
+
+  "How many tenths of a second to blink
+  set mat=2
+
+  "Highlight search things
+  set hlsearch
+
+
+  """"""""""""""""""""""""""""""""""""""""""""""""""
+  " Buffer realted
+  """"""""""""""""""""""""""""""""""""""""""""""""""
+
+  "Restore cursor to file position in previous editing session
+  set viminfo='10,\"100,:20,%,n~/.viminfo
+  au BufReadPost * if line("'\"") > 0|if line("'\"") <= line("$")|exe("norm '\"")|else|exe "norm $"|endif|endif
+
+endif
+
+""""""""""""""""""""""""""""""""""""""""""""""""""
 " Mappings
+""""""""""""""""""""""""""""""""""""""""""""""""""
 let mapleader = ","
 
-"map <leader>S :source $VIM/_vimrc<cr>
 map <leader>cd :cd %:p:h<cr>
-map \rc :e $VIM/_vimrc<cr>
-map \lrc :e $VIM/local_vimrc<cr>
-map \sorc :source $VIM/_vimrc<cr>
-map \slrc :source $VIM/local_vimrc<cr>
-map \r$ :%s/\r$//<cr>
+
+map <leader>h :help<space>
+map <leader>K :exe "help" expand("<cword>")<cr>
+
+if Platform() == 'win'
+  map \rc :e $VIM/_vimrc<cr>
+  map \lrc :e $VIM/local_vimrc<cr>
+  map \sorc :source $VIM/_vimrc<cr>
+  map \slrc :source $VIM/local_vimrc<cr>
+  map \r$ :%s/\r$//<cr>
+else
+  map \rc :e $HOME/.vimrc<cr>
+  map \lrc :e $HOME/.vimrc_local<cr>
+  map \sorc :source $HOME/.vimrc<cr>
+  map \slrc :source $HOME/.vimrc_local<cr>
+  map \r$ :%s/\r$//<cr>
+endif
+
+map \msn i<c-r>=strftime("%Y-%m-%d %H:%M")<cr> MSN<cr>
 
 set winaltkeys=no
 map <M-y> "+yy
@@ -44,19 +153,16 @@ noremap <M-v> <C-v>
 noremap <M-x> <C-x>
 
 
-" Indent
-set tabstop=4
-set shiftwidth=4
-"set expandtab
-"set smarttab
-
-map <leader>t2 :set expandtab<cr>:set shiftwidth=2<cr>
-map <leader>t3 :set expandtab<cr>:set shiftwidth=3<cr>
-map <leader>t4 :set expandtab<cr>:set shiftwidth=4<cr>
-map <leader>tt :set noexpandtab<cr>:set shiftwidth=4<cr>
-
+""""""""""""""""""""""""""""""""""""""""""""""""""
+" File Format and File Encodings
+""""""""""""""""""""""""""""""""""""""""""""""""""
 " File format
-set ffs=dos,unix,mac
+if Platform() == 'win'
+  set ffs=dos,unix,mac
+else
+  set ffs=unix,dos,mac
+endif
+
 nmap <leader>fd :set ff=dos<cr>
 nmap <leader>fD :set ffs=dos<cr>:e<cr>
 "nmap <leader>fD :e ++ff=dos<cr>
@@ -65,24 +171,51 @@ nmap <leader>fm :set ff=mac<cr>
 autocmd FileType sh set ff=unix " XXX: does it have any potential problem?
 
 " File encoding
-set fileencodings=ucs-bom,utf-8
-
-
-" Look
-if has("gui_running")
-	let psc_style='cool'
-	colorscheme ps_color
-"	colorscheme desert
-	set guifont=Monaco:h10:cDEFAULT
-	set guioptions-=T
+if Platform() == 'win'
+  set fileencodings=ucs-bom,utf-8
 else
-	set background=dark
-	colorscheme zellner
+  set fileencodings=utf-8,gbk,ucs-bom,default,latin1
+  "nmap <leader>eu :e enc=utf-8<cr>
+  "nmap <leader>eg :e enc=gbk<cr>
 endif
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""
+" Look
+""""""""""""""""""""""""""""""""""""""""""""""""""
+syntax enable
+
+if Platform() == "win"
+  set guifont=Monaco:h10:cDEFAULT
+elseif Platform() == "linux"
+  set guifont=Monospace\ 11
+endif
+
+if has("gui_running")
+  set background=dark
+  colorscheme ps_color
+  let psc_style='cool'
+  set guioptions-=T
+else
+  set background=dark
+"  colorscheme zellner
+  colorscheme darkblue
+endif
+
+set showcmd
+
 set laststatus=2
 set statusline=\ %<%F%m%r%h\ %w\ \ [%{&ff}][%{&fenc!=''?&fenc:&enc}%{&bomb?',BOM':''}][%Y]\ %=%4l,%-10.(%c%V%)\ %P\ 
 
+if Platform() == 'linux'
+  function! CurDir()
+    let curdir = substitute(getcwd(), '/home/pleiades/', "~/", "g")
+    return curdir
+  endfunction
 
+  "Format the statusline
+  set statusline=\ %F%m%r%h\ %w\ \ CWD:\ %r%{CurDir()}%h\ \ \ Line:\ %l/%L:%c
+endif
 
 """"""""""""""""""""""""""""""""""""""""""""""""""
 " Folding
@@ -395,14 +528,22 @@ map \52 :set filetype=javascript<cr>
 map \53 :set filetype=actionscript<cr>
 map \54 :set filetype=mxml<cr>
 
-map \61 :set filetype=dosbatch<cr>
-map \62 :set filetype=sh<cr>
+if Platform() == 'win'
+  map \61 :set filetype=dosbatch<cr>
+  map \62 :set filetype=sh<cr>
+else
+  map \61 :set filetype=sh<cr>
+  map \62 :set filetype=dosbatch<cr>
+endif
 
 map \71 :set filetype=vim<cr>
 map \72 :set filetype=make<cr>
 map \73 :set filetype=sql<cr>
 map \74 :set filetype=tex<cr>
 map \75 :set filetype=diff<cr>
+
+
+if Platform() == 'win'
 
 autocmd FileType perl,python,tcl,dosbatch map <buffer> <leader>! :up<cr>:!%<cr>
 
@@ -442,6 +583,97 @@ autocmd FileType xml,ant map <buffer> <leader>= :up<cr>:%!xmllint --format %<cr>
 autocmd FileType html map <buffer> <leader>= :up<cr>:%!tidy -f nul %<cr>
 
 
+else
+
+  """"""""""""""""""""""""""""""
+  " Util
+  """"""""""""""""""""""""""""""
+  function! FileDir()
+    let s = expand("%:h")
+    return s == '' ? '.' : s
+  endfunction
+
+  """"""""""""""""""""""""""""""
+  " VIM
+  """"""""""""""""""""""""""""""
+  autocmd FileType vim map <buffer> <leader><space> :up<cr>:source %<cr>
+  "autocmd FileType vim set nofen
+
+  """"""""""""""""""""""""""""""
+  " C mappings
+  """""""""""""""""""""""""""""""
+"  autocmd FileType c map <buffer> <leader>cc :up<cr>:!gcc -W -Wall %<cr>
+  autocmd FileType c map <buffer> <leader>cc :up<cr>:exe "!gcc -W -Wall % -o ".FileDir().'/a.out'<cr>
+  autocmd FileType c map <buffer> <leader>cr :up<cr>:exe '!'.FileDir().'/a.out'<cr>
+  autocmd FileType c map <buffer> <leader><space> <leader>cc
+
+  """"""""""""""""""""""""""""""
+  " C++ mappings
+  """""""""""""""""""""""""""""""
+"  autocmd FileType cpp map <buffer> <leader>cc :up<cr>:!g++ -W -Wall %<cr>
+  autocmd FileType cpp map <buffer> <leader>cc :up<cr>:exe "!g++ -W -Wall % -o ".FileDir().'/a.out'<cr>
+  autocmd FileType cpp map <buffer> <leader>cr :up<cr>:exe '!'.FileDir().'/a.out'<cr>
+  autocmd FileType cpp map <buffer> <leader><space> <leader>cc
+
+  """"""""""""""""""""""""""""""
+  " C/C++
+  """""""""""""""""""""""""""""""
+  autocmd FileType c,cpp map <buffer> <leader>= :up<cr>:%!astyle --style=ansi -p < %<cr>
+
+  """""""""""""""""""""""""""""""
+  " Java section
+  """""""""""""""""""""""""""""""
+
+
+  """""""""""""""""""""""""""""""
+  " Perl section 
+  """""""""""""""""""""""""""""""
+  autocmd FileType perl map <buffer> <leader><space> :up<cr>:!perl %<cr>
+  autocmd FileType perl map <buffer> <leader>cc :up<cr>:!perl -c %<cr>
+
+
+  """""""""""""""""""""""""""""""
+  " Python section
+  """""""""""""""""""""""""""""""
+  autocmd FileType python map <buffer> <leader><space> :up<cr>:!python %<cr>
+
+
+  """""""""""""""""""""""""""""""
+  " Tcl section
+  """""""""""""""""""""""""""""""
+  autocmd FileType tcl map <buffer> <leader><space> :up<cr>:!tclsh %<cr>
+
+
+  """""""""""""""""""""""""""""""
+  " Lua section
+  """""""""""""""""""""""""""""""
+  autocmd FileType lua map <buffer> <leader><space> :up<cr>:!lua %<cr>
+
+
+  """""""""""""""""""""""""""""""
+  " Lisp section
+  """""""""""""""""""""""""""""""
+  autocmd FileType lisp map <buffer> <leader><space> :up<cr>:!clisp %<cr>
+
+
+  """""""""""""""""""""""""""""""
+  " XML section
+  """""""""""""""""""""""""""""""
+  autocmd FileType xml map <buffer> <leader>= :up<cr>:%!xmllint --format %<cr>
+  autocmd FileType xml map <buffer> <leader><space> <leader>=
+
+
+  """""""""""""""""""""""""""""""
+  " JavaScript
+  """""""""""""""""""""""""""""""
+  autocmd FileType javascript map <buffer> <leader><space> :up<cr>:!js %<cr>
+
+  """""""""""""""""""""""""""""""
+  " HTML
+  """""""""""""""""""""""""""""""
+  autocmd FileType html map <buffer> <leader>= :up<cr>:%!tidy -f /dev/null %<cr>
+
+endif
 
 
 
@@ -454,9 +686,17 @@ autocmd FileType html map <buffer> <leader>= :up<cr>:%!tidy -f nul %<cr>
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""
+" Load more
 """"""""""""""""""""""""""""""""""""""""""""""""""
-if filereadable(expand('$VIM\local_vimrc'))
-	source $VIM\local_vimrc
+
+if Platform() == 'win'
+  if filereadable(expand('$VIM\local_vimrc'))
+    source $VIM\local_vimrc
+  endif
+else
+  if filereadable(expand('~/.vimrc_local'))
+    source ~/.vimrc_local
+  endif
 endif
 
 
