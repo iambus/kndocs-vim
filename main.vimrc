@@ -107,7 +107,6 @@ if os == linux
   set expandtab
   set smarttab
   set linebreak
-  set textwidth=500
   set smartindent
   "C-style indeting
   "set cindent
