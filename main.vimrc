@@ -106,8 +106,8 @@ set autoindent
 if os == linux
   set expandtab
   set smarttab
-  set linebreak
   set smartindent
+  set linebreak "?
   "C-style indeting
   "set cindent
 endif
@@ -663,6 +663,9 @@ map \75 :set filetype=diff<cr>
   autocmd FileType perl,python,tcl,dosbatch map <buffer> <leader>! :up<cr>:!%<cr>
 
 
+  """""""""""""""""""""""""""""""
+  "
+  """""""""""""""""""""""""""""""
 
 
 
