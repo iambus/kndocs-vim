@@ -30,11 +30,26 @@ set nobackup
 set number
 set ignorecase
 set incsearch
-set vb t_vb=
+set hlsearch
+"set whichwrap+=<,>,h,l
+set backspace=indent,eol,start
+
+if Platform() == 'win'
+  set vb t_vb=
+else
+  set noerrorbells
+  set novisualbell
+  set t_vb=
+endif
 
 if Platform() == 'linux'
   set nowb
   set noswapfile
+
+  set scrolloff=5
+
+  set showmatch
+  set mat=2
 endif
 
 "set history=400
@@ -45,12 +60,12 @@ set shiftwidth=4
 if Platform() == 'linux'
   set expandtab
   set smarttab
-  set lbr
-  set tw=500
+  set linebreak
+  set textwidth=500
   "Auto indent
-  set ai
+  set autoindent
   "Smart indet
-  set si
+  set smartindent
   "C-style indeting
   "set cindent
   "Wrap lines
@@ -66,48 +81,19 @@ if Platform() == 'linux'
   """"""""""""""""""""""""""""""""""""""""""""""""""
   " VIM userinterface
   """"""""""""""""""""""""""""""""""""""""""""""""""
-  "Set 7 lines to the curors - when moving vertical..
-  set so=7
-
-  "Turn on WiLd menu
   set wildmenu
 
   "Always show current position
   set ruler
 
   "Do not redraw, when running macros.. lazyredraw
-  set lz
+  set lazyredraw
 
   "Change buffer - without saving
-  set hid
-
-  "Set backspace
-  set backspace=eol,start,indent
-
-  "Bbackspace and cursor keys wrap to
-  set whichwrap+=<,>,h,l
-
-  "Ignore case when searching
-  set ignorecase
-  set incsearch
+  set hidden
 
   "Set magic on
   set magic
-
-  "No sound on errors.
-  set noerrorbells
-  set novisualbell
-  set t_vb=
-
-  "show matching bracets
-  set showmatch
-
-  "How many tenths of a second to blink
-  set mat=2
-
-  "Highlight search things
-  set hlsearch
-
 
   """"""""""""""""""""""""""""""""""""""""""""""""""
   " Buffer realted
