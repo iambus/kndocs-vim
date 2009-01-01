@@ -79,7 +79,7 @@ else
 	set background=dark
 	colorscheme zellner
 endif
-"set laststatus=2
+set laststatus=2
 set statusline=\ %<%F%m%r%h\ %w\ \ [%{&ff}][%{&fenc!=''?&fenc:&enc}%{&bomb?',BOM':''}][%Y]\ %=%4l,%-10.(%c%V%)\ %P\ 
 
 
