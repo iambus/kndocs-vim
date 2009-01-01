@@ -438,18 +438,10 @@ map \only :call OnlyInput()<cr>
 Command only \only
 
 
-function! WrapLine()
-	set wrap
-	set guioptions-=b
-endfunction
-map \wrap :call WrapLine()<cr>
+map \wrap :set wrap<cr>:set guioptions-=b<cr>
 Command wrapline \wrap
 
-function! NoWrapLine()
-	set nowrap
-	set guioptions+=b
-endfunction
-map \nowrap :call NoWrapLine()<cr>
+map \nowrap :set nowrap<cr>:set guioptions+=b<cr>
 Command nowrapline \nowrap
 
 if os == win
