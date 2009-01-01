@@ -185,7 +185,7 @@ endif
 """"""""""""""""""""""""""""""""""""""""""""""""""
 " Buffers
 """"""""""""""""""""""""""""""""""""""""""""""""""
-
+" XXX: how to use it?
 if os == 'linux'
   "Restore cursor to file position in previous editing session
   set viminfo='10,\"100,:20,%,n~/.viminfo
@@ -239,25 +239,25 @@ map! <M-h> <esc>:tab help<cr>
 """"""""""""""""""""""""""""""""""""""""""""""""""
 
 function! DiffFiles(f1, f2)
-	execute 'tablast'
-	execute 'tabnew ' . a:f2
-	execute 'vertical diffsplit ' . a:f1
+  execute 'tablast'
+  execute 'tabnew ' . a:f2
+  execute 'vertical diffsplit ' . a:f1
 endfunction
 
 function! DiffTabs(t1, t2)
-	function! GetTabFile(n)
-		let buflist = tabpagebuflist(a:n)
-		let winnr = tabpagewinnr(a:n)
-		return bufname(buflist[winnr - 1])
-	endfunction
-	let s1 = GetTabFile(a:t1)
-	let s2 = GetTabFile(a:t2)
-	call DiffFiles(s1, s2)
+  function! GetTabFile(n)
+    let buflist = tabpagebuflist(a:n)
+    let winnr = tabpagewinnr(a:n)
+    return bufname(buflist[winnr - 1])
+  endfunction
+  let s1 = GetTabFile(a:t1)
+  let s2 = GetTabFile(a:t2)
+  call DiffFiles(s1, s2)
 endfunction
 
 function! DiffEndTabs()
-	let n = tabpagenr('$')
-	call DiffTabs(n-1, n)
+  let n = tabpagenr('$')
+  call DiffTabs(n-1, n)
 endfunction
 
 map <silent> \diff :call DiffTabs(1, 2)<cr>
@@ -271,54 +271,54 @@ map <silent> \dif0 :call DiffEndTabs()<cr>
 let s:mxdict = {}
 
 function! MXInput()
-	call inputsave()
-	let cmd = input("M-x ","","customlist,CommandList")
-	call inputrestore()
-	if cmd != ""
-		call MX(cmd)
-	endif
+  call inputsave()
+  let cmd = input("M-x ","","customlist,CommandList")
+  call inputrestore()
+  if cmd != ""
+    call MX(cmd)
+  endif
 endfunction
 
 function! MX(cmd)
-	let cmd = a:cmd
+  let cmd = a:cmd
 
-	if HasCommand(cmd)
-		let x = GetCommand(cmd)
-		execute 'normal ' . x
-	elseif maparg('\' . cmd) != ""
-		execute 'normal ' . '\' . cmd
-	elseif maparg(',' . cmd) != ""
-		execute 'normal ' . ',' . cmd
-	endif
+  if HasCommand(cmd)
+    let x = GetCommand(cmd)
+    execute 'normal ' . x
+  elseif maparg('\' . cmd) != ""
+    execute 'normal ' . '\' . cmd
+  elseif maparg(',' . cmd) != ""
+    execute 'normal ' . ',' . cmd
+  endif
 endfunction
 
 function! PutCommand(name, seq)
-	let s:mxdict[a:name] = a:seq
+  let s:mxdict[a:name] = a:seq
 endfunction
 
 function! GetCommand(name)
-	return s:mxdict[a:name]
+  return s:mxdict[a:name]
 endfunction
 
 function! HasCommand(name)
-	return has_key(s:mxdict, a:name)
+  return has_key(s:mxdict, a:name)
 endfunction
 
 map <M-x> :call MXInput()<cr>
 
 function! CommandList(ArgLead, CmdLine, CursorPos)
-	let list = GetCommandList()
-	let nlist = []
-	for i in list
-		if stridx(tolower(i), tolower(a:CmdLine)) == 0
-			call add(nlist, i)
-		endif
-	endfor
-	return nlist
+  let list = GetCommandList()
+  let nlist = []
+  for i in list
+    if stridx(tolower(i), tolower(a:CmdLine)) == 0
+      call add(nlist, i)
+    endif
+  endfor
+  return nlist
 endfunction
 
 function! GetCommandList()
-	return sort(keys(s:mxdict), 1)
+  return sort(keys(s:mxdict), 1)
 endfunction
 
 command! -nargs=* Command call PutCommand(<f-args>)
@@ -388,18 +388,18 @@ Command open-temp-file-9 \otemp9
 
 " Keep only strings matched
 function! Only(regex)
-	let r = a:regex
-	execute '%s/' . r . '/\r&\r/g'
-	execute 'v/^' . r . '$/d'
+  let r = a:regex
+  execute '%s/' . r . '/\r&\r/g'
+  execute 'v/^' . r . '$/d'
 endfunction
 
 function! OnlyInput()
-	call inputsave()
-	let r = input("only:")
-	call inputrestore()
-	if r != ""
-		call Only(r)
-	endif
+  call inputsave()
+  let r = input("only:")
+  call inputrestore()
+  if r != ""
+    call Only(r)
+  endif
 endfunction
 
 map \only :call OnlyInput()<cr>
