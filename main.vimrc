@@ -3,16 +3,23 @@
 " Platform
 """"""""""""""""""""""""""""""""""""""""""""""""""
 
+let win = 'win'
+let win32 = 'win'
+let win64 = 'win'
+let linux = 'unix'
+let unix = 'unix'
+let unknown_platform = 'unkown'
+
 function! Platform()
   if has('win32')
-    return "win"
+    return g:win32
   elseif has('win64')
-    return "win"
+    return g:win64
   elseif has('unix')
-    return 'linux'
+    return g:unix
   else
     throw 'Unknown platform'
-    return 'unkown'
+    return g:unknown_platform
   endif
 endfunction
 
@@ -35,7 +42,7 @@ set backspace=indent,eol,start "?
 set ruler "?
 set magic "?
 
-if os == 'win'
+if os == win
   set vb t_vb=
 else
   set noerrorbells
@@ -43,7 +50,7 @@ else
   set t_vb=
 endif
 
-if os == 'linux'
+if os == linux
   set nowritebackup
   set noswapfile
 
@@ -66,7 +73,7 @@ endif
 " Indent
 set tabstop=4
 set shiftwidth=4
-if os == 'linux'
+if os == linux
   set expandtab
   set smarttab
   set linebreak
@@ -94,7 +101,7 @@ map <leader>cd :cd %:p:h<cr>
 map <leader>h :help<space>
 map <leader>K :exe "help" expand("<cword>")<cr>
 
-if os == 'win'
+if os == win
   map \rc :e $VIM/main.vimrc<cr>
   map \lrc :e $VIM/local_vimrc<cr>
   map \sorc :source $VIM/_vimrc<cr>
@@ -122,7 +129,7 @@ noremap <M-x> <C-x>
 " File Format and File Encodings
 """"""""""""""""""""""""""""""""""""""""""""""""""
 " File format
-if os == 'win'
+if os == win
   set ffs=dos,unix,mac
 else
   set ffs=unix,dos,mac
@@ -135,7 +142,7 @@ nmap <leader>fu :set ff=unix<cr>
 nmap <leader>fm :set ff=mac<cr>
 
 " File encoding
-if os == 'win'
+if os == win
   set fileencodings=ucs-bom,utf-8
 else
   set fileencodings=utf-8,gbk,ucs-bom,default,latin1
@@ -171,7 +178,7 @@ set showcmd
 set laststatus=2
 set statusline=\ %<%F%m%r%h\ %w\ \ [%{&ff}][%{&fenc!=''?&fenc:&enc}%{&bomb?',BOM':''}][%Y]\ %=%4l,%-10.(%c%V%)\ %P\ 
 
-if os == 'linux'
+if os == linux
   function! CurDir()
     let curdir = substitute(getcwd(), '/home/pleiades/', "~/", "g")
     return curdir
@@ -186,7 +193,7 @@ endif
 " Buffers
 """"""""""""""""""""""""""""""""""""""""""""""""""
 " XXX: how to use it?
-if os == 'linux'
+if os == linux
   "Restore cursor to file position in previous editing session
   set viminfo='10,\"100,:20,%,n~/.viminfo
   au BufReadPost * if line("'\"") > 0|if line("'\"") <= line("$")|exe("norm '\"")|else|exe "norm $"|endif|endif
@@ -333,7 +340,7 @@ Command remove-bom \nobom
 Command hitest \hitest
 
 
-if os == 'win'
+if os == win
   let $TMPDIR = 'F:/temp'
 else
   let $TMPDIR = '~/tmp'
@@ -466,7 +473,7 @@ map \52 :set filetype=javascript<cr>
 map \53 :set filetype=actionscript<cr>
 map \54 :set filetype=mxml<cr>
 
-if os == 'win'
+if os == win
   map \61 :set filetype=dosbatch<cr>
   map \62 :set filetype=sh<cr>
 else
@@ -503,7 +510,7 @@ map \75 :set filetype=diff<cr>
   """""""""""""""""""""""""""""""
 "  autocmd FileType c map <buffer> <leader>cc :up<cr>:!gcc -W -Wall %<cr>
 
-  if os == 'linux'
+  if os == linux
     autocmd FileType c map <buffer> <leader>cc :up<cr>:exe "!gcc -W -Wall % -o ".FileDir().'/a.out'<cr>
     autocmd FileType c map <buffer> <leader>cr :up<cr>:exe '!'.FileDir().'/a.out'<cr>
   else
@@ -517,7 +524,7 @@ map \75 :set filetype=diff<cr>
   " C++ mappings
   """""""""""""""""""""""""""""""
 "  autocmd FileType cpp map <buffer> <leader>cc :up<cr>:!g++ -W -Wall %<cr>
-  if os == 'linux'
+  if os == linux
     autocmd FileType cpp map <buffer> <leader>cc :up<cr>:exe "!g++ -W -Wall % -o ".FileDir().'/a.out'<cr>
     autocmd FileType cpp map <buffer> <leader>cr :up<cr>:exe '!'.FileDir().'/a.out'<cr>
   else
@@ -543,7 +550,7 @@ map \75 :set filetype=diff<cr>
   """""""""""""""""""""""""""""""
   autocmd FileType perl map <buffer> <leader><space> :up<cr>:!perl %<cr>
   autocmd FileType perl map <buffer> <leader>cc :up<cr>:!perl -c %<cr>
-  if os == 'win'
+  if os == win
     autocmd FileType perl map <buffer> <leader>= :up<cr>:%!perltidy < %<cr>
   endif
 
@@ -576,7 +583,7 @@ map \75 :set filetype=diff<cr>
   """""""""""""""""""""""""""""""
   " XML section
   """""""""""""""""""""""""""""""
-  if os == 'linux'
+  if os == linux
     autocmd FileType xml map <buffer> <leader>= :up<cr>:%!xmllint --format %<cr>
     autocmd FileType xml map <buffer> <leader><space> <leader>=
   else
@@ -599,7 +606,7 @@ map \75 :set filetype=diff<cr>
   """""""""""""""""""""""""""""""
   " HTML
   """""""""""""""""""""""""""""""
-  if os == 'win'
+  if os == win
     autocmd FileType html map <buffer> <leader>= :up<cr>:%!tidy -f nul %<cr>
   else
     autocmd FileType html map <buffer> <leader>= :up<cr>:%!tidy -f /dev/null %<cr>
@@ -634,7 +641,7 @@ map \75 :set filetype=diff<cr>
 " Load more
 """"""""""""""""""""""""""""""""""""""""""""""""""
 
-let local_vimrc = os == 'win' ? '$VIM\local_vimrc' : '~/.vimrc_local'
+let local_vimrc = os == win ? '$VIM\local_vimrc' : '~/.vimrc_local'
 
 if filereadable(expand(local_vimrc))
   exe 'source' local_vimrc
