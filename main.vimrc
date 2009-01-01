@@ -616,7 +616,10 @@ endif
 
 
 autocmd FileType sh set ff=unix " XXX: does it have any potential problem?
-autocmd FileType vim set ff=unix " XXX: does it have any potential problem?
+
+autocmd FileType vim set shiftwidth=2
+autocmd FileType vim set tabstop=2
+autocmd FileType vim set noexpandtab
 
 autocmd FileType svn set spell " XXX: how to avoid Chinese spell check?
 
