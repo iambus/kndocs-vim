@@ -770,6 +770,12 @@ let favex_fe='\fe'
 let favex_fd='\fd'
 let favlist_path = os == linux ? '$HOME/.vimfavlist' : '$HOME/_vimfavlist'
 
+" DirDiff.vim
+map <unique> \dg <Plug>DirDiffGet
+map <unique> \dp <Plug>DirDiffPut
+map <unique> \dj <Plug>DirDiffNext
+map <unique> \dk <Plug>DirDiffPrev
+
 """"""""""""""""""""""""""""""""""""""""""""""""""
 " Load more
 """"""""""""""""""""""""""""""""""""""""""""""""""
