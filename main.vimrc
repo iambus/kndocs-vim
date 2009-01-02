@@ -123,12 +123,6 @@ if os == linux
   "set cindent
 endif
 
-map <leader>t2 :set expandtab<cr>:set shiftwidth=2<cr>
-map <leader>t3 :set expandtab<cr>:set shiftwidth=3<cr>
-map <leader>t4 :set expandtab<cr>:set shiftwidth=4<cr>
-map <leader>tt :set noexpandtab<cr>:set shiftwidth=4<cr>
-
-
 """"""""""""""""""""""""""""""""""""""""""""""""""
 " Mappings
 """"""""""""""""""""""""""""""""""""""""""""""""""
@@ -161,6 +155,12 @@ map <M-Y> gg"+yG<C-O><C-O>
 noremap <M-a> <C-a>
 noremap <M-v> <C-v>
 noremap <M-x> <C-x>
+
+
+map <leader>t2 :set expandtab<cr>:set shiftwidth=2<cr>
+map <leader>t3 :set expandtab<cr>:set shiftwidth=3<cr>
+map <leader>t4 :set expandtab<cr>:set shiftwidth=4<cr>
+map <leader>tt :set noexpandtab<cr>:set shiftwidth=4<cr>
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""
