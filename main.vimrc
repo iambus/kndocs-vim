@@ -354,6 +354,7 @@ function! HasCommand(name)
 endfunction
 
 map <M-x> :call MXInput()<cr>
+map <leader>mx :call MXInput()<cr>
 
 function! CommandList(ArgLead, CmdLine, CursorPos)
   let list = GetCommandList()
