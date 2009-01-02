@@ -321,7 +321,7 @@ let s:mxdict = {}
 
 function! MXInput()
   call inputsave()
-  let cmd = input("M-x ","","customlist,CommandList")
+  let cmd = input("M-x ", "", "customlist,CommandList")
   call inputrestore()
   if cmd != ""
     call MX(cmd)
@@ -430,6 +430,55 @@ Command open-temp-file-7 \otemp7
 Command open-temp-file-8 \otemp8
 Command open-temp-file-9 \otemp9
 
+""""""""""""""""""""""""""""""""""""""""""""""""""
+" Script
+""""""""""""""""""""""""""""""""""""""""""""""""""
+
+function! ScriptLoad(name)
+  let name = a:name
+  exe 'source' '$VIMFILES/script/'.name.'.vim'
+endfunction
+
+" TODO: optional arg
+function! GetScriptList()
+  let list = split(glob('$VIMFILES/script/*.vim'), '\n')
+  let list = map(list, "fnamemodify(v:val, ':t:r')")
+  return sort(list)
+endfunction
+
+let s:script_list = GetScriptList()
+
+function! ScriptList(ArgLead, CmdLine, CursorPos)
+  let alist = s:script_list
+  let nlist = []
+  for i in alist
+    if stridx(tolower(i), tolower(a:ArgLead)) == 0
+      call add(nlist, i)
+    endif
+  endfor
+  return nlist
+endfunction
+
+function! ScriptInput()
+  call inputsave()
+  let name = input("Script: ", "", "customlist,ScriptList")
+  call inputrestore()
+  if name != ""
+    call ScriptLoad(name)
+  endif
+endfunction
+
+function! Script(...)
+  if a:0 == 0
+    call ScriptInput()
+  elseif a:0 == 1
+    call ScriptLoad(a:1)
+  else
+    echoerr 'Too many arguments. Only 0 or 1 argument is allowed.'
+  endif
+endfunction
+
+command! -complete=customlist,ScriptList -nargs=? Script call Script(<q-args>)
 
 """"""""""""""""""""""""""""""""""""""""""""""""""
 " Misc
