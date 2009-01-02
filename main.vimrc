@@ -780,6 +780,14 @@ map <unique> \dp <Plug>DirDiffPut
 map <unique> \dj <Plug>DirDiffNext
 map <unique> \dk <Plug>DirDiffPrev
 
+" timestamp.vim
+" XXX: How to make %z = +0800 on Windows?
+let g:timestamp_rep = '%Y-%m-%d %H:%M:%S %z'
+"let g:timestamp_regexp = '\v\C%(<%(Last %([cC]hanged?|modified)|Modified)\s*:\s+)@<=\a+ \d{2} \a+ \d{4} \d{2}:\d{2}:\d{2}%(\s+[AP]M)?%(\s+\a+)?|TIMESTAMP'
+let g:timestamp_regexp = '\v\C%(<%(Last %([cC]hanged?|modified)|Modified)\s*:\s+)@<=\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}%(\s+\S+)?|\%TIMESTAMP\%'
+map \time a%TIMESTAMP%<ESC>
+
+
 " mru.vim
 " Nothing to change
 
