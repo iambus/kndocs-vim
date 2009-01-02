@@ -748,6 +748,10 @@ map \75 :set filetype=diff<cr>
 """"""""""""""""""""""""""""""""""""""""""""""""""
 " Plugin
 """"""""""""""""""""""""""""""""""""""""""""""""""
+" taglist.vim
+if !executable('ctags')
+  let loaded_taglist = 'no'
+endif
 
 " vcscommand.vim
 let VCSCommandMapPrefix = '\c'
