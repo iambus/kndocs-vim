@@ -748,6 +748,9 @@ map \75 :set filetype=diff<cr>
 """"""""""""""""""""""""""""""""""""""""""""""""""
 " Plugin
 """"""""""""""""""""""""""""""""""""""""""""""""""
+" bufexplorer.vim
+" Nothing to change
+
 " taglist.vim
 if !executable('ctags')
   let loaded_taglist = 'no'
@@ -759,6 +762,7 @@ let VCSCommandMapPrefix = '\c'
 " calendar.vim
 nmap <unique> \\cal <Plug>CalendarV
 nmap <unique> \\caL <Plug>CalendarH
+" TODO: set diary path
 
 " lookupfile.vim
 let g:LookupFile_DisableDefaultMap = 1
@@ -775,6 +779,27 @@ map <unique> \dg <Plug>DirDiffGet
 map <unique> \dp <Plug>DirDiffPut
 map <unique> \dj <Plug>DirDiffNext
 map <unique> \dk <Plug>DirDiffPrev
+
+" mru.vim
+" Nothing to change
+
+" xml.vim
+" TODO: remap
+
+" matchit.vim
+" TODO: remap
+
+" snippetsEmu.vim
+" Nothing to change
+
+" showit.vim
+" Nothing to change
+
+" text.vim
+" Nothing to change
+
+" genutils.vim
+" Nothing to change
 
 """"""""""""""""""""""""""""""""""""""""""""""""""
 " Load more
