@@ -57,6 +57,12 @@ endfunction
 
 let os = Platform()
 
+if os == win
+  let $VIMFILES = expand('$VIM/vimfiles')
+else
+  let $VIMFILES = expand('~/.vim')
+end
+
 """"""""""""""""""""""""""""""""""""""""""""""""""
 " Basic
 """"""""""""""""""""""""""""""""""""""""""""""""""
@@ -452,6 +458,9 @@ Command wrapline \wrap
 
 map \nowrap :set nowrap<cr>:set guioptions+=b<cr>
 Command nowrapline \nowrap
+
+map \tagdoc :helptags $VIMFILES/doc<cr>
+Command tagdoc \tagdoc
 
 if os == win
   " TOhtml
