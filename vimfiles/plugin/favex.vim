@@ -215,7 +215,6 @@ fun! s:FavList()
   if exists('g:favlist_path')
     let s:favlist= expand(g:favlist_path)
     if ! filereadable(s:favlist)
-      echoerr s:favlist
       exe "silent! e ".s:favlist
       0put='\"! h : toggle help'
       1put='\"! <Enter> : open file(dir) in this window'
@@ -229,7 +228,7 @@ fun! s:FavList()
       echo "Created ".s:favlist
       silent! g/^$/d
       silent! w
-      silent! close
+      silent! close "XXX: close it or not?
     endif
     return
   endif
