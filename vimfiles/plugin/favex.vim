@@ -209,6 +209,33 @@ endfun
 "}}}
 " FavList: find favlist file; create it if necessary {{{
 fun! s:FavList()
+  """"""""""""""""""""""""""""""""""""""""""""""""""
+  "           Kneo's modification from here        "
+  """"""""""""""""""""""""""""""""""""""""""""""""""
+  if exists('g:favlist_path')
+    let s:favlist= expand(g:favlist_path)
+    if ! filereadable(s:favlist)
+      echoerr s:favlist
+      exe "silent! e ".s:favlist
+      0put='\"! h : toggle help'
+      1put='\"! <Enter> : open file(dir) in this window'
+      2put='\"! o : open file(dir) in new window'
+      3put='\"! O : open file(dir) in previous window'
+      4put='\"! d : delete entry'
+      5put='\"! q : close favex window'
+      6put='\"! :he favex for detailed help'
+      7put='\" Files (do not delete this line)'
+      8put='\" Directories (do not delete this line)'
+      echo "Created ".s:favlist
+      silent! g/^$/d
+      silent! w
+      silent! close
+    endif
+    return
+  endif
+  """"""""""""""""""""""""""""""""""""""""""""""""""
+  "                       END                      "
+  """"""""""""""""""""""""""""""""""""""""""""""""""
   silent! 1sp
   let upath=&path
   if has('win32')

@@ -383,7 +383,7 @@ Command copy-all gg"+yG``
 if os == win
   let $TEMPDIR = 'F:/temp'
 else
-  let $TEMPDIR = '~/tmp'
+  let $TEMPDIR = expand('~/tmp')
 endif
 
 map <leader>W :cd $TEMPDIR<cr>:w! _<cr>
@@ -764,6 +764,8 @@ let favex_fs='\fs'
 let favex_ff='\ff'
 let favex_fe='\fe'
 let favex_fd='\fd'
+
+let favlist_path = '$TEMPDIR/favlist'
 
 """"""""""""""""""""""""""""""""""""""""""""""""""
 " Load more
