@@ -191,13 +191,13 @@ endif
 
 if has("gui_running")
   set background=dark
-	if os == win
-		colorscheme ps_color
-		let psc_style='cool'
-		set guioptions-=T
-	else
-		colorscheme moria
-	endif
+  if os == win
+    colorscheme ps_color
+    let psc_style='cool'
+    set guioptions-=T
+  else
+    colorscheme moria
+  endif
 else
   set background=dark
 "  colorscheme zellner
@@ -547,7 +547,7 @@ map \75 :set filetype=diff<cr>
 
   autocmd FileType vim set shiftwidth=2
   autocmd FileType vim set tabstop=2
-  autocmd FileType vim set noexpandtab
+  autocmd FileType vim set expandtab
 
   """"""""""""""""""""""""""""""
   " C mappings
