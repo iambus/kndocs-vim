@@ -702,6 +702,9 @@ map \75 :set filetype=diff<cr>
 " vcscommand.vim
 let VCSCommandMapPrefix = '\c'
 
+" calendar.vim
+nmap <unique> \\cal <Plug>CalendarV
+nmap <unique> \\caL <Plug>CalendarH
 
 """"""""""""""""""""""""""""""""""""""""""""""""""
 " Load more
