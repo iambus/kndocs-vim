@@ -764,7 +764,7 @@ let favex_fs='\fs'
 let favex_ff='\ff'
 let favex_fe='\fe'
 let favex_fd='\fd'
-let favlist_path = os == linux ? '$HOME/.vimfavlist' : '$HOME/.vimfavlist'
+let favlist_path = os == linux ? '$HOME/.vimfavlist' : '$HOME/_vimfavlist'
 
 """"""""""""""""""""""""""""""""""""""""""""""""""
 " Load more
