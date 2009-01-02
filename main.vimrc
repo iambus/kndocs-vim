@@ -759,6 +759,12 @@ nmap <unique> \\caL <Plug>CalendarH
 " lookupfile.vim
 let g:LookupFile_DisableDefaultMap = 1
 
+" favex.vim
+let favex_fs='\fs'
+let favex_ff='\ff'
+let favex_fe='\fe'
+let favex_fd='\fd'
+
 """"""""""""""""""""""""""""""""""""""""""""""""""
 " Load more
 """"""""""""""""""""""""""""""""""""""""""""""""""
