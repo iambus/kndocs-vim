@@ -378,34 +378,35 @@ Command copy-all gg"+yG``
 
 " Temporary Files
 
+" XXX: Don't use $TMPDIR, which conflicts with taglist...
 if os == win
-  let $TMPDIR = 'F:/temp'
+  let $TEMPDIR = 'F:/temp'
 else
-  let $TMPDIR = '~/tmp'
+  let $TEMPDIR = '~/tmp'
 endif
 
-map <leader>W :cd $TMPDIR<cr>:w! _<cr>
+map <leader>W :cd $TEMPDIR<cr>:w! _<cr>
 
-map \temp1 :w! $TMPDIR/_1<cr>
-map \temp2 :w! $TMPDIR/_2<cr>
-map \temp3 :w! $TMPDIR/_3<cr>
-map \temp4 :w! $TMPDIR/_4<cr>
-map \temp5 :w! $TMPDIR/_5<cr>
-map \temp6 :w! $TMPDIR/_6<cr>
-map \temp7 :w! $TMPDIR/_7<cr>
-map \temp8 :w! $TMPDIR/_8<cr>
-map \temp9 :w! $TMPDIR/_9<cr>
+map \temp1 :w! $TEMPDIR/_1<cr>
+map \temp2 :w! $TEMPDIR/_2<cr>
+map \temp3 :w! $TEMPDIR/_3<cr>
+map \temp4 :w! $TEMPDIR/_4<cr>
+map \temp5 :w! $TEMPDIR/_5<cr>
+map \temp6 :w! $TEMPDIR/_6<cr>
+map \temp7 :w! $TEMPDIR/_7<cr>
+map \temp8 :w! $TEMPDIR/_8<cr>
+map \temp9 :w! $TEMPDIR/_9<cr>
 
-map \otemp :e $TMPDIR/_<cr>
-map \otemp1 :e $TMPDIR/_1<cr>
-map \otemp2 :e $TMPDIR/_2<cr>
-map \otemp3 :e $TMPDIR/_3<cr>
-map \otemp4 :e $TMPDIR/_4<cr>
-map \otemp5 :e $TMPDIR/_5<cr>
-map \otemp6 :e $TMPDIR/_6<cr>
-map \otemp7 :e $TMPDIR/_7<cr>
-map \otemp8 :e $TMPDIR/_8<cr>
-map \otemp9 :e $TMPDIR/_9<cr>
+map \otemp :e $TEMPDIR/_<cr>
+map \otemp1 :e $TEMPDIR/_1<cr>
+map \otemp2 :e $TEMPDIR/_2<cr>
+map \otemp3 :e $TEMPDIR/_3<cr>
+map \otemp4 :e $TEMPDIR/_4<cr>
+map \otemp5 :e $TEMPDIR/_5<cr>
+map \otemp6 :e $TEMPDIR/_6<cr>
+map \otemp7 :e $TEMPDIR/_7<cr>
+map \otemp8 :e $TEMPDIR/_8<cr>
+map \otemp9 :e $TEMPDIR/_9<cr>
 
 Command temp-file-1 \temp1
 Command temp-file-2 \temp2
