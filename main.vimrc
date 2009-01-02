@@ -191,9 +191,13 @@ endif
 
 if has("gui_running")
   set background=dark
-  colorscheme ps_color
-  let psc_style='cool'
-  set guioptions-=T
+	if os == win
+		colorscheme ps_color
+		let psc_style='cool'
+		set guioptions-=T
+	else
+		colorscheme moria
+	endif
 else
   set background=dark
 "  colorscheme zellner
