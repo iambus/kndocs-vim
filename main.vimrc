@@ -35,7 +35,6 @@ let win32 = 'win'
 let win64 = 'win'
 let linux = 'unix'
 let unix = 'unix'
-let unknown_platform = 'unkown'
 
 function! Platform()
   if has('win32')
@@ -44,9 +43,14 @@ function! Platform()
     return g:win64
   elseif has('unix')
     return g:unix
+  elseif has('win32unix')
+    throw 'Cygwin is not tested'
+  elseif has('mac') or has('macunix')
+    throw 'Mac is not supported'
+  elseif has('win16')
+    throw 'win16 is not supported'
   else
     throw 'Unknown platform'
-    return g:unknown_platform
   endif
 endfunction
 
