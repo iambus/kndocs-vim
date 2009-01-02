@@ -707,6 +707,9 @@ let VCSCommandMapPrefix = '\c'
 nmap <unique> \\cal <Plug>CalendarV
 nmap <unique> \\caL <Plug>CalendarH
 
+" lookupfile.vim
+let g:LookupFile_DisableDefaultMap = 1
+
 """"""""""""""""""""""""""""""""""""""""""""""""""
 " Load more
 """"""""""""""""""""""""""""""""""""""""""""""""""
