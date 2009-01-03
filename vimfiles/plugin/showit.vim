@@ -133,10 +133,6 @@ nnoremap <silent> <Plug>MarkClear :call
 "       do a \*; otherwise (\/ is the
 "       most recently used), do a \/.
 
-""""""""""""""""""""""""""""""""""""""""""""""""""
-" Commented by Kneo:
-" I don't want to use them ...
-""""""""""""""""""""""""""""""""""""""""""""""""""
 ""nnoremap <silent> <leader>* :call <sid>SearchCurrentMark()<cr>
 ""nnoremap <silent> <leader># :call <sid>SearchCurrentMark("b")<cr>
 ""nnoremap <silent> <leader>/ :call <sid>SearchAnyMark()<cr>
@@ -493,31 +489,4 @@ endfunction
 let &cpo = s:save_cpo
 
 " vim: ts=2 sw=2
-""""""""""""""""""""""""""""""""""""""""""""""""""
-" By Kneo
-""""""""""""""""""""""""""""""""""""""""""""""""""
-" Highlight current line
-function! s:ShowLine()
-  let linecontent = '\%' . line(".") . "l.*"
-  call s:DoMark(linecontent)
-endfunction
-
-" Highlight current word
-function! s:ShowIt()
-  let lineno = '\%' . line(".") . "l"
-  let colno = '\%' . col(".") . "c"
-  let p = lineno . '\<' . '\w*' . colno . '\w*' . '\>'
-  call s:DoMark(p)
-endfunction
-
-nnoremap <silent> <Plug>ShowLine    :call <sid>ShowLine()<cr>
-nnoremap <silent> <Plug>ShowIt      :call <sid>ShowIt()<cr>
-
-if !hasmapto('<Plug>ShowLine', 'n')
-	nmap <unique> <silent> \sl <Plug>ShowLine
-endif
-if !hasmapto('<Plug>ShowIt', 'n')
-	nmap <unique> <silent> \si <Plug>ShowIt
-endif
-
 

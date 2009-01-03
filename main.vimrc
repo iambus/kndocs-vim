@@ -2,7 +2,7 @@
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 ""                                                                ""
 "" Maintainer: Kneo                                               ""
-"" Last Modified: 2009-01-03 18:23:12 +0800                       ""
+"" Last Modified: 2009-01-03 18:54:49 中国标准时间                       ""
 "" Version: unversioned                                           ""
 "" Latest Version:                                                ""
 "" http://kndocs-directory.googlecode.com/svn/trunk/profiles/vim/ ""
@@ -818,39 +818,56 @@ map \75 :set filetype=diff<cr>
 """"""""""""""""""""""""""""""""""""""""""""""""""
 " Plugin
 """"""""""""""""""""""""""""""""""""""""""""""""""
-" bufexplorer.vim
+
+"""""""""""""""""""""""""
+" bufexplorer.vim       "
+"""""""""""""""""""""""""
 " Nothing to change
 
-" taglist.vim
+"""""""""""""""""""""""""
+" taglist.vim           "
+"""""""""""""""""""""""""
 if !executable('ctags')
   let g:loaded_taglist = 'no'
 endif
 
-" vcscommand.vim
+"""""""""""""""""""""""""
+" vcscommand.vim        "
+"""""""""""""""""""""""""
 let g:VCSCommandMapPrefix = '\v'
 
-" calendar.vim
+"""""""""""""""""""""""""
+" calendar.vim          "
+"""""""""""""""""""""""""
 nmap <unique> \\cal <Plug>CalendarV
 nmap <unique> \\caL <Plug>CalendarH
 " TODO: set diary path
 
-" lookupfile.vim
+"""""""""""""""""""""""""
+" lookupfile.vim        "
+"""""""""""""""""""""""""
 let g:LookupFile_DisableDefaultMap = 1
 
-" favex.vim
+"""""""""""""""""""""""""
+" favex.vim             "
+"""""""""""""""""""""""""
 let g:favex_fs='\fs'
 let g:favex_ff='\ff'
 let g:favex_fe='\fe'
 let g:favex_fd='\fd'
 let g:favlist_path = os == linux ? '$HOME/.vimfavlist' : '$HOME/_vimfavlist'
 
-" DirDiff.vim
+"""""""""""""""""""""""""
+" DirDiff.vim           "
+"""""""""""""""""""""""""
 map <unique> \dg <Plug>DirDiffGet
 map <unique> \dp <Plug>DirDiffPut
 map <unique> \dj <Plug>DirDiffNext
 map <unique> \dk <Plug>DirDiffPrev
 
-" timestamp.vim
+"""""""""""""""""""""""""
+" timestamp.vim         "
+"""""""""""""""""""""""""
 " XXX: How to make %z = +0800 on Windows?
 let g:timestamp_rep = '%Y-%m-%d %H:%M:%S %z'
 "let g:timestamp_regexp = '\v\C%(<%(Last %([cC]hanged?|modified)|Modified)\s*:\s+)@<=\a+ \d{2} \a+ \d{4} \d{2}:\d{2}:\d{2}%(\s+[AP]M)?%(\s+\a+)?|TIMESTAMP'
@@ -858,45 +875,83 @@ let g:timestamp_regexp = '\v\C%(<%(Last %([cC]hanged?|modified)|Modified)\s*:\s+
 map \time a%TIMESTAMP%<ESC>
 
 
-" mru.vim
+"""""""""""""""""""""""""
+" mru.vim               "
+"""""""""""""""""""""""""
 " Nothing to change
 
-" xml.vim
+"""""""""""""""""""""""""
+" xml.vim               "
+"""""""""""""""""""""""""
 " TODO: remap
 
-" matchit.vim
+"""""""""""""""""""""""""
+" matchit.vim           "
+"""""""""""""""""""""""""
 " TODO: remap
 
-" snippetsEmu.vim
+"""""""""""""""""""""""""
+" snippetsEmu.vim       "
+"""""""""""""""""""""""""
 " Nothing to change
 
-" showit.vim
+"""""""""""""""""""""""""
+" showit.vim            "
+"""""""""""""""""""""""""
 nmap <unique> <silent> \ss <Plug>MarkSet
 vmap <unique> <silent> \ss <Plug>MarkSet
 nmap <unique> <silent> \sr <Plug>MarkRegex
 vmap <unique> <silent> \sr <Plug>MarkRegex
 nmap <unique> <silent> \sn <Plug>MarkClear
 
+" Highlight current line
+function! ShowLine()
+  let linecontent = '\%' . line(".") . "l.*"
+  exe 'Mark' linecontent
+endfunction
+
+" Highlight current word
+function! ShowIt()
+  let lineno = '\%' . line(".") . "l"
+  let colno = '\%' . col(".") . "c"
+  let p = lineno . '\<' . '\w*' . colno . '\w*' . '\>'
+  exe 'Mark' p
+endfunction
+
+nmap <unique> <silent> \sl :call ShowLine()<cr>
+nmap <unique> <silent> \si :call ShowIt()<cr>
+
 autocmd ColorScheme * source $VIMFILES/plugin/showit.vim
 
+" FIXME: not working :(
 hi MarkWord1  ctermbg=Green    ctermfg=Black  guibg=#A4E57E    guifg=Black
 hi MarkWord2  ctermbg=Yellow   ctermfg=Black  guibg=#FFDB72    guifg=Black
 hi MarkWord3  ctermbg=Cyan     ctermfg=Black  guibg=#8CCBEA    guifg=Black
 
-" mark.vim
+"""""""""""""""""""""""""
+" mark.vim              "
+"""""""""""""""""""""""""
 """ TODO: protect mark.vim from mapping for *, #, \*, \#, \/, \?
 
 
-" text.vim
+"""""""""""""""""""""""""
+" text.vim              "
+"""""""""""""""""""""""""
 " Nothing to change
 
-" genutils.vim
+"""""""""""""""""""""""""
+" genutils.vim          "
+"""""""""""""""""""""""""
 " Nothing to change
 
-" surround.vim
+"""""""""""""""""""""""""
+" surround.vim          "
+"""""""""""""""""""""""""
 " Nothing to change
 
-" NERD_commenter.vim
+"""""""""""""""""""""""""
+" NERD_commenter.vim    "
+"""""""""""""""""""""""""
 let g:NERDCreateDefaultMappings = 0
 " TODO: nmap/vmap instead of map
  map \cc       <plug>NERDCommenterComment
@@ -915,17 +970,29 @@ nmap \ca       <plug>NERDCommenterAltDelims
 
 let g:NERDShutUp=1
 
-" dbext.vim
+"""""""""""""""""""""""""
+" dbext.vim             "
+"""""""""""""""""""""""""
 " Disable all default key mappings
 let g:dbext_default_usermaps = 0
 
-" buftabs.vim
+"""""""""""""""""""""""""
+" buftabs.vim           "
+"""""""""""""""""""""""""
 let g:buftabs_only_basename = 1
 "let g:buftabs_in_statusline = 1
 
-" DrawItPlugin.vim
+"""""""""""""""""""""""""
+" DrawItPlugin.vim      "
+"""""""""""""""""""""""""
 map \di <Plug>StartDrawIt
 map \ds <Plug>StopDrawIt
+
+
+"""""""""""""""""""""""""
+"                       "
+"""""""""""""""""""""""""
+
 
 """"""""""""""""""""""""""""""""""""""""""""""""""
 " Load more
