@@ -2,7 +2,7 @@
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 ""                                                                ""
 "" Maintainer: Kneo                                               ""
-"" Last Modified: 2009-01-03 14:01:54 +0800                       ""
+"" Last Modified: 2009-01-03 14:08:42 +0800                       ""
 "" Version: unversioned                                           ""
 "" Latest Version:                                                ""
 "" http://kndocs-directory.googlecode.com/svn/trunk/profiles/vim/ ""
@@ -893,6 +893,7 @@ let g:NERDCreateDefaultMappings = 0
  map \c$       <plug>NERDCommenterToEOL
  map \cA       <plug>NERDCommenterAppend
 nmap \ca       <plug>NERDCommenterAltDelims
+let g:NERDShutUp=1
 
 """"""""""""""""""""""""""""""""""""""""""""""""""
 " Load more
