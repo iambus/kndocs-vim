@@ -2,7 +2,7 @@
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 ""                                                                ""
 "" Maintainer: Kneo                                               ""
-"" Last Modified: 2009-01-03 12:21:34 +0800                       ""
+"" Last Modified: 2009-01-03 12:46:17 +0800                       ""
 "" Version: unversioned                                           ""
 "" Latest Version:                                                ""
 "" http://kndocs-directory.googlecode.com/svn/trunk/profiles/vim/ ""
@@ -130,6 +130,8 @@ endif
 """"""""""""""""""""""""""""""""""""""""""""""""""
 let mapleader = ','
 
+noremap ,, ,
+
 map <leader>cd :cd %:p:h<cr>
 
 map <leader>h :help<space>
@@ -224,7 +226,7 @@ set statusline=\ %<%F%m%r%h\ %w\ \ [%{&ff}][%{&fenc!=''?&fenc:&enc}%{&bomb?',BOM
 
 if os == linux
   function! CurDir()
-    let curdir = substitute(getcwd(), '/home/pleiades/', "~/", "g")
+    let curdir = substitute(getcwd(), expand('$HOME/'), "~/", "g")
     return curdir
   endfunction
 
