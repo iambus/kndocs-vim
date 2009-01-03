@@ -2,7 +2,7 @@
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 ""                                                                ""
 "" Maintainer: Kneo                                               ""
-"" Last Modified: 2009-01-03 16:28:15 +0800                       ""
+"" Last Modified: 2009-01-03 16:50:54 +0800                       ""
 "" Version: unversioned                                           ""
 "" Latest Version:                                                ""
 "" http://kndocs-directory.googlecode.com/svn/trunk/profiles/vim/ ""
@@ -909,7 +909,9 @@ let g:dbext_default_usermaps = 0
 let g:buftabs_only_basename = 1
 "let g:buftabs_in_statusline = 1
 
-
+" DrawItPlugin.vim
+map \di <Plug>StartDrawIt
+map \ds <Plug>StopDrawIt
 
 """"""""""""""""""""""""""""""""""""""""""""""""""
 " Load more
