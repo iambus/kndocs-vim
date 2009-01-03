@@ -757,7 +757,7 @@ if !executable('ctags')
 endif
 
 " vcscommand.vim
-let VCSCommandMapPrefix = '\c'
+let VCSCommandMapPrefix = '\v'
 
 " calendar.vim
 nmap <unique> \\cal <Plug>CalendarV
