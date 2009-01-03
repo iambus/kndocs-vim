@@ -2,7 +2,7 @@
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 ""                                                                ""
 "" Maintainer: Kneo                                               ""
-"" Last Modified: 2009-01-03 15:44:10 +0800                       ""
+"" Last Modified: 2009-01-03 16:03:41 +0800                       ""
 "" Version: unversioned                                           ""
 "" Latest Version:                                                ""
 "" http://kndocs-directory.googlecode.com/svn/trunk/profiles/vim/ ""
@@ -898,7 +898,8 @@ nmap \ca       <plug>NERDCommenterAltDelims
 let g:NERDShutUp=1
 
 " dbext.vim
-"let g:dbext_default_usermaps = 1
+" Disable all default key mappings
+let g:dbext_default_usermaps = 0
 
 """"""""""""""""""""""""""""""""""""""""""""""""""
 " Load more
