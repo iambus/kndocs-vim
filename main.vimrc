@@ -21,11 +21,10 @@
 "" File Types                                                     ""
 "" Plugin                                                         ""
 "" Load more                                                      ""
-"" Reset mapleader                                                ""
+"" Restore mapleader to \ for plugins                             ""
 ""                                                                ""
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""
@@ -813,7 +812,21 @@ map \time a%TIMESTAMP%<ESC>
 " surround.vim
 " Nothing to change
 
-
+" NERD_commenter.vim
+let g:NERDCreateDefaultMappings = 0
+ map \cc       <plug>NERDCommenterComment
+ map \c<space> <plug>NERDCommenterToggle
+ map \cm       <plug>NERDCommenterMinimal
+ map \cs       <plug>NERDCommenterSexy
+ map \ci       <plug>NERDCommenterInvert
+ map \cy       <plug>NERDCommenterYank
+ map \cl       <plug>NERDCommenterAlignLeft
+ map \cb       <plug>NERDCommenterAlignBoth
+ map \cn       <plug>NERDCommenterNest
+ map \cu       <plug>NERDCommenterUncomment
+ map \c$       <plug>NERDCommenterToEOL
+ map \cA       <plug>NERDCommenterAppend
+nmap \ca       <plug>NERDCommenterAltDelims
 
 """"""""""""""""""""""""""""""""""""""""""""""""""
 " Load more
@@ -827,7 +840,7 @@ endif
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""
-" Reset mapleader
+" Restore mapleader to \ for plugins
 """"""""""""""""""""""""""""""""""""""""""""""""""
 let mapleader = '\'
 
