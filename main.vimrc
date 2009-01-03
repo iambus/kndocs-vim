@@ -2,7 +2,7 @@
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 ""                                                                ""
 "" Maintainer: Kneo                                               ""
-"" Last Modified: 2009-01-03 19:32:47 +0800                       ""
+"" Last Modified: 2009-01-03 21:48:39 +0800                       ""
 "" Version: unversioned                                           ""
 "" Latest Version:                                                ""
 "" http://kndocs-directory.googlecode.com/svn/trunk/profiles/vim/ ""
@@ -898,11 +898,11 @@ map \time a%TIMESTAMP%<ESC>
 """""""""""""""""""""""""
 " showit.vim            "
 """""""""""""""""""""""""
-nmap <unique> <silent> \ss <Plug>MarkSet
-vmap <unique> <silent> \ss <Plug>MarkSet
-nmap <unique> <silent> \sr <Plug>MarkRegex
-vmap <unique> <silent> \sr <Plug>MarkRegex
-nmap <unique> <silent> \sn <Plug>MarkClear
+nmap <unique> <silent> \mm <Plug>MarkSet
+vmap <unique> <silent> \mm <Plug>MarkSet
+nmap <unique> <silent> \mr <Plug>MarkRegex
+vmap <unique> <silent> \mr <Plug>MarkRegex
+nmap <unique> <silent> \mn <Plug>MarkClear
 
 " Highlight current line
 function! ShowLine()
@@ -910,7 +910,7 @@ function! ShowLine()
   exe 'Mark' linecontent
 endfunction
 
-" Highlight current word
+" Highlight current word (other same words are not highlighted)
 function! ShowIt()
   let lineno = '\%' . line(".") . "l"
   let colno = '\%' . col(".") . "c"
@@ -918,8 +918,8 @@ function! ShowIt()
   exe 'Mark' p
 endfunction
 
-nmap <unique> <silent> \sl :call ShowLine()<cr>
-nmap <unique> <silent> \si :call ShowIt()<cr>
+nmap <unique> <silent> \ml :call ShowLine()<cr>
+nmap <unique> <silent> \mi :call ShowIt()<cr>
 
 autocmd ColorScheme * source $VIMFILES/plugin/showit.vim
 
