@@ -2,7 +2,7 @@
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 ""                                                                ""
 "" Maintainer: Kneo                                               ""
-"" Last Modified: 2009-01-03 16:50:54 +0800                       ""
+"" Last Modified: 2009-01-03 18:00:48 +0800                       ""
 "" Version: unversioned                                           ""
 "" Latest Version:                                                ""
 "" http://kndocs-directory.googlecode.com/svn/trunk/profiles/vim/ ""
@@ -231,7 +231,7 @@ if os == linux
   endfunction
 
   "Format the statusline
-  set statusline=\ %F%m%r%h\ %w\ \ CWD:\ %r%{CurDir()}%h\ \ \ Line:\ %l/%L:%c
+  "set statusline=\ %F%m%r%h\ %w\ \ CWD:\ %r%{CurDir()}%h\ \ \ Line:\ %l/%L:%c
 endif
 
 
@@ -871,7 +871,21 @@ map \time a%TIMESTAMP%<ESC>
 " Nothing to change
 
 " showit.vim
-" Nothing to change
+nmap <unique> <silent> \ss <Plug>MarkSet
+vmap <unique> <silent> \ss <Plug>MarkSet
+nmap <unique> <silent> \sr <Plug>MarkRegex
+vmap <unique> <silent> \sr <Plug>MarkRegex
+nmap <unique> <silent> \sn <Plug>MarkClear
+
+nmap <unique> <silent> \sL :source $VIMFILES/plugin/showit.vim<cr>
+
+hi MarkWord1  ctermbg=Green    ctermfg=Black  guibg=#A4E57E    guifg=Black
+hi MarkWord2  ctermbg=Yellow   ctermfg=Black  guibg=#FFDB72    guifg=Black
+hi MarkWord3  ctermbg=Cyan     ctermfg=Black  guibg=#8CCBEA    guifg=Black
+
+" mark.vim
+""" TODO: protect mark.vim from mapping for *, #, \*, \#, \/, \?
+
 
 " text.vim
 " Nothing to change

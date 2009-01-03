@@ -67,9 +67,9 @@
 
 " default colors/groups
 " you may define your own colors in you vimrc file, in the form as below:
-hi MarkWord1  ctermbg=Green    ctermfg=Black  guibg=#A4E57E    guifg=Black
-hi MarkWord2  ctermbg=Yellow   ctermfg=Black  guibg=#FFDB72    guifg=Black
-hi MarkWord3  ctermbg=Cyan     ctermfg=Black  guibg=#8CCBEA    guifg=Black
+hi MarkWord1  ctermbg=Cyan     ctermfg=Black  guibg=#8CCBEA    guifg=Black
+hi MarkWord2  ctermbg=Green    ctermfg=Black  guibg=#A4E57E    guifg=Black
+hi MarkWord3  ctermbg=Yellow   ctermfg=Black  guibg=#FFDB72    guifg=Black
 hi MarkWord4  ctermbg=Red      ctermfg=Black  guibg=#FF7272    guifg=Black
 hi MarkWord5  ctermbg=Magenta  ctermfg=Black  guibg=#FFB3FF    guifg=Black
 hi MarkWord6  ctermbg=Blue     ctermfg=Black  guibg=#9999FF    guifg=Black
@@ -85,24 +85,21 @@ set cpo&vim
 
 " Default bindings
 
-""""""""""""""""""""""""""""""""""""""""""""""""""
-" Commented by Kneo: I don't want them ...
-""""""""""""""""""""""""""""""""""""""""""""""""""
-""if !hasmapto('<Plug>MarkSet', 'n')
-""	nmap <unique> <silent> <leader>m <Plug>MarkSet
-""endif
-""if !hasmapto('<Plug>MarkSet', 'v')
-""	vmap <unique> <silent> <leader>m <Plug>MarkSet
-""endif
-""if !hasmapto('<Plug>MarkRegex', 'n')
-""	nmap <unique> <silent> <leader>r <Plug>MarkRegex
-""endif
-""if !hasmapto('<Plug>MarkRegex', 'v')
-""	vmap <unique> <silent> <leader>r <Plug>MarkRegex
-""endif
-""if !hasmapto('<Plug>MarkClear', 'n')
-""	nmap <unique> <silent> <leader>n <Plug>MarkClear
-""endif
+if !hasmapto('<Plug>MarkSet', 'n')
+	nmap <unique> <silent> <leader>m <Plug>MarkSet
+endif
+if !hasmapto('<Plug>MarkSet', 'v')
+	vmap <unique> <silent> <leader>m <Plug>MarkSet
+endif
+if !hasmapto('<Plug>MarkRegex', 'n')
+	nmap <unique> <silent> <leader>r <Plug>MarkRegex
+endif
+if !hasmapto('<Plug>MarkRegex', 'v')
+	vmap <unique> <silent> <leader>r <Plug>MarkRegex
+endif
+if !hasmapto('<Plug>MarkClear', 'n')
+	nmap <unique> <silent> <leader>n <Plug>MarkClear
+endif
 
 nnoremap <silent> <Plug>MarkSet   :call
 	\ <sid>MarkCurrentWord()<cr>
@@ -515,7 +512,6 @@ endfunction
 
 nnoremap <silent> <Plug>ShowLine    :call <sid>ShowLine()<cr>
 nnoremap <silent> <Plug>ShowIt      :call <sid>ShowIt()<cr>
-nnoremap <silent> <Plug>LoadShowIt  :source $VIM/vimfiles/plugin/showit.vim<cr>
 
 if !hasmapto('<Plug>ShowLine', 'n')
 	nmap <unique> <silent> \sl <Plug>ShowLine
@@ -523,23 +519,5 @@ endif
 if !hasmapto('<Plug>ShowIt', 'n')
 	nmap <unique> <silent> \si <Plug>ShowIt
 endif
-if !hasmapto('<Plug>LoadShowIt', 'n')
-	nmap <unique> <silent> \sL <Plug>LoadShowIt
-endif
 
-if !hasmapto('<Plug>MarkSet', 'n')
-	nmap <unique> <silent> \ss <Plug>MarkSet
-endif
-if !hasmapto('<Plug>MarkSet', 'v')
-	vmap <unique> <silent> \ss <Plug>MarkSet
-endif
-if !hasmapto('<Plug>MarkRegex', 'n')
-	nmap <unique> <silent> \sr <Plug>MarkRegex
-endif
-if !hasmapto('<Plug>MarkRegex', 'v')
-	vmap <unique> <silent> \sr <Plug>MarkRegex
-endif
-if !hasmapto('<Plug>MarkClear', 'n')
-	nmap <unique> <silent> \sn <Plug>MarkClear
-endif
 
