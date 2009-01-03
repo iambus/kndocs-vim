@@ -2,7 +2,7 @@
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 ""                                                                ""
 "" Maintainer: Kneo                                               ""
-"" Last Modified: 2009-01-03 13:50:46 +0800                       ""
+"" Last Modified: 2009-01-03 14:01:54 +0800                       ""
 "" Version: unversioned                                           ""
 "" Latest Version:                                                ""
 "" http://kndocs-directory.googlecode.com/svn/trunk/profiles/vim/ ""
@@ -431,12 +431,14 @@ Command open-temp-file-9 \otemp9
 " Script
 """"""""""""""""""""""""""""""""""""""""""""""""""
 
+" FIXME: Too many duplicated code...
+
+" Load Script
+
 function! ScriptLoad(name)
-  let name = a:name
-  exe 'source' '$VIMFILES/script/'.name.'.vim'
+  exe 'source' '$VIMFILES/script/'.a:name.'.vim'
 endfunction
 
-" TODO: optional arg
 function! GetScriptList()
   let list = split(glob('$VIMFILES/script/*.vim'), '\n')
   let list = map(list, "fnamemodify(v:val, ':t:r')")
@@ -469,6 +471,80 @@ function! Script(...)
 endfunction
 
 command! -complete=customlist,ScriptList -nargs=? Script call Script(<q-args>)
+
+
+" Open Script
+
+function! ScriptOpen(name)
+  if a:name != ''
+    exe 'edit' '$VIMFILES/script/'.a:name.'.vim'
+  endif
+endfunction
+
+function! OpenScriptInput()
+  call inputsave()
+  let name = input("Script: ", "", "customlist,ScriptList")
+  call inputrestore()
+  if name != ""
+    call ScriptOpen(name)
+  endif
+endfunction
+
+function! OpenScript(...)
+  if a:0 == 0
+    call OpenScriptInput()
+  elseif a:0 == 1
+    call ScriptOpen(a:1)
+  else
+    echoerr 'Too many arguments. Only 0 or 1 argument is allowed.'
+  endif
+endfunction
+
+command! -complete=customlist,ScriptList -nargs=? OpenScript call OpenScript(<q-args>)
+
+
+" Open Script
+
+function! PluginOpen(name)
+  if a:name != ''
+    exe 'edit' '$VIMFILES/plugin/'.a:name.'.vim'
+  endif
+endfunction
+
+function! GetPluginList()
+  let list = split(glob('$VIMFILES/plugin/*.vim'), '\n')
+  let list = map(list, "fnamemodify(v:val, ':t:r')")
+  return sort(list)
+endfunction
+
+let s:plugin_list = GetPluginList()
+
+function! PluginList(ArgLead, CmdLine, CursorPos)
+  return filter(s:plugin_list, "stridx(tolower(v:val), tolower(a:ArgLead)) == 0")
+endfunction
+
+
+function! OpenPluginInput()
+  call inputsave()
+  let name = input("Plugin: ", "", "customlist,PluginList")
+  call inputrestore()
+  if name != ""
+    call PluginOpen(name)
+  endif
+endfunction
+
+function! OpenPlugin(...)
+  if a:0 == 0
+    call OpenPluginInput()
+  elseif a:0 == 1
+    call PluginOpen(a:1)
+  else
+    echoerr 'Too many arguments. Only 0 or 1 argument is allowed.'
+  endif
+endfunction
+
+command! -complete=customlist,PluginList -nargs=? OpenPlugin call OpenPlugin(<q-args>)
+
 
 """"""""""""""""""""""""""""""""""""""""""""""""""
 " Misc
