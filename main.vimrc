@@ -2,7 +2,7 @@
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 ""                                                                ""
 "" Maintainer: Kneo                                               ""
-"" Last Modified: 2009-01-03 18:00:48 +0800                       ""
+"" Last Modified: 2009-01-03 18:23:12 +0800                       ""
 "" Version: unversioned                                           ""
 "" Latest Version:                                                ""
 "" http://kndocs-directory.googlecode.com/svn/trunk/profiles/vim/ ""
@@ -877,7 +877,7 @@ nmap <unique> <silent> \sr <Plug>MarkRegex
 vmap <unique> <silent> \sr <Plug>MarkRegex
 nmap <unique> <silent> \sn <Plug>MarkClear
 
-nmap <unique> <silent> \sL :source $VIMFILES/plugin/showit.vim<cr>
+autocmd ColorScheme * source $VIMFILES/plugin/showit.vim
 
 hi MarkWord1  ctermbg=Green    ctermfg=Black  guibg=#A4E57E    guifg=Black
 hi MarkWord2  ctermbg=Yellow   ctermfg=Black  guibg=#FFDB72    guifg=Black
