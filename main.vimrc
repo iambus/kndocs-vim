@@ -21,6 +21,7 @@
 "" File Types                                                     ""
 "" Plugin                                                         ""
 "" Load more                                                      ""
+"" Reset mapleader                                                ""
 ""                                                                ""
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -126,7 +127,7 @@ endif
 """"""""""""""""""""""""""""""""""""""""""""""""""
 " Mappings
 """"""""""""""""""""""""""""""""""""""""""""""""""
-let mapleader = ","
+let mapleader = ','
 
 map <leader>cd :cd %:p:h<cr>
 
@@ -823,5 +824,12 @@ let local_vimrc = os == win ? '$VIM\local_vimrc' : '~/.vimrc_local'
 if filereadable(expand(local_vimrc))
   exe 'source' local_vimrc
 endif
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""
+" Reset mapleader
+""""""""""""""""""""""""""""""""""""""""""""""""""
+let mapleader = '\'
+
 
 
