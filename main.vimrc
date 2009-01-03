@@ -2,7 +2,7 @@
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 ""                                                                ""
 "" Maintainer: Kneo                                               ""
-"" Last Modified: 2009-01-03 18:54:49 中国标准时间                       ""
+"" Last Modified: 2009-01-03 19:01:48 +0800                       ""
 "" Version: unversioned                                           ""
 "" Latest Version:                                                ""
 "" http://kndocs-directory.googlecode.com/svn/trunk/profiles/vim/ ""
@@ -923,10 +923,6 @@ nmap <unique> <silent> \si :call ShowIt()<cr>
 
 autocmd ColorScheme * source $VIMFILES/plugin/showit.vim
 
-" FIXME: not working :(
-hi MarkWord1  ctermbg=Green    ctermfg=Black  guibg=#A4E57E    guifg=Black
-hi MarkWord2  ctermbg=Yellow   ctermfg=Black  guibg=#FFDB72    guifg=Black
-hi MarkWord3  ctermbg=Cyan     ctermfg=Black  guibg=#8CCBEA    guifg=Black
 
 """""""""""""""""""""""""
 " mark.vim              "
