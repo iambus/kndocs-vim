@@ -2,7 +2,7 @@
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 ""                                                                ""
 "" Maintainer: Kneo                                               ""
-"" Last Modified: 2009-01-03 16:26:37 +0800                       ""
+"" Last Modified: 2009-01-03 16:28:15 +0800                       ""
 "" Version: unversioned                                           ""
 "" Latest Version:                                                ""
 "" http://kndocs-directory.googlecode.com/svn/trunk/profiles/vim/ ""
@@ -238,6 +238,10 @@ endif
 """"""""""""""""""""""""""""""""""""""""""""""""""
 " Buffers
 """"""""""""""""""""""""""""""""""""""""""""""""""
+
+map <leader>bn :bnext<cr>
+map <leader>bp :bprevious<cr>
+
 " XXX: how to use it?
 if os == linux
   "Restore cursor to file position in previous editing session
