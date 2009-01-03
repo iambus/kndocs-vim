@@ -2,7 +2,7 @@
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 ""                                                                ""
 "" Maintainer: Kneo                                               ""
-"" Last Modified: 2009-01-03 16:03:41 +0800                       ""
+"" Last Modified: 2009-01-03 16:26:37 +0800                       ""
 "" Version: unversioned                                           ""
 "" Latest Version:                                                ""
 "" http://kndocs-directory.googlecode.com/svn/trunk/profiles/vim/ ""
@@ -900,6 +900,12 @@ let g:NERDShutUp=1
 " dbext.vim
 " Disable all default key mappings
 let g:dbext_default_usermaps = 0
+
+" buftabs.vim
+let g:buftabs_only_basename = 1
+"let g:buftabs_in_statusline = 1
+
+
 
 """"""""""""""""""""""""""""""""""""""""""""""""""
 " Load more
