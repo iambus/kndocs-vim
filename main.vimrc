@@ -2,7 +2,7 @@
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 ""                                                                ""
 "" Maintainer: Kneo                                               ""
-"" Last Modified: 2009-01-03 19:01:48 +0800                       ""
+"" Last Modified: 2009-01-03 19:32:47 +0800                       ""
 "" Version: unversioned                                           ""
 "" Latest Version:                                                ""
 "" http://kndocs-directory.googlecode.com/svn/trunk/profiles/vim/ ""
@@ -983,6 +983,7 @@ let g:buftabs_only_basename = 1
 """""""""""""""""""""""""
 map \di <Plug>StartDrawIt
 map \ds <Plug>StopDrawIt
+let g:DrChipTopLvlMenu= "Plugin."
 
 
 """""""""""""""""""""""""
