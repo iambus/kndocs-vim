@@ -2,7 +2,7 @@
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 ""                                                                ""
 "" Maintainer: Kneo                                               ""
-"" Last Modified: 2009-01-03 14:08:42 +0800                       ""
+"" Last Modified: 2009-01-03 14:12:41 +0800                       ""
 "" Version: unversioned                                           ""
 "" Latest Version:                                                ""
 "" http://kndocs-directory.googlecode.com/svn/trunk/profiles/vim/ ""
@@ -819,11 +819,11 @@ map \75 :set filetype=diff<cr>
 
 " taglist.vim
 if !executable('ctags')
-  let loaded_taglist = 'no'
+  let g:loaded_taglist = 'no'
 endif
 
 " vcscommand.vim
-let VCSCommandMapPrefix = '\v'
+let g:VCSCommandMapPrefix = '\v'
 
 " calendar.vim
 nmap <unique> \\cal <Plug>CalendarV
@@ -834,11 +834,11 @@ nmap <unique> \\caL <Plug>CalendarH
 let g:LookupFile_DisableDefaultMap = 1
 
 " favex.vim
-let favex_fs='\fs'
-let favex_ff='\ff'
-let favex_fe='\fe'
-let favex_fd='\fd'
-let favlist_path = os == linux ? '$HOME/.vimfavlist' : '$HOME/_vimfavlist'
+let g:favex_fs='\fs'
+let g:favex_ff='\ff'
+let g:favex_fe='\fe'
+let g:favex_fd='\fd'
+let g:favlist_path = os == linux ? '$HOME/.vimfavlist' : '$HOME/_vimfavlist'
 
 " DirDiff.vim
 map <unique> \dg <Plug>DirDiffGet
