@@ -2,7 +2,7 @@
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 ""                                                                ""
 "" Maintainer: Kneo                                               ""
-"" Last Modified: 2009-01-03 14:12:41 +0800                       ""
+"" Last Modified: 2009-01-03 15:44:10 +0800                       ""
 "" Version: unversioned                                           ""
 "" Latest Version:                                                ""
 "" http://kndocs-directory.googlecode.com/svn/trunk/profiles/vim/ ""
@@ -880,6 +880,7 @@ map \time a%TIMESTAMP%<ESC>
 
 " NERD_commenter.vim
 let g:NERDCreateDefaultMappings = 0
+" TODO: nmap/vmap instead of map
  map \cc       <plug>NERDCommenterComment
  map \c<space> <plug>NERDCommenterToggle
  map \cm       <plug>NERDCommenterMinimal
@@ -893,7 +894,11 @@ let g:NERDCreateDefaultMappings = 0
  map \c$       <plug>NERDCommenterToEOL
  map \cA       <plug>NERDCommenterAppend
 nmap \ca       <plug>NERDCommenterAltDelims
+
 let g:NERDShutUp=1
+
+" dbext.vim
+"let g:dbext_default_usermaps = 1
 
 """"""""""""""""""""""""""""""""""""""""""""""""""
 " Load more

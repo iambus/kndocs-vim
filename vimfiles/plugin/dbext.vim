@@ -208,6 +208,7 @@ if !exists(':DBToggleResultsResize')
 end
 "}}}
 " Mappings {{{
+if (!exists('g:dbext_default_usermaps')) || g:dbext_default_usermaps " fix by Kneo
 if !hasmapto('<Plug>DBExecVisualSQL') && !hasmapto('<Leader>se', 'v')
     vmap <unique> <Leader>se <Plug>DBExecVisualSQL
 endif
@@ -315,6 +316,7 @@ endif
 if !hasmapto('<Plug>DBOrientationToggle') && !hasmapto('<Leader>so', 'n')
     nmap <unique> <Leader>so <Plug>DBOrientationToggle
 endif
+endif " fix by Kneo
 "}}}
 " Menus {{{
 if has("gui_running") && has("menu") && g:dbext_default_menu_mode != 0
