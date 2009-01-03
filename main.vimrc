@@ -2,7 +2,7 @@
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 ""                                                                ""
 "" Maintainer: Kneo                                               ""
-"" Last Modified: 2009-01-03 12:46:17 +0800                       ""
+"" Last Modified: 2009-01-03 13:50:46 +0800                       ""
 "" Version: unversioned                                           ""
 "" Latest Version:                                                ""
 "" http://kndocs-directory.googlecode.com/svn/trunk/profiles/vim/ ""
@@ -361,14 +361,7 @@ map <M-x> :call MXInput()<cr>
 map <leader>mx :call MXInput()<cr>
 
 function! CommandList(ArgLead, CmdLine, CursorPos)
-  let list = GetCommandList()
-  let nlist = []
-  for i in list
-    if stridx(tolower(i), tolower(a:CmdLine)) == 0
-      call add(nlist, i)
-    endif
-  endfor
-  return nlist
+  return filter(GetCommandList(), "stridx(tolower(v:val), tolower(a:ArgLead)) == 0")
 endfunction
 
 function! GetCommandList()
@@ -453,14 +446,7 @@ endfunction
 let s:script_list = GetScriptList()
 
 function! ScriptList(ArgLead, CmdLine, CursorPos)
-  let alist = s:script_list
-  let nlist = []
-  for i in alist
-    if stridx(tolower(i), tolower(a:ArgLead)) == 0
-      call add(nlist, i)
-    endif
-  endfor
-  return nlist
+  return filter(s:script_list, "stridx(tolower(v:val), tolower(a:ArgLead)) == 0")
 endfunction
 
 function! ScriptInput()
