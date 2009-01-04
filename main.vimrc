@@ -2,7 +2,7 @@
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 ""                                                                ""
 "" Maintainer: Kneo                                               ""
-"" Last Modified: 2009-01-04 13:44:32                             ""
+"" Last Modified: 2009-01-04 13:54:01                             ""
 "" Version: unversioned                                           ""
 "" Latest Version:                                                ""
 "" http://kndocs-directory.googlecode.com/svn/trunk/profiles/vim/ ""
@@ -23,7 +23,6 @@
 "" File Types                                                     ""
 "" Plugin                                                         ""
 "" Load more                                                      ""
-"" Restore mapleader to \ for plugins                             ""
 ""                                                                ""
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -128,14 +127,15 @@ endif
 """"""""""""""""""""""""""""""""""""""""""""""""""
 " Mappings
 """"""""""""""""""""""""""""""""""""""""""""""""""
-let mapleader = ','
+" Just use the default mapleader '\'. Whenever I want ',', give ',' instead of '<leader>'.
+let mapleader = '\'
 
 noremap ,, ,
 
-map <leader>cd :cd %:p:h<cr>
+map ,cd :cd %:p:h<cr>
 
-map <leader>h :help<space>
-map <leader>K :exe "help" expand("<cword>")<cr>
+map ,h :help<space>
+map ,K :exe "help" expand("<cword>")<cr>
 
 if os == win
   map \rc :e $VIM/main.vimrc<cr>
@@ -161,10 +161,10 @@ noremap <M-v> <C-v>
 noremap <M-x> <C-x>
 
 
-map <leader>t2 :set expandtab<cr>:set shiftwidth=2<cr>
-map <leader>t3 :set expandtab<cr>:set shiftwidth=3<cr>
-map <leader>t4 :set expandtab<cr>:set shiftwidth=4<cr>
-map <leader>tt :set noexpandtab<cr>:set shiftwidth=4<cr>
+map ,t2 :set expandtab<cr>:set shiftwidth=2<cr>
+map ,t3 :set expandtab<cr>:set shiftwidth=3<cr>
+map ,t4 :set expandtab<cr>:set shiftwidth=4<cr>
+map ,tt :set noexpandtab<cr>:set shiftwidth=4<cr>
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""
@@ -177,19 +177,19 @@ else
   set ffs=unix,dos,mac
 endif
 
-nmap <leader>fd :set ff=dos<cr>
-nmap <leader>fD :set ffs=dos<cr>:e<cr>
-"nmap <leader>fD :e ++ff=dos<cr>
-nmap <leader>fu :set ff=unix<cr>
-nmap <leader>fm :set ff=mac<cr>
+nmap ,fd :set ff=dos<cr>
+nmap ,fD :set ffs=dos<cr>:e<cr>
+"nmap ,fD :e ++ff=dos<cr>
+nmap ,fu :set ff=unix<cr>
+nmap ,fm :set ff=mac<cr>
 
 " File encoding
 if os == win
   set fileencodings=ucs-bom,utf-8
 else
   set fileencodings=utf-8,gbk,ucs-bom,default,latin1
-  "nmap <leader>eu :e enc=utf-8<cr>
-  "nmap <leader>eg :e enc=gbk<cr>
+  "nmap ,eu :e enc=utf-8<cr>
+  "nmap ,eg :e enc=gbk<cr>
 endif
 
 
@@ -239,8 +239,8 @@ endif
 " Buffers
 """"""""""""""""""""""""""""""""""""""""""""""""""
 
-map <leader>bn :bnext<cr>
-map <leader>bp :bprevious<cr>
+map ,bn :bnext<cr>
+map ,bp :bprevious<cr>
 
 " XXX: how to use it?
 if os == linux
@@ -368,7 +368,7 @@ function! HasCommand(name)
 endfunction
 
 map <M-x> :call MXInput()<cr>
-map <leader>mx :call MXInput()<cr>
+map ,mx :call MXInput()<cr>
 
 function! CommandList(ArgLead, CmdLine, CursorPos)
   return filter(GetCommandList(), "stridx(tolower(v:val), tolower(a:ArgLead)) == 0")
@@ -393,7 +393,7 @@ else
   let $TEMPDIR = expand('~/tmp')
 endif
 
-map <leader>W :cd $TEMPDIR<cr>:w! _<cr>
+map ,W :cd $TEMPDIR<cr>:w! _<cr>
 
 map <plug>temp1 :w! $TEMPDIR/_1<cr>
 map <plug>temp2 :w! $TEMPDIR/_2<cr>
@@ -618,18 +618,18 @@ Command hitest \hitest
 " File Types
 """"""""""""""""""""""""""""""""""""""""""""""""""
 
-map <leader>ft :set filetype=
+map ,ft :set filetype=
 
-map <leader>1 :set filetype=c<cr>
-map <leader>2 :set filetype=cpp<cr>
-map <leader>3 :set filetype=java<cr>
-map <leader>4 :set filetype=perl<cr>
-map <leader>5 :set filetype=python<cr>
-map <leader>6 :set filetype=tcl<cr>
-map <leader>7 :set filetype=lisp<cr>
-"map <leader>8 :set filetype=<cr>
-map <leader>9 :set filetype=xml<cr>
-map <leader>0 :set filetype=<cr>
+map ,1 :set filetype=c<cr>
+map ,2 :set filetype=cpp<cr>
+map ,3 :set filetype=java<cr>
+map ,4 :set filetype=perl<cr>
+map ,5 :set filetype=python<cr>
+map ,6 :set filetype=tcl<cr>
+map ,7 :set filetype=lisp<cr>
+"map ,8 :set filetype=<cr>
+map ,9 :set filetype=xml<cr>
+map ,0 :set filetype=<cr>
 
 map \11 :set filetype=ruby<cr>
 map \12 :set filetype=lua<cr>
@@ -684,7 +684,7 @@ map \75 :set filetype=diff<cr>
   """"""""""""""""""""""""""""""
   " VIM
   """"""""""""""""""""""""""""""
-  autocmd FileType vim map <buffer> <leader><space> :up<cr>:source %<cr>
+  autocmd FileType vim map <buffer> ,<space> :up<cr>:source %<cr>
 
   autocmd FileType vim set shiftwidth=2
   autocmd FileType vim set tabstop=2
@@ -693,104 +693,104 @@ map \75 :set filetype=diff<cr>
   """"""""""""""""""""""""""""""
   " C mappings
   """""""""""""""""""""""""""""""
-"  autocmd FileType c map <buffer> <leader>cc :up<cr>:!gcc -W -Wall %<cr>
+"  autocmd FileType c map <buffer> ,cc :up<cr>:!gcc -W -Wall %<cr>
 
   if os == linux
-    autocmd FileType c map <buffer> <leader>cc :up<cr>:exe "!gcc -W -Wall % -o ".FileDir().'/a.out'<cr>
-    autocmd FileType c map <buffer> <leader>cr :up<cr>:exe '!'.FileDir().'/a.out'<cr>
+    autocmd FileType c map <buffer> ,cc :up<cr>:exe "!gcc -W -Wall % -o ".FileDir().'/a.out'<cr>
+    autocmd FileType c map <buffer> ,cr :up<cr>:exe '!'.FileDir().'/a.out'<cr>
   else
-    autocmd FileType c map <buffer> <leader>cc :up<cr>:!gcc -W -Wall % -o %:r<cr>
-    autocmd FileType c map <buffer> <leader>cr :up<cr>:!%:r<cr>
+    autocmd FileType c map <buffer> ,cc :up<cr>:!gcc -W -Wall % -o %:r<cr>
+    autocmd FileType c map <buffer> ,cr :up<cr>:!%:r<cr>
   endif
 
-  autocmd FileType c map <buffer> <leader><space> <leader>cc
+  autocmd FileType c map <buffer> ,<space> ,cc
 
   """"""""""""""""""""""""""""""
   " C++ mappings
   """""""""""""""""""""""""""""""
-"  autocmd FileType cpp map <buffer> <leader>cc :up<cr>:!g++ -W -Wall %<cr>
+"  autocmd FileType cpp map <buffer> ,cc :up<cr>:!g++ -W -Wall %<cr>
   if os == linux
-    autocmd FileType cpp map <buffer> <leader>cc :up<cr>:exe "!g++ -W -Wall % -o ".FileDir().'/a.out'<cr>
-    autocmd FileType cpp map <buffer> <leader>cr :up<cr>:exe '!'.FileDir().'/a.out'<cr>
+    autocmd FileType cpp map <buffer> ,cc :up<cr>:exe "!g++ -W -Wall % -o ".FileDir().'/a.out'<cr>
+    autocmd FileType cpp map <buffer> ,cr :up<cr>:exe '!'.FileDir().'/a.out'<cr>
   else
-    autocmd FileType cpp map <buffer> <leader>cc :up<cr>:!g++ -W -Wall % -o %:r<cr>
-    autocmd FileType cpp map <buffer> <leader>cr :up<cr>:!%:r<cr>
+    autocmd FileType cpp map <buffer> ,cc :up<cr>:!g++ -W -Wall % -o %:r<cr>
+    autocmd FileType cpp map <buffer> ,cr :up<cr>:!%:r<cr>
   endif
 
-  autocmd FileType cpp map <buffer> <leader><space> <leader>cc
+  autocmd FileType cpp map <buffer> ,<space> ,cc
 
   """"""""""""""""""""""""""""""
   " C/C++
   """""""""""""""""""""""""""""""
-  autocmd FileType c,cpp map <buffer> <leader>= :up<cr>:%!astyle --style=ansi -p < %<cr>
+  autocmd FileType c,cpp map <buffer> ,= :up<cr>:%!astyle --style=ansi -p < %<cr>
 
   """""""""""""""""""""""""""""""
   " Java
   """""""""""""""""""""""""""""""
-  autocmd FileType java map <buffer> <leader>= :up<cr>:%!astyle --style=java -p < %<cr>
+  autocmd FileType java map <buffer> ,= :up<cr>:%!astyle --style=java -p < %<cr>
 
 
   """""""""""""""""""""""""""""""
   " Perl
   """""""""""""""""""""""""""""""
-  autocmd FileType perl map <buffer> <leader><space> :up<cr>:!perl %<cr>
-  autocmd FileType perl map <buffer> <leader>cc :up<cr>:!perl -c %<cr>
+  autocmd FileType perl map <buffer> ,<space> :up<cr>:!perl %<cr>
+  autocmd FileType perl map <buffer> ,cc :up<cr>:!perl -c %<cr>
   if os == win
-    autocmd FileType perl map <buffer> <leader>= :up<cr>:%!perltidy < %<cr>
+    autocmd FileType perl map <buffer> ,= :up<cr>:%!perltidy < %<cr>
   endif
 
 
   """""""""""""""""""""""""""""""
   " Python
   """""""""""""""""""""""""""""""
-  autocmd FileType python map <buffer> <leader><space> :up<cr>:!python %<cr>
+  autocmd FileType python map <buffer> ,<space> :up<cr>:!python %<cr>
 
 
   """""""""""""""""""""""""""""""
   " Tcl
   """""""""""""""""""""""""""""""
-  autocmd FileType tcl map <buffer> <leader><space> :up<cr>:!tclsh %<cr>
+  autocmd FileType tcl map <buffer> ,<space> :up<cr>:!tclsh %<cr>
 
 
   """""""""""""""""""""""""""""""
   " Lua
   """""""""""""""""""""""""""""""
-  autocmd FileType lua map <buffer> <leader><space> :up<cr>:!lua %<cr>
-  autocmd FileType lua map <buffer> <leader>cc :up<cr>:!luac -p %<cr>
+  autocmd FileType lua map <buffer> ,<space> :up<cr>:!lua %<cr>
+  autocmd FileType lua map <buffer> ,cc :up<cr>:!luac -p %<cr>
 
 
   """""""""""""""""""""""""""""""
   " Lisp
   """""""""""""""""""""""""""""""
-  autocmd FileType lisp map <buffer> <leader><space> :up<cr>:!clisp %<cr>
+  autocmd FileType lisp map <buffer> ,<space> :up<cr>:!clisp %<cr>
 
 
   """""""""""""""""""""""""""""""
   " XML & Ant
   """""""""""""""""""""""""""""""
-  autocmd FileType xml,ant map <buffer> <leader>= :up<cr>:%!xmllint --format %<cr>
+  autocmd FileType xml,ant map <buffer> ,= :up<cr>:%!xmllint --format %<cr>
   if os == win
-    autocmd FileType xml,ant map <buffer> <leader>cc :up<cr>:!rxp %<cr>
-    autocmd FileType xml map <buffer> <leader>cC :up<cr>:!rxp -V -N -s -x<cr>
+    autocmd FileType xml,ant map <buffer> ,cc :up<cr>:!rxp %<cr>
+    autocmd FileType xml map <buffer> ,cC :up<cr>:!rxp -V -N -s -x<cr>
   endif
-  autocmd FileType xml map <buffer> <leader><space> <leader>=
+  autocmd FileType xml map <buffer> ,<space> ,=
 
   autocmd FileType ant compiler ant
-  autocmd FileType ant map <buffer> <leader><space> :up<cr>:make<cr>
+  autocmd FileType ant map <buffer> ,<space> :up<cr>:make<cr>
   autocmd FileType ant map <buffer> \ant :up<cr>:make<space>
 
   """""""""""""""""""""""""""""""
   " JavaScript
   """""""""""""""""""""""""""""""
-  autocmd FileType javascript map <buffer> <leader><space> :up<cr>:!js %<cr>
+  autocmd FileType javascript map <buffer> ,<space> :up<cr>:!js %<cr>
 
   """""""""""""""""""""""""""""""
   " HTML
   """""""""""""""""""""""""""""""
   if os == win
-    autocmd FileType html map <buffer> <leader>= :up<cr>:%!tidy -f nul %<cr>
+    autocmd FileType html map <buffer> ,= :up<cr>:%!tidy -f nul %<cr>
   else
-    autocmd FileType html map <buffer> <leader>= :up<cr>:%!tidy -f /dev/null %<cr>
+    autocmd FileType html map <buffer> ,= :up<cr>:%!tidy -f /dev/null %<cr>
   end
 
   """""""""""""""""""""""""""""""
@@ -801,7 +801,7 @@ map \75 :set filetype=diff<cr>
   """""""""""""""""""""""""""""""
   " DOS Batch
   """""""""""""""""""""""""""""""
-  autocmd FileType dosbatch map <buffer> <leader><space> :up<cr>:!call %<cr>
+  autocmd FileType dosbatch map <buffer> ,<space> :up<cr>:!call %<cr>
 
   """"""""""""""""""""""""""""""""""""""""""""""""""
   " .as & .mxml
@@ -819,7 +819,7 @@ map \75 :set filetype=diff<cr>
   """""""""""""""""""""""""""""""
   " Others
   """""""""""""""""""""""""""""""
-  autocmd FileType perl,python,tcl,dosbatch map <buffer> <leader>! :up<cr>:!%<cr>
+  autocmd FileType perl,python,tcl,dosbatch map <buffer> ,! :up<cr>:!%<cr>
 
 
   """""""""""""""""""""""""""""""
@@ -1016,11 +1016,6 @@ if filereadable(expand(local_vimrc))
   exe 'source' local_vimrc
 endif
 
-
-""""""""""""""""""""""""""""""""""""""""""""""""""
-" Restore mapleader to \ for plugins
-""""""""""""""""""""""""""""""""""""""""""""""""""
-let mapleader = '\'
 
 
 
