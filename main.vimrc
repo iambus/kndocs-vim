@@ -2,7 +2,7 @@
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 ""                                                                ""
 "" Maintainer: Kneo                                               ""
-"" Last Modified: 2009-01-04 10:59:11                             ""
+"" Last Modified: 2009-01-04 11:11:33                             ""
 "" Version: unversioned                                           ""
 "" Latest Version:                                                ""
 "" http://kndocs-directory.googlecode.com/svn/trunk/profiles/vim/ ""
@@ -826,176 +826,177 @@ map \75 :set filetype=diff<cr>
 " Plugin
 """"""""""""""""""""""""""""""""""""""""""""""""""
 
-"""""""""""""""""""""""""
-" bufexplorer.vim       "
-"""""""""""""""""""""""""
-" Nothing to change
+  """""""""""""""""""""""""
+  " bufexplorer.vim       "
+  """""""""""""""""""""""""
+  " Nothing to change
 
-"""""""""""""""""""""""""
-" taglist.vim           "
-"""""""""""""""""""""""""
-if !executable('ctags')
-  let g:loaded_taglist = 'no'
-endif
+  """""""""""""""""""""""""
+  " taglist.vim           "
+  """""""""""""""""""""""""
+  if !executable('ctags')
+    let g:loaded_taglist = 'no'
+  endif
 
-"""""""""""""""""""""""""
-" vcscommand.vim        "
-"""""""""""""""""""""""""
-let g:VCSCommandMapPrefix = '\v'
+  """""""""""""""""""""""""
+  " vcscommand.vim        "
+  """""""""""""""""""""""""
+  let g:VCSCommandMapPrefix = '\v'
 
-"""""""""""""""""""""""""
-" calendar.vim          "
-"""""""""""""""""""""""""
-nmap <unique> \\cal <Plug>CalendarV
-nmap <unique> \\caL <Plug>CalendarH
-" TODO: set diary path
+  """""""""""""""""""""""""
+  " calendar.vim          "
+  """""""""""""""""""""""""
+  nmap <unique> \\cal <Plug>CalendarV
+  nmap <unique> \\caL <Plug>CalendarH
+  " TODO: set diary path
 
-"""""""""""""""""""""""""
-" lookupfile.vim        "
-"""""""""""""""""""""""""
-let g:LookupFile_DisableDefaultMap = 1
+  """""""""""""""""""""""""
+  " lookupfile.vim        "
+  """""""""""""""""""""""""
+  let g:LookupFile_DisableDefaultMap = 1
 
-"""""""""""""""""""""""""
-" favex.vim             "
-"""""""""""""""""""""""""
-let g:favex_fs='\fs'
-let g:favex_ff='\ff'
-let g:favex_fe='\fe'
-let g:favex_fd='\fd'
-let g:favlist_path = os == linux ? '$HOME/.vimfavlist' : '$HOME/_vimfavlist'
+  """""""""""""""""""""""""
+  " favex.vim             "
+  """""""""""""""""""""""""
+  let g:favex_fs='\fs'
+  let g:favex_ff='\ff'
+  let g:favex_fe='\fe'
+  let g:favex_fd='\fd'
+  let g:favlist_path = os == linux ? '$HOME/.vimfavlist' : '$HOME/_vimfavlist'
 
-"""""""""""""""""""""""""
-" DirDiff.vim           "
-"""""""""""""""""""""""""
-map <unique> \dg <Plug>DirDiffGet
-map <unique> \dp <Plug>DirDiffPut
-map <unique> \dj <Plug>DirDiffNext
-map <unique> \dk <Plug>DirDiffPrev
+  """""""""""""""""""""""""
+  " DirDiff.vim           "
+  """""""""""""""""""""""""
+  map <unique> \dg <Plug>DirDiffGet
+  map <unique> \dp <Plug>DirDiffPut
+  map <unique> \dj <Plug>DirDiffNext
+  map <unique> \dk <Plug>DirDiffPrev
 
-"""""""""""""""""""""""""
-" timestamp.vim         "
-"""""""""""""""""""""""""
-" XXX: How to make %z = +0800 on Windows?
-let g:timestamp_rep = '%Y-%m-%d %H:%M:%S'
-"let g:timestamp_regexp = '\v\C%(<%(Last %([cC]hanged?|modified)|Modified)\s*:\s+)@<=\a+ \d{2} \a+ \d{4} \d{2}:\d{2}:\d{2}%(\s+[AP]M)?%(\s+\a+)?|TIMESTAMP'
-let g:timestamp_regexp = '\v\C%(<%(Last %([cC]hanged?|modified)|Modified)\s*:\s+)@<=\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}|\%TIMESTAMP\%'
-map \time a%TIMESTAMP%<ESC>
-
-
-"""""""""""""""""""""""""
-" mru.vim               "
-"""""""""""""""""""""""""
-" Nothing to change
-
-"""""""""""""""""""""""""
-" xml.vim               "
-"""""""""""""""""""""""""
-" TODO: remap
-
-"""""""""""""""""""""""""
-" matchit.vim           "
-"""""""""""""""""""""""""
-" TODO: remap
-
-"""""""""""""""""""""""""
-" snippetsEmu.vim       "
-"""""""""""""""""""""""""
-" Nothing to change
-
-"""""""""""""""""""""""""
-" showit.vim            "
-"""""""""""""""""""""""""
-nmap <unique> <silent> \mm <Plug>MarkSet
-vmap <unique> <silent> \mm <Plug>MarkSet
-nmap <unique> <silent> \mr <Plug>MarkRegex
-vmap <unique> <silent> \mr <Plug>MarkRegex
-nmap <unique> <silent> \mn <Plug>MarkClear
-
-" Highlight current line
-function! ShowLine()
-  let linecontent = '\%' . line(".") . "l.*"
-  exe 'Mark' linecontent
-endfunction
-
-" Highlight current word (other same words are not highlighted)
-function! ShowIt()
-  let lineno = '\%' . line(".") . "l"
-  let colno = '\%' . col(".") . "c"
-  let p = lineno . '\<' . '\w*' . colno . '\w*' . '\>'
-  exe 'Mark' p
-endfunction
-
-nmap <unique> <silent> \ml :call ShowLine()<cr>
-nmap <unique> <silent> \mi :call ShowIt()<cr>
-
-autocmd ColorScheme * source $VIMFILES/plugin/showit.vim
+  """""""""""""""""""""""""
+  " timestamp.vim         "
+  """""""""""""""""""""""""
+  " XXX: How to make %z = +0800 on Windows?
+  " Note: I have removed the timezone information because I don't know how to show time zone in format like +0800 on Windows.
+  let g:timestamp_rep = '%Y-%m-%d %H:%M:%S'
+  "let g:timestamp_regexp = '\v\C%(<%(Last %([cC]hanged?|modified)|Modified)\s*:\s+)@<=\a+ \d{2} \a+ \d{4} \d{2}:\d{2}:\d{2}%(\s+[AP]M)?%(\s+\a+)?|TIMESTAMP'
+  let g:timestamp_regexp = '\v\C%(<%(Last %([cC]hanged?|modified)|Modified)\s*:\s+)@<=\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}|\%TIMESTAMP\%'
+  map \time a%TIMESTAMP%<ESC>
 
 
-"""""""""""""""""""""""""
-" mark.vim              "
-"""""""""""""""""""""""""
-""" TODO: protect mark.vim from mapping for *, #, \*, \#, \/, \?
+  """""""""""""""""""""""""
+  " mru.vim               "
+  """""""""""""""""""""""""
+  " Nothing to change
+
+  """""""""""""""""""""""""
+  " xml.vim               "
+  """""""""""""""""""""""""
+  " TODO: remap
+
+  """""""""""""""""""""""""
+  " matchit.vim           "
+  """""""""""""""""""""""""
+  " TODO: remap
+
+  """""""""""""""""""""""""
+  " snippetsEmu.vim       "
+  """""""""""""""""""""""""
+  " Nothing to change
+
+  """""""""""""""""""""""""
+  " showit.vim            "
+  """""""""""""""""""""""""
+  nmap <unique> <silent> \mm <Plug>MarkSet
+  vmap <unique> <silent> \mm <Plug>MarkSet
+  nmap <unique> <silent> \mr <Plug>MarkRegex
+  vmap <unique> <silent> \mr <Plug>MarkRegex
+  nmap <unique> <silent> \mn <Plug>MarkClear
+
+  " Highlight current line
+  function! ShowLine()
+    let linecontent = '\%' . line(".") . "l.*"
+    exe 'Mark' linecontent
+  endfunction
+
+  " Highlight current word (other same words are not highlighted)
+  function! ShowIt()
+    let lineno = '\%' . line(".") . "l"
+    let colno = '\%' . col(".") . "c"
+    let p = lineno . '\<' . '\w*' . colno . '\w*' . '\>'
+    exe 'Mark' p
+  endfunction
+
+  nmap <unique> <silent> \ml :call ShowLine()<cr>
+  nmap <unique> <silent> \mi :call ShowIt()<cr>
+
+  autocmd ColorScheme * source $VIMFILES/plugin/showit.vim
 
 
-"""""""""""""""""""""""""
-" text.vim              "
-"""""""""""""""""""""""""
-" Nothing to change
-
-"""""""""""""""""""""""""
-" genutils.vim          "
-"""""""""""""""""""""""""
-" Nothing to change
-
-"""""""""""""""""""""""""
-" surround.vim          "
-"""""""""""""""""""""""""
-" Nothing to change
-
-"""""""""""""""""""""""""
-" NERD_commenter.vim    "
-"""""""""""""""""""""""""
-let g:NERDCreateDefaultMappings = 0
-" TODO: nmap/vmap instead of map
- map \cc       <plug>NERDCommenterComment
- map \c<space> <plug>NERDCommenterToggle
- map \cm       <plug>NERDCommenterMinimal
- map \cs       <plug>NERDCommenterSexy
- map \ci       <plug>NERDCommenterInvert
- map \cy       <plug>NERDCommenterYank
- map \cl       <plug>NERDCommenterAlignLeft
- map \cb       <plug>NERDCommenterAlignBoth
- map \cn       <plug>NERDCommenterNest
- map \cu       <plug>NERDCommenterUncomment
- map \c$       <plug>NERDCommenterToEOL
- map \cA       <plug>NERDCommenterAppend
-nmap \ca       <plug>NERDCommenterAltDelims
-
-let g:NERDShutUp=1
-
-"""""""""""""""""""""""""
-" dbext.vim             "
-"""""""""""""""""""""""""
-" Disable all default key mappings
-let g:dbext_default_usermaps = 0
-
-"""""""""""""""""""""""""
-" buftabs.vim           "
-"""""""""""""""""""""""""
-let g:buftabs_only_basename = 1
-"let g:buftabs_in_statusline = 1
-
-"""""""""""""""""""""""""
-" DrawItPlugin.vim      "
-"""""""""""""""""""""""""
-map \di <Plug>StartDrawIt
-map \ds <Plug>StopDrawIt
-let g:DrChipTopLvlMenu= "Plugin."
+  """""""""""""""""""""""""
+  " mark.vim              "
+  """""""""""""""""""""""""
+  """ TODO: protect mark.vim from mapping for *, #, \*, \#, \/, \?
 
 
-"""""""""""""""""""""""""
-"                       "
-"""""""""""""""""""""""""
+  """""""""""""""""""""""""
+  " text.vim              "
+  """""""""""""""""""""""""
+  " Nothing to change
+
+  """""""""""""""""""""""""
+  " genutils.vim          "
+  """""""""""""""""""""""""
+  " Nothing to change
+
+  """""""""""""""""""""""""
+  " surround.vim          "
+  """""""""""""""""""""""""
+  " Nothing to change
+
+  """""""""""""""""""""""""
+  " NERD_commenter.vim    "
+  """""""""""""""""""""""""
+  let g:NERDCreateDefaultMappings = 0
+  " TODO: nmap/vmap instead of map
+   map \cc       <plug>NERDCommenterComment
+   map \c<space> <plug>NERDCommenterToggle
+   map \cm       <plug>NERDCommenterMinimal
+   map \cs       <plug>NERDCommenterSexy
+   map \ci       <plug>NERDCommenterInvert
+   map \cy       <plug>NERDCommenterYank
+   map \cl       <plug>NERDCommenterAlignLeft
+   map \cb       <plug>NERDCommenterAlignBoth
+   map \cn       <plug>NERDCommenterNest
+   map \cu       <plug>NERDCommenterUncomment
+   map \c$       <plug>NERDCommenterToEOL
+   map \cA       <plug>NERDCommenterAppend
+  nmap \ca       <plug>NERDCommenterAltDelims
+
+  let g:NERDShutUp=1
+
+  """""""""""""""""""""""""
+  " dbext.vim             "
+  """""""""""""""""""""""""
+  " Disable all default key mappings
+  let g:dbext_default_usermaps = 0
+
+  """""""""""""""""""""""""
+  " buftabs.vim           "
+  """""""""""""""""""""""""
+  let g:buftabs_only_basename = 1
+  "let g:buftabs_in_statusline = 1
+
+  """""""""""""""""""""""""
+  " DrawItPlugin.vim      "
+  """""""""""""""""""""""""
+  map \di <Plug>StartDrawIt
+  map \ds <Plug>StopDrawIt
+  let g:DrChipTopLvlMenu= "Plugin."
+
+
+  """""""""""""""""""""""""
+  "                       "
+  """""""""""""""""""""""""
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""
