@@ -2,7 +2,7 @@
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 ""                                                                ""
 "" Maintainer: Kneo                                               ""
-"" Last Modified: 2009-01-04 13:54:01                             ""
+"" Last Modified: 2009-01-04 14:30:09                             ""
 "" Version: unversioned                                           ""
 "" Latest Version:                                                ""
 "" http://kndocs-directory.googlecode.com/svn/trunk/profiles/vim/ ""
@@ -355,8 +355,29 @@ function! MX(cmd)
   endif
 endfunction
 
-function! PutCommand(name, seq)
-  let s:mxdict[a:name] = a:seq
+function! PutCommand(...)
+  if a:0 == 0
+    " No argument given, print existing Commands
+    for cmd in sort(keys(s:mxdict))
+      echo cmd s:mxdict[cmd]
+    endfor
+  elseif a:0 == 1
+    " Only one Command given, print key sequence bound to this Command
+    let cmd = a:1
+    if HasCommand(cmd)
+      echo cmd s:mxdict[cmd]
+    else
+      echo 'No Command found for' cmd
+    endif
+  elseif a:0 == 2
+    " Command and key sequence given, bind Command to key sequence
+    let s:mxdict[a:1] = a:2
+  else
+    " Command and key sequence given, bind Command to key sequence
+    " For example, the following will bind Command 'c' to 'k1  k2 k3   k4'
+    "   :Command c k1 k2    k3\ \ \ k4
+    let s:mxdict[a:1] = join(a:000[1:])
+  endif
 endfunction
 
 function! GetCommand(name)
@@ -378,6 +399,7 @@ function! GetCommandList()
   return sort(keys(s:mxdict), 1)
 endfunction
 
+" TODO: give complete-list
 command! -nargs=* Command call PutCommand(<f-args>)
 
 " Some useful mappings
@@ -395,47 +417,26 @@ endif
 
 map ,W :cd $TEMPDIR<cr>:w! _<cr>
 
-map <plug>temp1 :w! $TEMPDIR/_1<cr>
-map <plug>temp2 :w! $TEMPDIR/_2<cr>
-map <plug>temp3 :w! $TEMPDIR/_3<cr>
-map <plug>temp4 :w! $TEMPDIR/_4<cr>
-map <plug>temp5 :w! $TEMPDIR/_5<cr>
-map <plug>temp6 :w! $TEMPDIR/_6<cr>
-map <plug>temp7 :w! $TEMPDIR/_7<cr>
-map <plug>temp8 :w! $TEMPDIR/_8<cr>
-map <plug>temp9 :w! $TEMPDIR/_9<cr>
+Command temp-file-1 :w! $TEMPDIR/_1<cr>
+Command temp-file-2 :w! $TEMPDIR/_2<cr>
+Command temp-file-3 :w! $TEMPDIR/_3<cr>
+Command temp-file-4 :w! $TEMPDIR/_4<cr>
+Command temp-file-5 :w! $TEMPDIR/_5<cr>
+Command temp-file-6 :w! $TEMPDIR/_6<cr>
+Command temp-file-7 :w! $TEMPDIR/_7<cr>
+Command temp-file-8 :w! $TEMPDIR/_8<cr>
+Command temp-file-9 :w! $TEMPDIR/_9<cr>
 
-map <plug>otemp :e $TEMPDIR/_<cr>
-map <plug>otemp1 :e $TEMPDIR/_1<cr>
-map <plug>otemp2 :e $TEMPDIR/_2<cr>
-map <plug>otemp3 :e $TEMPDIR/_3<cr>
-map <plug>otemp4 :e $TEMPDIR/_4<cr>
-map <plug>otemp5 :e $TEMPDIR/_5<cr>
-map <plug>otemp6 :e $TEMPDIR/_6<cr>
-map <plug>otemp7 :e $TEMPDIR/_7<cr>
-map <plug>otemp8 :e $TEMPDIR/_8<cr>
-map <plug>otemp9 :e $TEMPDIR/_9<cr>
-
-Command temp-file-1 <plug>temp1
-Command temp-file-2 <plug>temp2
-Command temp-file-3 <plug>temp3
-Command temp-file-4 <plug>temp4
-Command temp-file-5 <plug>temp5
-Command temp-file-6 <plug>temp6
-Command temp-file-7 <plug>temp7
-Command temp-file-8 <plug>temp8
-Command temp-file-9 <plug>temp9
-
-Command open-temp-file <plug>otemp
-Command open-temp-file-1 <plug>otemp1
-Command open-temp-file-2 <plug>otemp2
-Command open-temp-file-3 <plug>otemp3
-Command open-temp-file-4 <plug>otemp4
-Command open-temp-file-5 <plug>otemp5
-Command open-temp-file-6 <plug>otemp6
-Command open-temp-file-7 <plug>otemp7
-Command open-temp-file-8 <plug>otemp8
-Command open-temp-file-9 <plug>otemp9
+Command open-temp-file   :e $TEMPDIR/_<cr>
+Command open-temp-file-1 :e $TEMPDIR/_1<cr>
+Command open-temp-file-2 :e $TEMPDIR/_2<cr>
+Command open-temp-file-3 :e $TEMPDIR/_3<cr>
+Command open-temp-file-4 :e $TEMPDIR/_4<cr>
+Command open-temp-file-5 :e $TEMPDIR/_5<cr>
+Command open-temp-file-6 :e $TEMPDIR/_6<cr>
+Command open-temp-file-7 :e $TEMPDIR/_7<cr>
+Command open-temp-file-8 :e $TEMPDIR/_8<cr>
+Command open-temp-file-9 :e $TEMPDIR/_9<cr>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""
 " Script
@@ -576,18 +577,14 @@ function! OnlyInput()
   endif
 endfunction
 
-map \only :call OnlyInput()<cr>
-Command only \only
+Command only-text :call OnlyInput()<cr>
 
 
-map \wrap :set wrap<cr>:set guioptions-=b<cr>
-Command wrapline \wrap
+Command wrapline :set wrap<cr>:set guioptions-=b<cr>
 
-map \nowrap :set nowrap<cr>:set guioptions+=b<cr>
-Command nowrapline \nowrap
+Command nowrapline :set nowrap<cr>:set guioptions+=b<cr>
 
-map \tagdoc :helptags $VIMFILES/doc<cr>
-Command tagdoc \tagdoc
+Command tagdoc :helptags $VIMFILES/doc<cr>
 
 if os == win
   " TOhtml
@@ -606,12 +603,11 @@ if os == win
 endif
 
 " Remove BOM in current file
-map \nobom :set nobomb<cr> :w<cr>
-Command remove-bom \nobom
+Command remove-bom :set nobomb<cr> :w<cr>
+Command      nobom :set nobomb<cr> :w<cr>
 
 " hitest
-map \hitest :so $VIMRUNTIME/syntax/hitest.vim<cr>
-Command hitest \hitest
+Command hitest :so $VIMRUNTIME/syntax/hitest.vim<cr>
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""
