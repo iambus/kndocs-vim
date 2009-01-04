@@ -2,7 +2,7 @@
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 ""                                                                ""
 "" Maintainer: Kneo                                               ""
-"" Last Modified: 2009-01-04 23:16:35                             ""
+"" Last Modified: 2009-01-04 23:18:34                             ""
 "" Version: unversioned                                           ""
 "" Latest Version:                                                ""
 "" http://kndocs-directory.googlecode.com/svn/trunk/profiles/vim/ ""
@@ -536,8 +536,7 @@ if os == win
   " TOhtml
   "let html_font="Courier New"
   "let html_number_lines = 0
-  map \print :TOhtml<cr>:silent %s/font face="\([^*]*\)"/font style="font-size:10pt;" face="Courier New, \1"/<cr>:silent %s/^\(.*\)<br>$/<p style="margin:0px">\1<\/p>/<cr>:wq<cr>:silent !%.html<cr>
-  Command TOHtmlForOutlook \print
+  Command TOHtmlForOutlook :TOhtml<cr>:silent %s/font face="\([^*]*\)"/font style="font-size:10pt;" face="Courier New, \1"/<cr>:silent %s/^\(.*\)<br>$/<p style="margin:0px">\1<\/p>/<cr>:wq<cr>:silent !%.html<cr>
 
   " Open directory in a new explorer window
   Command openwd :call system("explorer ".expand("%:p:h"))<cr>
