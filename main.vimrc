@@ -2,7 +2,7 @@
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 ""                                                                ""
 "" Maintainer: Kneo                                               ""
-"" Last Modified: 2009-01-04 21:01:17                             ""
+"" Last Modified: 2009-01-04 21:07:24                             ""
 "" Version: unversioned                                           ""
 "" Latest Version:                                                ""
 "" http://kndocs-directory.googlecode.com/svn/trunk/profiles/vim/ ""
@@ -340,6 +340,7 @@ map <silent> \dif0 :call DiffEndTabs()<cr>
 " Source code for Command is in $VIMFILES/before/Command.vim
 
 map <M-x> :call CommandInput('M-x ')<cr>
+imap <M-x> <C-O>:call CommandInput('M-x ')<cr>
 map ,mx :call CommandInput('M-x ')<cr>
 
 command! -complete=customlist,CommandList -nargs=* Command call Command(<f-args>)
