@@ -2,7 +2,7 @@
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 ""                                                                ""
 "" Maintainer: Kneo                                               ""
-"" Last Modified: 2009-01-04 23:36:22                             ""
+"" Last Modified: 2009-01-04 23:38:54                             ""
 "" Version: unversioned                                           ""
 "" Latest Version:                                                ""
 "" http://kndocs-directory.googlecode.com/svn/trunk/profiles/vim/ ""
@@ -190,7 +190,6 @@ imap <M-x> <C-O><plug>Command
 map ,mx <plug>Command
 map ,x <plug>Command
 
-command! -complete=customlist,CommandList -nargs=* Command call Command(<f-args>)
 
 " Some useful mappings
 
