@@ -2,7 +2,7 @@
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 ""                                                                ""
 "" Maintainer: Kneo                                               ""
-"" Last Modified: 2009-01-04 15:00:54                             ""
+"" Last Modified: 2009-01-04 15:02:46                             ""
 "" Version: unversioned                                           ""
 "" Latest Version:                                                ""
 "" http://kndocs-directory.googlecode.com/svn/trunk/profiles/vim/ ""
@@ -853,6 +853,7 @@ map \75 :set filetype=diff<cr>
   """""""""""""""""""""""""
   let g:VCSCommandMapPrefix = '\v'
   "nmap \vv :tabnew %<cr><Plug>VCSVimDiff
+  autocmd FileType VCSCommit set spell " XXX: how to avoid Chinese spell check?
 
   """""""""""""""""""""""""
   " calendar.vim          "
