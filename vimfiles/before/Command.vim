@@ -1,6 +1,6 @@
 
 " Created: 2009-01-04 20:55:15
-" Last Modified: 2009-01-04 20:55:15
+" Last Modified: 2009-01-04 21:14:48
 
 let s:command_dict = {}
 
@@ -81,5 +81,7 @@ function! CommandInput(prompt)
     call CommandExecute(cmd)
   endif
 endfunction
+
+map <plug>Command :call CommandInput('M-x ')<cr>
 
 
