@@ -2,7 +2,8 @@
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 ""                                                                ""
 "" Maintainer: Kneo                                               ""
-"" Last Modified: 2009-01-03 21:48:39 +0800                       ""
+"" Last Modified: 2009-01-04 10:55:17 China Standard Time Standard Time                       ""
+
 "" Version: unversioned                                           ""
 "" Latest Version:                                                ""
 "" http://kndocs-directory.googlecode.com/svn/trunk/profiles/vim/ ""
@@ -796,6 +797,13 @@ map \75 :set filetype=diff<cr>
   " DOS Batch
   """""""""""""""""""""""""""""""
   autocmd FileType dosbatch map <buffer> <leader><space> :up<cr>:!call %<cr>
+
+  """"""""""""""""""""""""""""""""""""""""""""""""""
+  " .as & .mxml
+  """"""""""""""""""""""""""""""""""""""""""""""""""
+  au BufNewFile,BufRead *.mxml set filetype=mxml
+  au BufNewFile,BufRead *.as set filetype=actionscript
+
 
   """""""""""""""""""""""""""""""
   " SVN
