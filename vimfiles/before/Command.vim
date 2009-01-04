@@ -1,12 +1,12 @@
 
 " Created: 2009-01-04 20:55:15
-" Last Modified: 2009-01-04 21:14:48
+" Last Modified: 2009-01-04 23:24:18
 
 let s:command_dict = {}
 
 " TODO: looks not so good...
 function! EvalKeysInString(q)
-    return substitute(a:q, '<[^<>]\+>', '\= eval("\"\\".submatch(0)."\"")', 'g')
+    return substitute(a:q, '<\w\+>', '\= eval("\"\\".submatch(0)."\"")', 'g')
 endfunction
 
 " CommandPut(command, key-sequence, &rest more-key-sequences)
