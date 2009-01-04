@@ -2,7 +2,7 @@
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 ""                                                                ""
 "" Maintainer: Kneo                                               ""
-"" Last Modified: 2009-01-04 15:02:46                             ""
+"" Last Modified: 2009-01-04 15:05:41                             ""
 "" Version: unversioned                                           ""
 "" Latest Version:                                                ""
 "" http://kndocs-directory.googlecode.com/svn/trunk/profiles/vim/ ""
@@ -325,7 +325,7 @@ map <silent> \dif0 :call DiffEndTabs()<cr>
 " M-x for vim
 """"""""""""""""""""""""""""""""""""""""""""""""""
 
-let s:mxdict = {}
+let s:command_dict = {}
 
 " TODO: looks not so good...
 function! EvalKeysInString(q)
@@ -337,27 +337,27 @@ function! CommandPut(...)
   if a:0 < 1
     echoerr 'Too few arguments for CommandPut. Expected: >= 2, got '.a:0.' ('.a:000.'.'
   elseif a:0 == 2
-    let s:mxdict[a:1] = a:2
+    let s:command_dict[a:1] = a:2
   else
     " join rest 
-    let s:mxdict[a:1] = join(a:000[1:])
+    let s:command_dict[a:1] = join(a:000[1:])
   endif
 endfunction
 
 function! CommandGet(name)
-  return s:mxdict[a:name]
+  return s:command_dict[a:name]
 endfunction
 
 function! CommandHas(name)
-  return has_key(s:mxdict, a:name)
+  return has_key(s:command_dict, a:name)
 endfunction
 
 " Command(&optional command, &optional key-sequence, &rest more-key-sequences)
 function! Command(...)
   if a:0 == 0
     " No argument given, print existing Commands
-    for cmd in sort(keys(s:mxdict))
-      echo cmd s:mxdict[cmd]
+    for cmd in sort(keys(s:command_dict))
+      echo cmd s:command_dict[cmd]
     endfor
   elseif a:0 == 1
     " Only one Command given, print key sequence bound to this Command
@@ -389,7 +389,7 @@ function! CommandExecute(cmd)
 endfunction
 
 function! CommandListGet()
-  return sort(keys(s:mxdict), 1)
+  return sort(keys(s:command_dict), 1)
 endfunction
 
 function! CommandList(ArgLead, CmdLine, CursorPos)
