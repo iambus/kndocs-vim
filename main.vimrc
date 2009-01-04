@@ -2,7 +2,7 @@
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 ""                                                                ""
 "" Maintainer: Kneo                                               ""
-"" Last Modified: 2009-01-04 14:30:09                             ""
+"" Last Modified: 2009-01-04 15:00:54                             ""
 "" Version: unversioned                                           ""
 "" Latest Version:                                                ""
 "" http://kndocs-directory.googlecode.com/svn/trunk/profiles/vim/ ""
@@ -327,25 +327,58 @@ map <silent> \dif0 :call DiffEndTabs()<cr>
 
 let s:mxdict = {}
 
-function! MXInput()
-  call inputsave()
-  let cmd = input("M-x ", "", "customlist,CommandList")
-  call inputrestore()
-  if cmd != ""
-    call MX(cmd)
-  endif
-endfunction
-
 " TODO: looks not so good...
 function! EvalKeysInString(q)
     return substitute(a:q, '<[^<>]\+>', '\= eval("\"\\".submatch(0)."\"")', 'g')
 endfunction
 
-function! MX(cmd)
-  let cmd = a:cmd
+" CommandPut(command, key-sequence, &rest more-key-sequences)
+function! CommandPut(...)
+  if a:0 < 1
+    echoerr 'Too few arguments for CommandPut. Expected: >= 2, got '.a:0.' ('.a:000.'.'
+  elseif a:0 == 2
+    let s:mxdict[a:1] = a:2
+  else
+    " join rest 
+    let s:mxdict[a:1] = join(a:000[1:])
+  endif
+endfunction
 
-  if HasCommand(cmd)
-    execute 'normal' EvalKeysInString(GetCommand(cmd))
+function! CommandGet(name)
+  return s:mxdict[a:name]
+endfunction
+
+function! CommandHas(name)
+  return has_key(s:mxdict, a:name)
+endfunction
+
+" Command(&optional command, &optional key-sequence, &rest more-key-sequences)
+function! Command(...)
+  if a:0 == 0
+    " No argument given, print existing Commands
+    for cmd in sort(keys(s:mxdict))
+      echo cmd s:mxdict[cmd]
+    endfor
+  elseif a:0 == 1
+    " Only one Command given, print key sequence bound to this Command
+    let cmd = a:1
+    if CommandHas(cmd)
+      echo cmd CommandGet(cmd)
+    else
+      echo 'No Command found for' cmd
+    endif
+  else
+    " Command and key sequence given, bind Command to key sequence
+    " For example, the following will bind Command 'c' to 'k1  k2 k3   k4'
+    "   :Command c k1 k2    k3\ \ \ k4
+    call CommandPut(a:1, join(a:000[1:]))
+  endif
+endfunction
+
+function! CommandExecute(cmd)
+  let cmd = a:cmd
+  if CommandHas(cmd)
+    execute 'normal' EvalKeysInString(CommandGet(cmd))
   elseif maparg('\' . cmd) != ""
     execute 'normal' '\' . cmd
   elseif maparg(',' . cmd) != ""
@@ -355,52 +388,27 @@ function! MX(cmd)
   endif
 endfunction
 
-function! PutCommand(...)
-  if a:0 == 0
-    " No argument given, print existing Commands
-    for cmd in sort(keys(s:mxdict))
-      echo cmd s:mxdict[cmd]
-    endfor
-  elseif a:0 == 1
-    " Only one Command given, print key sequence bound to this Command
-    let cmd = a:1
-    if HasCommand(cmd)
-      echo cmd s:mxdict[cmd]
-    else
-      echo 'No Command found for' cmd
-    endif
-  elseif a:0 == 2
-    " Command and key sequence given, bind Command to key sequence
-    let s:mxdict[a:1] = a:2
-  else
-    " Command and key sequence given, bind Command to key sequence
-    " For example, the following will bind Command 'c' to 'k1  k2 k3   k4'
-    "   :Command c k1 k2    k3\ \ \ k4
-    let s:mxdict[a:1] = join(a:000[1:])
-  endif
-endfunction
-
-function! GetCommand(name)
-  return s:mxdict[a:name]
-endfunction
-
-function! HasCommand(name)
-  return has_key(s:mxdict, a:name)
-endfunction
-
-map <M-x> :call MXInput()<cr>
-map ,mx :call MXInput()<cr>
-
-function! CommandList(ArgLead, CmdLine, CursorPos)
-  return filter(GetCommandList(), "stridx(tolower(v:val), tolower(a:ArgLead)) == 0")
-endfunction
-
-function! GetCommandList()
+function! CommandListGet()
   return sort(keys(s:mxdict), 1)
 endfunction
 
-" TODO: give complete-list
-command! -nargs=* Command call PutCommand(<f-args>)
+function! CommandList(ArgLead, CmdLine, CursorPos)
+  return filter(CommandListGet(), "stridx(tolower(v:val), tolower(a:ArgLead)) == 0")
+endfunction
+
+function! CommandInput(prompt)
+  call inputsave()
+  let cmd = input(a:prompt, "", "customlist,CommandList")
+  call inputrestore()
+  if cmd != ""
+    call CommandExecute(cmd)
+  endif
+endfunction
+
+map <M-x> :call CommandInput('M-x ')<cr>
+map ,mx :call CommandInput('M-x ')<cr>
+
+command! -complete=customlist,CommandList -nargs=* Command call Command(<f-args>)
 
 " Some useful mappings
 
