@@ -2,7 +2,7 @@
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 ""                                                                ""
 "" Maintainer: Kneo                                               ""
-"" Last Modified: 2009-01-04 11:11:33                             ""
+"" Last Modified: 2009-01-04 13:44:32                             ""
 "" Version: unversioned                                           ""
 "" Latest Version:                                                ""
 "" http://kndocs-directory.googlecode.com/svn/trunk/profiles/vim/ ""
@@ -336,16 +336,22 @@ function! MXInput()
   endif
 endfunction
 
+" TODO: looks not so good...
+function! EvalKeysInString(q)
+    return substitute(a:q, '<[^<>]\+>', '\= eval("\"\\".submatch(0)."\"")', 'g')
+endfunction
+
 function! MX(cmd)
   let cmd = a:cmd
 
   if HasCommand(cmd)
-    let x = GetCommand(cmd)
-    execute 'normal ' . x
+    execute 'normal' EvalKeysInString(GetCommand(cmd))
   elseif maparg('\' . cmd) != ""
-    execute 'normal ' . '\' . cmd
+    execute 'normal' '\' . cmd
   elseif maparg(',' . cmd) != ""
-    execute 'normal ' . ',' . cmd
+    execute 'normal' ',' . cmd
+  else
+    echoerr "Can't find Command " . cmd
   endif
 endfunction
 
@@ -389,47 +395,47 @@ endif
 
 map <leader>W :cd $TEMPDIR<cr>:w! _<cr>
 
-map \temp1 :w! $TEMPDIR/_1<cr>
-map \temp2 :w! $TEMPDIR/_2<cr>
-map \temp3 :w! $TEMPDIR/_3<cr>
-map \temp4 :w! $TEMPDIR/_4<cr>
-map \temp5 :w! $TEMPDIR/_5<cr>
-map \temp6 :w! $TEMPDIR/_6<cr>
-map \temp7 :w! $TEMPDIR/_7<cr>
-map \temp8 :w! $TEMPDIR/_8<cr>
-map \temp9 :w! $TEMPDIR/_9<cr>
+map <plug>temp1 :w! $TEMPDIR/_1<cr>
+map <plug>temp2 :w! $TEMPDIR/_2<cr>
+map <plug>temp3 :w! $TEMPDIR/_3<cr>
+map <plug>temp4 :w! $TEMPDIR/_4<cr>
+map <plug>temp5 :w! $TEMPDIR/_5<cr>
+map <plug>temp6 :w! $TEMPDIR/_6<cr>
+map <plug>temp7 :w! $TEMPDIR/_7<cr>
+map <plug>temp8 :w! $TEMPDIR/_8<cr>
+map <plug>temp9 :w! $TEMPDIR/_9<cr>
 
-map \otemp :e $TEMPDIR/_<cr>
-map \otemp1 :e $TEMPDIR/_1<cr>
-map \otemp2 :e $TEMPDIR/_2<cr>
-map \otemp3 :e $TEMPDIR/_3<cr>
-map \otemp4 :e $TEMPDIR/_4<cr>
-map \otemp5 :e $TEMPDIR/_5<cr>
-map \otemp6 :e $TEMPDIR/_6<cr>
-map \otemp7 :e $TEMPDIR/_7<cr>
-map \otemp8 :e $TEMPDIR/_8<cr>
-map \otemp9 :e $TEMPDIR/_9<cr>
+map <plug>otemp :e $TEMPDIR/_<cr>
+map <plug>otemp1 :e $TEMPDIR/_1<cr>
+map <plug>otemp2 :e $TEMPDIR/_2<cr>
+map <plug>otemp3 :e $TEMPDIR/_3<cr>
+map <plug>otemp4 :e $TEMPDIR/_4<cr>
+map <plug>otemp5 :e $TEMPDIR/_5<cr>
+map <plug>otemp6 :e $TEMPDIR/_6<cr>
+map <plug>otemp7 :e $TEMPDIR/_7<cr>
+map <plug>otemp8 :e $TEMPDIR/_8<cr>
+map <plug>otemp9 :e $TEMPDIR/_9<cr>
 
-Command temp-file-1 \temp1
-Command temp-file-2 \temp2
-Command temp-file-3 \temp3
-Command temp-file-4 \temp4
-Command temp-file-5 \temp5
-Command temp-file-6 \temp6
-Command temp-file-7 \temp7
-Command temp-file-8 \temp8
-Command temp-file-9 \temp9
+Command temp-file-1 <plug>temp1
+Command temp-file-2 <plug>temp2
+Command temp-file-3 <plug>temp3
+Command temp-file-4 <plug>temp4
+Command temp-file-5 <plug>temp5
+Command temp-file-6 <plug>temp6
+Command temp-file-7 <plug>temp7
+Command temp-file-8 <plug>temp8
+Command temp-file-9 <plug>temp9
 
-Command open-temp-file \otemp
-Command open-temp-file-1 \otemp1
-Command open-temp-file-2 \otemp2
-Command open-temp-file-3 \otemp3
-Command open-temp-file-4 \otemp4
-Command open-temp-file-5 \otemp5
-Command open-temp-file-6 \otemp6
-Command open-temp-file-7 \otemp7
-Command open-temp-file-8 \otemp8
-Command open-temp-file-9 \otemp9
+Command open-temp-file <plug>otemp
+Command open-temp-file-1 <plug>otemp1
+Command open-temp-file-2 <plug>otemp2
+Command open-temp-file-3 <plug>otemp3
+Command open-temp-file-4 <plug>otemp4
+Command open-temp-file-5 <plug>otemp5
+Command open-temp-file-6 <plug>otemp6
+Command open-temp-file-7 <plug>otemp7
+Command open-temp-file-8 <plug>otemp8
+Command open-temp-file-9 <plug>otemp9
 
 """"""""""""""""""""""""""""""""""""""""""""""""""
 " Script
@@ -842,6 +848,7 @@ map \75 :set filetype=diff<cr>
   " vcscommand.vim        "
   """""""""""""""""""""""""
   let g:VCSCommandMapPrefix = '\v'
+  "nmap \vv :tabnew %<cr><Plug>VCSVimDiff
 
   """""""""""""""""""""""""
   " calendar.vim          "
@@ -880,7 +887,7 @@ map \75 :set filetype=diff<cr>
   let g:timestamp_rep = '%Y-%m-%d %H:%M:%S'
   "let g:timestamp_regexp = '\v\C%(<%(Last %([cC]hanged?|modified)|Modified)\s*:\s+)@<=\a+ \d{2} \a+ \d{4} \d{2}:\d{2}:\d{2}%(\s+[AP]M)?%(\s+\a+)?|TIMESTAMP'
   let g:timestamp_regexp = '\v\C%(<%(Last %([cC]hanged?|modified)|Modified)\s*:\s+)@<=\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}|\%TIMESTAMP\%'
-  map \time a%TIMESTAMP%<ESC>
+  map <unique> \time a%TIMESTAMP%<ESC>
 
 
   """""""""""""""""""""""""
@@ -958,19 +965,19 @@ map \75 :set filetype=diff<cr>
   """""""""""""""""""""""""
   let g:NERDCreateDefaultMappings = 0
   " TODO: nmap/vmap instead of map
-   map \cc       <plug>NERDCommenterComment
-   map \c<space> <plug>NERDCommenterToggle
-   map \cm       <plug>NERDCommenterMinimal
-   map \cs       <plug>NERDCommenterSexy
-   map \ci       <plug>NERDCommenterInvert
-   map \cy       <plug>NERDCommenterYank
-   map \cl       <plug>NERDCommenterAlignLeft
-   map \cb       <plug>NERDCommenterAlignBoth
-   map \cn       <plug>NERDCommenterNest
-   map \cu       <plug>NERDCommenterUncomment
-   map \c$       <plug>NERDCommenterToEOL
-   map \cA       <plug>NERDCommenterAppend
-  nmap \ca       <plug>NERDCommenterAltDelims
+   map <unique> \cc       <plug>NERDCommenterComment
+   map <unique> \c<space> <plug>NERDCommenterToggle
+   map <unique> \cm       <plug>NERDCommenterMinimal
+   map <unique> \cs       <plug>NERDCommenterSexy
+   map <unique> \ci       <plug>NERDCommenterInvert
+   map <unique> \cy       <plug>NERDCommenterYank
+   map <unique> \cl       <plug>NERDCommenterAlignLeft
+   map <unique> \cb       <plug>NERDCommenterAlignBoth
+   map <unique> \cn       <plug>NERDCommenterNest
+   map <unique> \cu       <plug>NERDCommenterUncomment
+   map <unique> \c$       <plug>NERDCommenterToEOL
+   map <unique> \cA       <plug>NERDCommenterAppend
+  nmap <unique> \ca       <plug>NERDCommenterAltDelims
 
   let g:NERDShutUp=1
 
@@ -989,8 +996,8 @@ map \75 :set filetype=diff<cr>
   """""""""""""""""""""""""
   " DrawItPlugin.vim      "
   """""""""""""""""""""""""
-  map \di <Plug>StartDrawIt
-  map \ds <Plug>StopDrawIt
+  map <unique> \di <Plug>StartDrawIt
+  map <unique> \ds <Plug>StopDrawIt
   let g:DrChipTopLvlMenu= "Plugin."
 
 
