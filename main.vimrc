@@ -2,7 +2,7 @@
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 ""                                                                ""
 "" Maintainer: Kneo                                               ""
-"" Last Modified: 2009-01-04 21:14:55                             ""
+"" Last Modified: 2009-01-04 23:16:35                             ""
 "" Version: unversioned                                           ""
 "" Latest Version:                                                ""
 "" http://kndocs-directory.googlecode.com/svn/trunk/profiles/vim/ ""
@@ -540,12 +540,12 @@ if os == win
   Command TOHtmlForOutlook \print
 
   " Open directory in a new explorer window
-  map \openwd :call system("explorer ".expand("%:p:h"))<cr>
-  Command open-browser \openwd
+  Command openwd :call system("explorer ".expand("%:p:h"))<cr>
+  Command open-browser :call system("explorer ".expand("%:p:h"))<cr>
 
   " Open directory in a new cmd window
-  map \opencd :silent !start=cmd /K cd /d %:p:h<cr>
-  Command open-command \opencd
+  Command opencd :silent !start=cmd /K cd /d %:p:h<cr>
+  Command open-command :silent !start=cmd /K cd /d %:p:h<cr>
 endif
 
 " Remove BOM in current file
