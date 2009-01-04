@@ -2,7 +2,7 @@
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 ""                                                                ""
 "" Maintainer: Kneo                                               ""
-"" Last Modified: 2009-01-04 23:18:34                             ""
+"" Last Modified: 2009-01-04 23:36:22                             ""
 "" Version: unversioned                                           ""
 "" Latest Version:                                                ""
 "" http://kndocs-directory.googlecode.com/svn/trunk/profiles/vim/ ""
@@ -13,16 +13,16 @@
 "" Load some scripts from $VIMFILES/before                        ""
 "" Basic                                                          ""
 "" Mappings                                                       ""
+"" M-x for vim                                                    ""
 "" File Format and File Encodings                                 ""
 "" Look                                                           ""
 "" Buffers                                                        ""
 "" Folding                                                        ""
 "" Tab mappings                                                   ""
 "" Diff between tabs                                              ""
-"" M-x for vim                                                    ""
 "" Misc                                                           ""
 "" File Types                                                     ""
-"" Plugin                                                         ""
+"" Plugins                                                        ""
 "" Load more                                                      ""
 ""                                                                ""
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -180,6 +180,58 @@ map ,tt :set noexpandtab<cr>:set shiftwidth=4<cr>
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""
+" M-x for vim
+""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" Source code for Command is in $VIMFILES/before/Command.vim
+
+map <M-x> <plug>Command
+imap <M-x> <C-O><plug>Command
+map ,mx <plug>Command
+map ,x <plug>Command
+
+command! -complete=customlist,CommandList -nargs=* Command call Command(<f-args>)
+
+" Some useful mappings
+
+Command copy-all gg"+yG``
+
+Command msn i<c-r>=strftime("%Y-%m-%d %H:%M")<cr> MSN<cr>
+
+" Temporary Files
+
+" XXX: Don't use $TMPDIR, which conflicts with taglist...
+if os == win
+  let $TEMPDIR = 'F:/temp'
+else
+  let $TEMPDIR = expand('~/tmp')
+endif
+
+map ,W :cd $TEMPDIR<cr>:w! _<cr>
+
+Command temp-file-1 :w! $TEMPDIR/_1<cr>
+Command temp-file-2 :w! $TEMPDIR/_2<cr>
+Command temp-file-3 :w! $TEMPDIR/_3<cr>
+Command temp-file-4 :w! $TEMPDIR/_4<cr>
+Command temp-file-5 :w! $TEMPDIR/_5<cr>
+Command temp-file-6 :w! $TEMPDIR/_6<cr>
+Command temp-file-7 :w! $TEMPDIR/_7<cr>
+Command temp-file-8 :w! $TEMPDIR/_8<cr>
+Command temp-file-9 :w! $TEMPDIR/_9<cr>
+
+Command open-temp-file   :e $TEMPDIR/_<cr>
+Command open-temp-file-1 :e $TEMPDIR/_1<cr>
+Command open-temp-file-2 :e $TEMPDIR/_2<cr>
+Command open-temp-file-3 :e $TEMPDIR/_3<cr>
+Command open-temp-file-4 :e $TEMPDIR/_4<cr>
+Command open-temp-file-5 :e $TEMPDIR/_5<cr>
+Command open-temp-file-6 :e $TEMPDIR/_6<cr>
+Command open-temp-file-7 :e $TEMPDIR/_7<cr>
+Command open-temp-file-8 :e $TEMPDIR/_8<cr>
+Command open-temp-file-9 :e $TEMPDIR/_9<cr>
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""
 " File Format and File Encodings
 """"""""""""""""""""""""""""""""""""""""""""""""""
 " File format
@@ -329,60 +381,9 @@ function! DiffEndTabs()
   call DiffTabs(n-1, n)
 endfunction
 
-map <silent> \diff :call DiffTabs(1, 2)<cr>
-map <silent> \dif0 :call DiffEndTabs()<cr>
+Command diff-first-two-tabs :call DiffTabs(1, 2)<cr>
+Command diff-last-two-tabs :call DiffEndTabs()<cr>
 
-
-""""""""""""""""""""""""""""""""""""""""""""""""""
-" M-x for vim
-""""""""""""""""""""""""""""""""""""""""""""""""""
-
-" Source code for Command is in $VIMFILES/before/Command.vim
-
-map <M-x> <plug>Command
-imap <M-x> <C-O><plug>Command
-map ,mx <plug>Command
-map ,x <plug>Command
-
-command! -complete=customlist,CommandList -nargs=* Command call Command(<f-args>)
-
-" Some useful mappings
-
-Command copy-all gg"+yG``
-
-Command msn i<c-r>=strftime("%Y-%m-%d %H:%M")<cr> MSN<cr>
-
-" Temporary Files
-
-" XXX: Don't use $TMPDIR, which conflicts with taglist...
-if os == win
-  let $TEMPDIR = 'F:/temp'
-else
-  let $TEMPDIR = expand('~/tmp')
-endif
-
-map ,W :cd $TEMPDIR<cr>:w! _<cr>
-
-Command temp-file-1 :w! $TEMPDIR/_1<cr>
-Command temp-file-2 :w! $TEMPDIR/_2<cr>
-Command temp-file-3 :w! $TEMPDIR/_3<cr>
-Command temp-file-4 :w! $TEMPDIR/_4<cr>
-Command temp-file-5 :w! $TEMPDIR/_5<cr>
-Command temp-file-6 :w! $TEMPDIR/_6<cr>
-Command temp-file-7 :w! $TEMPDIR/_7<cr>
-Command temp-file-8 :w! $TEMPDIR/_8<cr>
-Command temp-file-9 :w! $TEMPDIR/_9<cr>
-
-Command open-temp-file   :e $TEMPDIR/_<cr>
-Command open-temp-file-1 :e $TEMPDIR/_1<cr>
-Command open-temp-file-2 :e $TEMPDIR/_2<cr>
-Command open-temp-file-3 :e $TEMPDIR/_3<cr>
-Command open-temp-file-4 :e $TEMPDIR/_4<cr>
-Command open-temp-file-5 :e $TEMPDIR/_5<cr>
-Command open-temp-file-6 :e $TEMPDIR/_6<cr>
-Command open-temp-file-7 :e $TEMPDIR/_7<cr>
-Command open-temp-file-8 :e $TEMPDIR/_8<cr>
-Command open-temp-file-9 :e $TEMPDIR/_9<cr>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""
 " Script
@@ -770,7 +771,7 @@ map \75 :set filetype=diff<cr>
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""
-" Plugin
+" Plugins
 """"""""""""""""""""""""""""""""""""""""""""""""""
 
   """""""""""""""""""""""""
