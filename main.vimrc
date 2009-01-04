@@ -2,7 +2,7 @@
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 ""                                                                ""
 "" Maintainer: Kneo                                               ""
-"" Last Modified: 2009-01-04 16:39:04                             ""
+"" Last Modified: 2009-01-04 21:01:17                             ""
 "" Version: unversioned                                           ""
 "" Latest Version:                                                ""
 "" http://kndocs-directory.googlecode.com/svn/trunk/profiles/vim/ ""
@@ -10,6 +10,7 @@
 "" Sections:                                                      ""
 ""                                                                ""
 "" Platform                                                       ""
+"" Load some scripts from $VIMFILES/before                        ""
 "" Basic                                                          ""
 "" Mappings                                                       ""
 "" File Format and File Encodings                                 ""
@@ -63,6 +64,19 @@ if os == win
 else
   let $VIMFILES = expand('~/.vim')
 end
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""
+" Load some scripts from $VIMFILES/before
+""""""""""""""""""""""""""""""""""""""""""""""""""
+function! RunBeforeScripts()
+  let list = split(glob('$VIMFILES/before/*.vim'), '\n')
+  for script in list
+      exe 'source' script
+  endfor
+endfunction
+call RunBeforeScripts()
+
 
 """"""""""""""""""""""""""""""""""""""""""""""""""
 " Basic
@@ -150,8 +164,6 @@ else
   map \slrc :source $HOME/.vimrc_local<cr>
   map \r$ :%s/\r$//<cr>
 endif
-
-map \msn i<c-r>=strftime("%Y-%m-%d %H:%M")<cr> MSN<cr>
 
 set winaltkeys=no
 map <M-y> "+yy
@@ -325,85 +337,7 @@ map <silent> \dif0 :call DiffEndTabs()<cr>
 " M-x for vim
 """"""""""""""""""""""""""""""""""""""""""""""""""
 
-let s:command_dict = {}
-
-" TODO: looks not so good...
-function! EvalKeysInString(q)
-    return substitute(a:q, '<[^<>]\+>', '\= eval("\"\\".submatch(0)."\"")', 'g')
-endfunction
-
-" CommandPut(command, key-sequence, &rest more-key-sequences)
-function! CommandPut(...)
-  if a:0 < 1
-    echoerr 'Too few arguments for CommandPut. Expected: >= 2, got '.a:0.' ('.a:000.'.'
-  elseif a:0 == 2
-    let s:command_dict[a:1] = a:2
-  else
-    " join rest 
-    let s:command_dict[a:1] = join(a:000[1:])
-  endif
-endfunction
-
-function! CommandGet(name)
-  return s:command_dict[a:name]
-endfunction
-
-function! CommandHas(name)
-  return has_key(s:command_dict, a:name)
-endfunction
-
-" Command(&optional command, &optional key-sequence, &rest more-key-sequences)
-function! Command(...)
-  if a:0 == 0
-    " No argument given, print existing Commands
-    for cmd in sort(keys(s:command_dict))
-      echo cmd s:command_dict[cmd]
-    endfor
-  elseif a:0 == 1
-    " Only one Command given, print key sequence bound to this Command
-    let cmd = a:1
-    if CommandHas(cmd)
-      echo cmd CommandGet(cmd)
-    else
-      echo 'No Command found for' cmd
-    endif
-  else
-    " Command and key sequence given, bind Command to key sequence
-    " For example, the following will bind Command 'c' to 'k1  k2 k3   k4'
-    "   :Command c k1 k2    k3\ \ \ k4
-    call CommandPut(a:1, join(a:000[1:]))
-  endif
-endfunction
-
-function! CommandExecute(cmd)
-  let cmd = a:cmd
-  if CommandHas(cmd)
-    execute 'normal' EvalKeysInString(CommandGet(cmd))
-  elseif maparg('\' . cmd) != ""
-    execute 'normal' '\' . cmd
-  elseif maparg(',' . cmd) != ""
-    execute 'normal' ',' . cmd
-  else
-    echoerr "Can't find Command " . cmd
-  endif
-endfunction
-
-function! CommandListGet()
-  return sort(keys(s:command_dict), 1)
-endfunction
-
-function! CommandList(ArgLead, CmdLine, CursorPos)
-  return filter(CommandListGet(), "stridx(tolower(v:val), tolower(a:ArgLead)) == 0")
-endfunction
-
-function! CommandInput(prompt)
-  call inputsave()
-  let cmd = input(a:prompt, "", "customlist,CommandList")
-  call inputrestore()
-  if cmd != ""
-    call CommandExecute(cmd)
-  endif
-endfunction
+" Source code for Command is in $VIMFILES/before/Command.vim
 
 map <M-x> :call CommandInput('M-x ')<cr>
 map ,mx :call CommandInput('M-x ')<cr>
@@ -413,6 +347,8 @@ command! -complete=customlist,CommandList -nargs=* Command call Command(<f-args>
 " Some useful mappings
 
 Command copy-all gg"+yG``
+
+Command msn i<c-r>=strftime("%Y-%m-%d %H:%M")<cr> MSN<cr>
 
 " Temporary Files
 
@@ -893,6 +829,7 @@ map \75 :set filetype=diff<cr>
   "let g:timestamp_regexp = '\v\C%(<%(Last %([cC]hanged?|modified)|Modified)\s*:\s+)@<=\a+ \d{2} \a+ \d{4} \d{2}:\d{2}:\d{2}%(\s+[AP]M)?%(\s+\a+)?|TIMESTAMP'
   let g:timestamp_regexp = '\v\C%(<%(Last %([cC]hanged?|modified)|Modified)\s*:\s+)@<=\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}|\%TIMESTAMP\%'
   map <unique> \time a%TIMESTAMP%<ESC>
+  Command insert-timestamp a%TIMESTAMP%<ESC>
 
 
   """""""""""""""""""""""""
