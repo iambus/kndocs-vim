@@ -2,7 +2,7 @@
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 ""                                                                ""
 "" Maintainer: Kneo                                               ""
-"" Last Modified: 2009-01-04 23:38:54                             ""
+"" Last Modified: 2009-01-05 10:46:24                             ""
 "" Version: unversioned                                           ""
 "" Latest Version:                                                ""
 "" http://kndocs-directory.googlecode.com/svn/trunk/profiles/vim/ ""
@@ -630,6 +630,8 @@ map \75 :set filetype=diff<cr>
   autocmd FileType vim set shiftwidth=2
   autocmd FileType vim set tabstop=2
   autocmd FileType vim set expandtab
+
+  autocmd FileType vim set ff=unix " XXX: does it have any potential problem?
 
   """"""""""""""""""""""""""""""
   " C mappings
