@@ -2,7 +2,7 @@
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 ""                                                                ""
 "" Maintainer: Kneo                                               ""
-"" Last Modified: 2009-01-05 10:46:24                             ""
+"" Last Modified: 2009-01-05 21:52:41                             ""
 "" Version: unversioned                                           ""
 "" Latest Version:                                                ""
 "" http://kndocs-directory.googlecode.com/svn/trunk/profiles/vim/ ""
@@ -881,8 +881,11 @@ map \75 :set filetype=diff<cr>
   nmap <unique> <silent> \ml :call ShowLine()<cr>
   nmap <unique> <silent> \mi :call ShowIt()<cr>
 
-  autocmd ColorScheme * source $VIMFILES/plugin/showit.vim
+  hi MarkWord1  ctermbg=Green    ctermfg=Black  guibg=#A4E57E    guifg=Black
+  hi MarkWord2  ctermbg=Yellow   ctermfg=Black  guibg=#FFDB72    guifg=Black
+  hi MarkWord3  ctermbg=Cyan     ctermfg=Black  guibg=#8CCBEA    guifg=Black
 
+  autocmd ColorScheme * source $VIMFILES/plugin/showit.vim
 
   """""""""""""""""""""""""
   " mark.vim              "
