@@ -2,7 +2,7 @@
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 ""                                                                ""
 "" Maintainer: Kneo                                               ""
-"" Last Modified: 2009-01-05 22:29:28                             ""
+"" Last Modified: 2009-01-08 11:39:11                             ""
 "" Version: unversioned                                           ""
 "" Latest Version:                                                ""
 "" http://kndocs-directory.googlecode.com/svn/trunk/profiles/vim/ ""
@@ -709,12 +709,12 @@ map \75 :set filetype=diff<cr>
 
 
   """""""""""""""""""""""""""""""
-  " XML & Ant
+  " XML & XMLs
   """""""""""""""""""""""""""""""
-  autocmd FileType xml,ant map <buffer> ,= :up<cr>:%!xmllint --format %<cr>
+  autocmd FileType xml,ant,xsd map <buffer> ,= :up<cr>:%!xmllint --format %<cr>
   if os == win
-    autocmd FileType xml,ant map <buffer> ,cc :up<cr>:!rxp %<cr>
-    autocmd FileType xml map <buffer> ,cC :up<cr>:!rxp -V -N -s -x<cr>
+    autocmd FileType xml,ant,xsd map <buffer> ,cc :up<cr>:!rxp %<cr>
+    autocmd FileType xml,ant,xsd map <buffer> ,cC :up<cr>:!rxp -V -N -s -x<cr>
   endif
   autocmd FileType xml map <buffer> ,<space> ,=
 
