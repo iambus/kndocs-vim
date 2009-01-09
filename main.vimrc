@@ -2,7 +2,7 @@
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 ""                                                                ""
 "" Maintainer: Kneo                                               ""
-"" Last Modified: 2009-01-08 11:39:11                             ""
+"" Last Modified: 2009-01-09 15:02:10                             ""
 "" Version: unversioned                                           ""
 "" Latest Version:                                                ""
 "" http://kndocs-directory.googlecode.com/svn/trunk/profiles/vim/ ""
@@ -721,6 +721,12 @@ map \75 :set filetype=diff<cr>
   autocmd FileType ant compiler ant
   autocmd FileType ant map <buffer> ,<space> :up<cr>:make<cr>
   autocmd FileType ant map <buffer> \ant :up<cr>:make<space>
+
+  function! ValidateXML()
+    let f = expand('%:t:r')
+    exe '!' 'xmllint' '--schema' f.'.xsd' f.'.xml'
+  endfunction
+  Command validate-xml :call ValidateXML()<cr>
 
   """""""""""""""""""""""""""""""
   " JavaScript
