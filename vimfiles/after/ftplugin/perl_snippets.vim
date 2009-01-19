@@ -24,4 +24,5 @@ exec "Snippet xif ".st."expression".et." if ".st."condition".et.";".st.et
 
 " Kneo
 exec "Snippet use <cr>use strict;<cr>use warnings;<cr><cr>".st.et."<cr>"
+exec "Snippet noti die \"Not Implemented\";".st.et
 
