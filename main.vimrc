@@ -2,7 +2,7 @@
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 ""                                                                ""
 "" Maintainer: Kneo                                               ""
-"" Last Modified: 2009-01-26 18:30:55                             ""
+"" Last Modified: 2009-01-26 18:34:25                             ""
 "" Version: unversioned                                           ""
 "" Latest Version:                                                ""
 "" http://kndocs-directory.googlecode.com/svn/trunk/profiles/vim/ ""
@@ -967,6 +967,11 @@ map \75 :set filetype=diff<cr>
   map <unique> \di <Plug>StartDrawIt
   map <unique> \ds <Plug>StopDrawIt
   let g:DrChipTopLvlMenu = "Plugin."
+
+  """""""""""""""""""""""""
+  " cmdline-complete.vim  "
+  """""""""""""""""""""""""
+  " Nothing to change
 
   """""""""""""""""""""""""
   "                       "
