@@ -2,7 +2,7 @@
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 ""                                                                ""
 "" Maintainer: Kneo                                               ""
-"" Last Modified: 2009-01-22 00:51:23                             ""
+"" Last Modified: 2009-01-26 18:30:55                             ""
 "" Version: unversioned                                           ""
 "" Latest Version:                                                ""
 "" http://kndocs-directory.googlecode.com/svn/trunk/profiles/vim/ ""
@@ -945,6 +945,11 @@ map \75 :set filetype=diff<cr>
   let g:NERDShutUp=1
 
   """""""""""""""""""""""""
+  " NERD_tree.vim         "
+  """""""""""""""""""""""""
+  let g:NERDTreeHijackNetrw = 0
+
+  """""""""""""""""""""""""
   " dbext.vim             "
   """""""""""""""""""""""""
   " Disable all default key mappings
@@ -961,8 +966,7 @@ map \75 :set filetype=diff<cr>
   """""""""""""""""""""""""
   map <unique> \di <Plug>StartDrawIt
   map <unique> \ds <Plug>StopDrawIt
-  let g:DrChipTopLvlMenu= "Plugin."
-
+  let g:DrChipTopLvlMenu = "Plugin."
 
   """""""""""""""""""""""""
   "                       "
