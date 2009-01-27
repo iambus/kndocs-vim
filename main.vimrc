@@ -2,7 +2,7 @@
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 ""                                                                ""
 "" Maintainer: Kneo                                               ""
-"" Last Modified: 2009-01-26 18:34:25                             ""
+"" Last Modified: 2009-01-27 19:18:52                             ""
 "" Version: unversioned                                           ""
 "" Latest Version:                                                ""
 "" http://kndocs-directory.googlecode.com/svn/trunk/profiles/vim/ ""
@@ -673,6 +673,11 @@ map \75 :set filetype=diff<cr>
   """""""""""""""""""""""""""""""
   autocmd FileType java map <buffer> ,= :up<cr>:%!astyle --style=java -p < %<cr>
 
+  autocmd FileType java map <buffer> ,cc :up<cr>:!javapro -c %<cr>
+  autocmd FileType java map <buffer> ,cr :up<cr>:!javapro -x %<cr>
+  autocmd FileType java map <buffer> ,c<space> :up<cr>:!javapro -cx %<cr>
+
+  autocmd FileType java map <buffer> ,<space> ,cr
 
   """""""""""""""""""""""""""""""
   " Perl
