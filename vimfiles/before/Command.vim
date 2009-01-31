@@ -1,6 +1,6 @@
 
 " Created: 2009-01-04 20:55:15
-" Last Modified: 2009-01-31 17:14:20
+" Last Modified: 2009-01-31 18:07:54
 
 let s:command_dict = {}
 
@@ -53,7 +53,19 @@ function! Command(...)
 endfunction
 
 function! CommandExecuteString(cmd)
+  " FIXME: This is a workaround because command like following doesn't work:
+  "
+  " :execute 'normal' ":call input('$>')\<cr>"
+  "
+  " But the following works:
+  "
+  " :execute "call input('$>')"
+  "
+  if a:cmd =~ "^:call\\s.*\<cr>$" && a:cmd !~ "\<cr>."
+    execute substitute(a:cmd, "^:\\(.*\\)\<cr>$", '\1', '')
+  else
     execute 'normal' a:cmd
+  endif
 endfunction
 
 function! CommandExecute(cmd)

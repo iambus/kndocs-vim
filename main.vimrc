@@ -2,7 +2,7 @@
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 ""                                                                ""
 "" Maintainer: Kneo                                               ""
-"" Last Modified: 2009-01-27 19:18:52                             ""
+"" Last Modified: 2009-01-31 18:07:20                             ""
 "" Version: unversioned                                           ""
 "" Latest Version:                                                ""
 "" http://kndocs-directory.googlecode.com/svn/trunk/profiles/vim/ ""
@@ -523,7 +523,6 @@ function! OnlyInput()
   endif
 endfunction
 
-" FIXME: not working...
 Command only-text :call OnlyInput()<cr>
 
 
