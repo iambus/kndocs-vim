@@ -1,6 +1,6 @@
 
 " Created: 2009-01-04 20:55:15
-" Last Modified: 2009-01-05 01:52:33
+" Last Modified: 2009-01-31 17:14:20
 
 let s:command_dict = {}
 
@@ -52,17 +52,23 @@ function! Command(...)
   endif
 endfunction
 
+function! CommandExecuteString(cmd)
+    execute 'normal' a:cmd
+endfunction
+
 function! CommandExecute(cmd)
   let cmd = a:cmd
   if CommandHas(cmd)
-    execute 'normal' EvalKeysInString(CommandGet(cmd))
+    let cmd = EvalKeysInString(CommandGet(cmd))
   elseif maparg('\' . cmd) != ""
-    execute 'normal' '\' . cmd
+    let cmd = '\' . cmd
   elseif maparg(',' . cmd) != ""
-    execute 'normal' ',' . cmd
+    let cmd = ',' . cmd
   else
     echoerr "Can't find Command " . cmd
+    return
   endif
+  call CommandExecuteString(cmd)
 endfunction
 
 function! CommandListGet()
