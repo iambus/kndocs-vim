@@ -2,7 +2,7 @@
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 ""                                                                ""
 "" Maintainer: Kneo                                               ""
-"" Last Modified: 2009-02-02 15:04:08                             ""
+"" Last Modified: 2009-02-28 13:51:07                             ""
 "" Version: unversioned                                           ""
 "" Latest Version:                                                ""
 "" http://kndocs-directory.googlecode.com/svn/trunk/profiles/vim/ ""
@@ -627,6 +627,7 @@ map \75 :set filetype=diff<cr>
   """"""""""""""""""""""""""""""
   autocmd FileType vim map <buffer> ,<space> :up<cr>:source %<cr>
 
+  " FIXME: make following only work in buffer
   autocmd FileType vim set shiftwidth=2
   autocmd FileType vim set tabstop=2
   autocmd FileType vim set expandtab
@@ -857,7 +858,7 @@ map \75 :set filetype=diff<cr>
   """""""""""""""""""""""""
   " mru.vim               "
   """""""""""""""""""""""""
-  " Nothing to change
+  let MRU_Max_Entries = 20
 
   """""""""""""""""""""""""
   " xml.vim               "
