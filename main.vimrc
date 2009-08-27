@@ -2,7 +2,7 @@
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 ""                                                                ""
 "" Maintainer: Kneo                                               ""
-"" Last Modified: 2009-02-28 13:51:07                             ""
+"" Last Modified: 2009-08-27 19:25:43                             ""
 "" Version: unversioned                                           ""
 "" Latest Version:                                                ""
 "" http://kndocs-directory.googlecode.com/svn/trunk/profiles/vim/ ""
@@ -168,6 +168,7 @@ endif
 set winaltkeys=no
 map <M-y> "+yy
 map <M-Y> gg"+yG``
+map <M-d> ggdG
 noremap <M-a> <C-a>
 noremap <M-v> <C-v>
 noremap <M-x> <C-x>
