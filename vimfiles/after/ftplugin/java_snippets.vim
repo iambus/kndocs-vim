@@ -55,4 +55,5 @@ exec "Snippet jcout <c:out value=\"${".st.et."}\" />".st.et
 exec "Snippet main public static void main(String[] args) {<CR>".st.et."<CR>}<CR>"
 exec "Snippet cm public class ".st."``expand('%:t:r')``".et." {<CR>public static void main(String[] args) {<CR>".st.et."<CR>}<CR>}"
 exec "Snippet sys System.out.println(".st.et.");<CR>".st.et
+exec "Snippet noti throw new RuntimeException(\"Not Implemented\");".st.et
 
