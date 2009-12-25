@@ -52,8 +52,16 @@ exec "Snippet jpum /**<CR> * ".st.et."<CR> *<CR> * @param ".st.et." ".st.et."<CR
 exec "Snippet jcout <c:out value=\"${".st.et."}\" />".st.et
 
 
+exec "Snippet c public class ".st."``expand('%:t:r')``".et." {<CR>".st.et."<CR>}"
+exec "Snippet con public ``expand('%:t:r')``(".st.et.") {<CR>".st.et."<CR>}"
 exec "Snippet main public static void main(String[] args) {<CR>".st.et."<CR>}<CR>"
 exec "Snippet cm public class ".st."``expand('%:t:r')``".et." {<CR>public static void main(String[] args) {<CR>".st.et."<CR>}<CR>}"
+exec "Snippet ct import org.junit.Test;<CR>import static org.junit.Assert.*;<CR><CR>public class ".st."``expand('%:t:r')``".et." {<CR>".st.et."<CR>}"
+
+exec "Snippet test @Test<CR>public void ".st.et."() throws Exception {<CR>".st.et."<CR>}"
+exec "Snippet before @Before<CR>public void setUp() throws Exception {<CR>".st.et."<CR>}"
+exec "Snippet after @Before<CR>public void tearDown() {<CR>".st.et."<CR>}"
+
 exec "Snippet sys System.out.println(".st.et.");<CR>".st.et
 exec "Snippet noti throw new RuntimeException(\"Not Implemented\");".st.et
 
