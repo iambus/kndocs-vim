@@ -2,7 +2,7 @@
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 ""                                                                ""
 "" Maintainer: Kneo                                               ""
-"" Last Modified: 2009-08-27 19:25:43                             ""
+"" Last Modified: 2010-04-27 11:56:41                             ""
 "" Version: unversioned                                           ""
 "" Latest Version:                                                ""
 "" http://kndocs-directory.googlecode.com/svn/trunk/profiles/vim/ ""
@@ -202,7 +202,14 @@ Command msn i<c-r>=strftime("%Y-%m-%d %H:%M")<cr> MSN<cr>
 
 " XXX: Don't use $TMPDIR, which conflicts with taglist...
 if os == win
-  let $TEMPDIR = 'F:/temp'
+  "let $TEMPDIR = 'F:/temp'
+  if isdirectory('F:/temp')
+    let $TEMPDIR = 'F:/temp'
+  elseif isdirectory('D:/temp')
+    let $TEMPDIR = 'D:/temp'
+  else
+    let $TEMPDIR = $TEMP
+  endif
 else
   let $TEMPDIR = expand('~/tmp')
 endif
