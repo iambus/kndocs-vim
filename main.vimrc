@@ -2,7 +2,7 @@
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 ""                                                                ""
 "" Maintainer: Kneo                                               ""
-"" Last Modified: 2010-04-27 11:56:41                             ""
+"" Last Modified: 2010-05-06 23:18:56                             ""
 "" Version: unversioned                                           ""
 "" Latest Version:                                                ""
 "" http://kndocs-directory.googlecode.com/svn/trunk/profiles/vim/ ""
@@ -84,6 +84,8 @@ call RunBeforeScripts()
 
 " Generl
 set nocompatible
+filetype on
+filetype plugin on
 set nobackup
 set number
 set ignorecase
