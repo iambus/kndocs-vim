@@ -2,7 +2,7 @@
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 ""                                                                ""
 "" Maintainer: Kneo                                               ""
-"" Last Modified: 2010-05-06 23:18:56                             ""
+"" Last Modified: 2010-08-28 22:53:39                             ""
 "" Version: unversioned                                           ""
 "" Latest Version:                                                ""
 "" http://kndocs-directory.googlecode.com/svn/trunk/profiles/vim/ ""
@@ -767,7 +767,7 @@ map \75 :set filetype=diff<cr>
   """""""""""""""""""""""""""""""
   " Shell
   """""""""""""""""""""""""""""""
-  autocmd FileType sh set ff=unix " XXX: does it have any potential problem?
+  "autocmd FileType sh set ff=unix " XXX: does it have any potential problem? -- nothing...but stupid...
 
   """""""""""""""""""""""""""""""
   " DOS Batch
