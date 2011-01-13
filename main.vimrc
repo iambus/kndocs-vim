@@ -2,7 +2,7 @@
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 ""                                                                ""
 "" Maintainer: Kneo                                               ""
-"" Last Modified: 2010-08-28 22:53:39                             ""
+"" Last Modified: 2011-01-13 21:03:18                             ""
 "" Version: unversioned                                           ""
 "" Latest Version:                                                ""
 "" http://kndocs-directory.googlecode.com/svn/trunk/profiles/vim/ ""
@@ -677,6 +677,18 @@ map \75 :set filetype=diff<cr>
   " C/C++
   """""""""""""""""""""""""""""""
   autocmd FileType c,cpp map <buffer> ,= :up<cr>:%!astyle --style=ansi -p < %<cr>
+
+  """"""""""""""""""""""""""""""
+  " Go
+  """""""""""""""""""""""""""""""
+  if os == linux
+    " TODO:
+  else
+    autocmd FileType go map <buffer> ,cc :up<cr>:!8g % && 8l -o %:r.exe %:r.8<cr>
+    autocmd FileType go map <buffer> ,cr :up<cr>:!%:r<cr>
+  endif
+
+  autocmd FileType go map <buffer> ,<space> ,cc
 
   """""""""""""""""""""""""""""""
   " Java
