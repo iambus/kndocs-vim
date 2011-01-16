@@ -2,7 +2,7 @@
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 ""                                                                ""
 "" Maintainer: Kneo                                               ""
-"" Last Modified: 2011-01-15 02:46:21                             ""
+"" Last Modified: 2011-01-16 17:37:51                             ""
 "" Version: unversioned                                           ""
 "" Latest Version:                                                ""
 "" http://kndocs-directory.googlecode.com/svn/trunk/profiles/vim/ ""
@@ -683,9 +683,11 @@ map \75 :set filetype=diff<cr>
   """""""""""""""""""""""""""""""
   if os == linux
     autocmd FileType go map <buffer> ,cc :up<cr>:exe '!6g % && 6l -o '.FileDir().'/%:r '.FileDir().'/%:r.6'<cr>
+    autocmd FileType go map <buffer> ,cg :up<cr>:!6g %<cr>
     autocmd FileType go map <buffer> ,cr :up<cr>:exe '!'.FileDir().'/%:r'<cr>
   else
     autocmd FileType go map <buffer> ,cc :up<cr>:!8g % && 8l -o %:r.exe %:r.8<cr>
+    autocmd FileType go map <buffer> ,cg :up<cr>:!8g %<cr>
     autocmd FileType go map <buffer> ,cr :up<cr>:!%:r<cr>
   endif
 
