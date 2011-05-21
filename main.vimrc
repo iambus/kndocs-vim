@@ -2,7 +2,7 @@
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 ""                                                                ""
 "" Maintainer: Kneo                                               ""
-"" Last Modified: 2011-01-18 13:01:20                             ""
+"" Last Modified: 2011-05-21 15:31:01                             ""
 "" Version: unversioned                                           ""
 "" Latest Version:                                                ""
 "" http://kndocs-directory.googlecode.com/svn/trunk/profiles/vim/ ""
@@ -739,6 +739,9 @@ map \75 :set filetype=diff<cr>
   " Lisp
   """""""""""""""""""""""""""""""
   autocmd FileType lisp map <buffer> ,<space> :up<cr>:!clisp %<cr>
+
+  autocmd FileType scheme map <buffer> ,<space> :up<cr>:!gsi %<cr>
+  autocmd FileType scheme map <buffer> 1,<space> :up<cr>:!gsi %<cr>
 
 
   """""""""""""""""""""""""""""""
