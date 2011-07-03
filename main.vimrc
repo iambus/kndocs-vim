@@ -2,7 +2,7 @@
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 ""                                                                ""
 "" Maintainer: Kneo                                               ""
-"" Last Modified: 2011-05-21 15:31:01                             ""
+"" Last Modified: 2011-07-03 14:36:48                             ""
 "" Version: unversioned                                           ""
 "" Latest Version:                                                ""
 "" http://kndocs-directory.googlecode.com/svn/trunk/profiles/vim/ ""
@@ -655,6 +655,7 @@ map \75 :set filetype=diff<cr>
   else
     autocmd FileType c map <buffer> ,cc :up<cr>:!gcc -W -Wall % -o %:r<cr>
     autocmd FileType c map <buffer> ,cr :up<cr>:!%:r<cr>
+    autocmd FileType c map <buffer> ,c<space> :up<cr>:!gcc -W -Wall % -o %:r && %:r<cr>
   endif
 
   autocmd FileType c map <buffer> ,<space> ,cc
@@ -669,6 +670,7 @@ map \75 :set filetype=diff<cr>
   else
     autocmd FileType cpp map <buffer> ,cc :up<cr>:!g++ -W -Wall % -o %:r<cr>
     autocmd FileType cpp map <buffer> ,cr :up<cr>:!%:r<cr>
+    autocmd FileType cpp map <buffer> ,c<space> :up<cr>:!g++ -W -Wall % -o %:r && %:r<cr>
   endif
 
   autocmd FileType cpp map <buffer> ,<space> ,cc
@@ -748,6 +750,13 @@ map \75 :set filetype=diff<cr>
   " Erlang
   """""""""""""""""""""""""""""""
   autocmd FileType erlang map <buffer> ,<space> :up<cr>:!escript %<cr>
+
+
+
+  """""""""""""""""""""""""""""""
+  " ASM
+  """""""""""""""""""""""""""""""
+  autocmd FileType asm map <buffer> ,cc :up<cr>:!yasm-1.1.0-win64 -f win64 %<cr>
 
 
   """""""""""""""""""""""""""""""
